@@ -1,0 +1,27 @@
+{
+    "cassandra": {
+        "exp": {
+            "repeat": 2
+        }
+    },
+
+    "env": {
+        "ycsb_dir": "/home/kirillb/projects/tectonic/cas/nc_ycsb"
+    },
+
+    "workload":{
+        "execute_on_hosts":["h1.3"],
+        "ycsb_cpus": 2,
+        "host":"192.16.125.163",
+        "-p_coordinators": [],
+
+        "workload":"workloads/workloadc",
+        "-p_recordcount":100000,
+        "-p_operationcount":100000,
+        "threads":"32",
+        "-p_writeconsistency":"ONE",
+        "-p_readconsistency":"ONE",
+        "-p_measurementtype":"raw"
+    }
+
+}
