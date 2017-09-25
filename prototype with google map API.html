@@ -19,13 +19,49 @@
     function initMap(){
       // Map options
       var options = {
-        zoom:8,
+        zoom:2,
         center:{lat:59.326242,lng:17.8419701}
       }
 
       // New map
       var map = new google.maps.Map(document.getElementById('map'), options);
+      var poly1, poly2;
 
+      var latLngs = {
+        Ireland: {lat:53.3942357,lng:-10.1983269},
+        Tokyo: {lat:35.6735408,lng:139.5703019},
+        Oregon: {lat:44.1274394,lng:-122.8267425},
+        Seoul: {lat:37.5647689,lng:126.7093638},
+        NVirginia: {lat:38.3804953,lng:-78.6602516},
+      }
+      
+      path1 = [
+        latLngs.Tokyo,
+        latLngs.Ireland,
+        latLngs.Oregon
+      ];
+      path2 = [
+        latLngs.NVirginia,
+        latLngs.Ireland,
+      ];
+      
+      poly1 = new google.maps.Polyline({
+        path: path1,
+        strokeColor: '#00e000',
+        strokeOpacity: 1.0,
+        strokeWeight: 3
+      });
+      poly1.setMap(map);
+      
+      poly2 = new google.maps.Polyline({
+        path: path2,
+        strokeColor: '#000000',
+        strokeOpacity: 1.0,
+        strokeWeight: 1.5
+      });
+      poly2.setMap(map);
+      
+      
       
 
       /*
@@ -45,27 +81,28 @@
       });
       */
 
+
       // Array of markers
       var markers = [
         {
-          coords:{lat:53.3942357,lng:-10.1983269},
+          coords: latLngs.Ireland,
           iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
           content:'<h1>Ireland</h1>'
         },
         {
-          coords:{lat:35.6735408,lng:139.5703019},
+          coords: latLngs.Tokyo,
           content:'<h1>Tokyo</h1>'
         },
         {
-          coords:{lat:44.1274394,lng:-122.8267425},
+          coords: latLngs.Oregon,
           content:'<h1>Oregon</h1>'
         },
         {
-          coords:{lat:37.5647689,lng:126.7093638},
+          coords: latLngs.Seoul,
           content:'<h1>Seoul</h1>'
         },
         {
-          coords:{lat:38.3804953,lng:-78.6602516},
+          coords: latLngs.NVirginia,
           content:'<h1>N.Virginia</h1>'
         }
       ];
