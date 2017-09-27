@@ -20,19 +20,20 @@
       // Map options
       var options = {
         zoom:2,
-        center:{lat:59.326242,lng:17.8419701}
+        center: {lat:59.326242, lng:17.8419701} // Stockholm's location
       }
 
       // New map
       var map = new google.maps.Map(document.getElementById('map'), options);
+      
       var path1, path2, poly1, poly2;
 
       var latLngs = {
-        Ireland: {lat:53.3942357,lng:-10.1983269},
-        Tokyo: {lat:35.6735408,lng:139.5703019},
-        Oregon: {lat:44.1274394,lng:-122.8267425},
-        Seoul: {lat:37.5647689,lng:126.7093638},
-        NVirginia: {lat:38.3804953,lng:-78.6602516},
+        Ireland: { lat: 53.3942357, lng: -10.1983269 },
+        Tokyo: { lat: 35.6735408, lng: 139.5703019 },
+        Oregon: { lat: 44.1274394, lng: -122.8267425 },
+        Seoul: { lat: 37.5647689, lng: 126.7093638 },
+        NVirginia: { lat: 38.3804953, lng: -78.6602516 },
       }
       
       path1 = [
@@ -45,6 +46,7 @@
         latLngs.Ireland,
       ];
       
+      // Add paths between datacenters, using arrows as lines
       poly1 = new google.maps.Polyline({
         path: path1,
         icons: [{
@@ -69,7 +71,7 @@
       });
       poly2.setMap(map);
 
-      // Array of markers
+      // Nodes representing datacenters
       var nodes = [
         {
           coords: latLngs.Ireland,
@@ -100,6 +102,7 @@
         }
       ];
       
+      // add datacenters' representations onto the map
       function addCircle(i) {
         var circle = new google.maps.Circle({
           strokeColor: '#FF0000',
@@ -122,7 +125,6 @@
         });
       }
       
-      // Add the nodes onto the map
       for (var i = 0; i < nodes.length; i++) {
         addCircle(i);
       }
