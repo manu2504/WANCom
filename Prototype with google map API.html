@@ -20,7 +20,7 @@
       // Map options
       var options = {
         zoom:2,
-        center: {lat:59.326242, lng:17.8419701} // Stockholm's location
+        center: { lat:59.326242, lng:17.8419701 } // Stockholm's location
       }
 
       // New map
@@ -28,7 +28,7 @@
       
       var path1, path2, poly1, poly2;
 
-      var latLngs = {
+      var latLngs = { // Datacenters' latitudes and longitudes
         Ireland: { lat: 53.3942357, lng: -10.1983269 },
         Tokyo: { lat: 35.6735408, lng: 139.5703019 },
         Oregon: { lat: 44.1274394, lng: -122.8267425 },
@@ -43,10 +43,11 @@
       ];
       path2 = [
         latLngs.NVirginia,
-        latLngs.Ireland,
+        latLngs.Ireland
       ];
       
       // Add paths between datacenters, using arrows as lines
+      // Doc for Polyline class: https://developers.google.com/maps/documentation/javascript/shapes#polylines
       poly1 = new google.maps.Polyline({
         path: path1,
         icons: [{
@@ -75,34 +76,29 @@
       var nodes = [
         {
           coords: latLngs.Ireland,
-          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
-          content:'<h1>Ireland</h1>',
-          size:40
+          // iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          content:'<h1>Ireland</h1>'
         },
         {
           coords: latLngs.Tokyo,
-          iconImage: 'https://upload.wikimedia.org/wikipedia/commons/thumb/0/07/Button_Icon_Red.svg/24px-Button_Icon_Red.svg.png',
-          content:'<h1>Tokyo</h1>',
-          size:30
+          content:'<h1>Tokyo</h1>'
         },
         {
           coords: latLngs.Oregon,
-          content:'<h1>Oregon</h1>',
-          size:10
+          content:'<h1>Oregon</h1>'
         },
         {
           coords: latLngs.Seoul,
-          content:'<h1>Seoul</h1>',
-          size:50
+          content:'<h1>Seoul</h1>'
         },
         {
           coords: latLngs.NVirginia,
-          content:'<h1>N.Virginia</h1>',
-          size:40
+          content:'<h1>N.Virginia</h1>'
         }
       ];
       
       // add datacenters' representations onto the map
+      // Docs for Circle class: https://developers.google.com/maps/documentation/javascript/shapes#circles
       function addCircle(i) {
         var circle = new google.maps.Circle({
           strokeColor: '#FF0000',
@@ -112,7 +108,7 @@
           fillOpacity: 0.35,
           map: map,
           center: nodes[i].coords,
-          radius: nodes[i].size*10000
+          radius: 40*10000 // fixed size, in meters
         });
         
         var infoWindow = new google.maps.InfoWindow({
