@@ -53,7 +53,7 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       // New map
       var map = new google.maps.Map(document.getElementById('map'), options);
       
-      var path1, path2, poly1, poly2;
+      var paths, polylines;
 
       /*
       var latLngs = { // Datacenters' latitudes and longitudes
@@ -64,14 +64,16 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
         NVirginia: { lat: 38.3804953, lng: -78.6602516 },
       }*/
       
-      path1 = [
-        'Tokyo',
-        'Ireland',
-        'Oregon'
-      ];
-      path2 = [
-        'NVirginia',
-        'Ireland'
+      paths = [
+        [
+          'Tokyo',
+          'Ireland',
+          'Oregon'
+        ],
+        [
+          'NVirginia',
+          'Ireland'
+        ]
       ];
       
       function city_to_coords(city) {
@@ -83,34 +85,26 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
         return new Error('Datacenter not found in the dataset!');
       }
       
-      path1 = path1.map(city_to_coords);
-      path2 = path2.map(city_to_coords);
-      
       // Add paths between datacenters, using arrows as lines
       // Doc for Polyline class: https://developers.google.com/maps/documentation/javascript/shapes#polylines
-      poly1 = new google.maps.Polyline({
-        path: path1,
-        icons: [{
-          icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-          offset: '100%'
-        }],
-        strokeColor: '#00e000',
-        strokeOpacity: 1.0,
-        strokeWeight: 3
-      });
-      poly1.setMap(map);
       
-      poly2 = new google.maps.Polyline({
-        path: path2,
-        icons: [{
-          icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-          offset: '100%'
-        }],
-        strokeColor: '#000000',
-        strokeOpacity: 1.0,
-        strokeWeight: 1.5
-      });
-      poly2.setMap(map);
+      var polyline, path;
+      for (var i in paths) {
+      
+        path = paths[i].map(city_to_coords);
+        
+        polyline = new google.maps.Polyline({
+          path: path,
+          icons: [{
+            icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+            offset: '100%'
+          }],
+          strokeColor: '#00e000',
+          strokeOpacity: 1.0,
+          strokeWeight: 3
+        });
+        polyline.setMap(map);
+      }
 
       /*
       // Nodes representing datacenters
