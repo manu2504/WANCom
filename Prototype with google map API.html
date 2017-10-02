@@ -1,4 +1,9 @@
 <!DOCTYPE html>
+<!------------------------------------------------------------------
+This file is an early stage of the interactive visualisation system (IVS)
+that we are building (phase 2)
+It is built upon Google Maps API (https://developers.google.com/maps/)
+-------------------------------------------------------------------->
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -10,13 +15,35 @@
       height:400px;
       width:100%;
     }
+    #form_datacenters{
+      margin-top: 1em;
+    }
   </style>
 </head>
 <body>
   <h1>My Google Map</h1>
   <div id="map"></div>
+  <form id="form_datacenters"></form>
+  
+  <script src="jquery.min.js"></script>
   <script>
-    function initMap(){
+  
+    var datacenters = [
+      { city: 'Ireland', coords: { lat: 53.3942357, lng: -10.1983269 }, 
+                         iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' },
+      { city: 'Tokyo', coords: { lat: 35.6735408, lng: 139.5703019 } },
+      { city: 'Oregon', coords: { lat: 44.1274394, lng: -122.8267425 } },
+      { city: 'Seoul', coords: { lat: 37.5647689, lng: 126.7093638 } },
+      { city: 'NVirginia', coords: { lat: 38.3804953, lng: -78.6602516 } },/*
+      
+      To figure out why some circles are bigger than other onto the world map:
+      { city: 'Groenland', coords: { lat: 74.283218, lng: -31.577798 } },
+      { city: 'Equador', coords: { lat: 0.048303, lng: 22.325172 } },
+      { city: 'SEquador', coords: { lat: -19.599556, lng: 23.820162 } },
+      { city: 'SSEquador', coords: { lat:  -56.687781, lng: 24.628136 } },*/
+    ];
+    
+    function initMap() {
       // Map options
       var options = {
         zoom:2,
@@ -28,23 +55,36 @@
       
       var path1, path2, poly1, poly2;
 
+      /*
       var latLngs = { // Datacenters' latitudes and longitudes
         Ireland: { lat: 53.3942357, lng: -10.1983269 },
         Tokyo: { lat: 35.6735408, lng: 139.5703019 },
         Oregon: { lat: 44.1274394, lng: -122.8267425 },
         Seoul: { lat: 37.5647689, lng: 126.7093638 },
         NVirginia: { lat: 38.3804953, lng: -78.6602516 },
-      }
+      }*/
       
       path1 = [
-        latLngs.Tokyo,
-        latLngs.Ireland,
-        latLngs.Oregon
+        'Tokyo',
+        'Ireland',
+        'Oregon'
       ];
       path2 = [
-        latLngs.NVirginia,
-        latLngs.Ireland
+        'NVirginia',
+        'Ireland'
       ];
+      
+      function city_to_coords(city) {
+        for (var d in datacenters) {
+          if (d.city === city) {
+            return d.coords;
+          }
+        }
+        return new Error('Datacenter\'s not found in the dataset!');
+      }
+      
+      path1 = path1.map(city_to_coords);
+      path2 = path2.map(city_to_coords);
       
       // Add paths between datacenters, using arrows as lines
       // Doc for Polyline class: https://developers.google.com/maps/documentation/javascript/shapes#polylines
@@ -72,11 +112,11 @@
       });
       poly2.setMap(map);
 
+      /*
       // Nodes representing datacenters
       var nodes = [
         {
-          coords: latLngs.Ireland,
-          // iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png',
+          coords: latLngs.Ireland,,
           content:'<h1>Ireland</h1>'
         },
         {
@@ -96,6 +136,7 @@
           content:'<h1>N.Virginia</h1>'
         }
       ];
+      */
       
       // add datacenters' representations onto the map
       // Docs for Circle class: https://developers.google.com/maps/documentation/javascript/shapes#circles
@@ -107,13 +148,13 @@
           fillColor: '#FF0000',
           fillOpacity: 0.35,
           map: map,
-          center: nodes[i].coords,
+          center: datacenters[i].coords,
           radius: 40*10000 // fixed size, in meters
         });
         
         var infoWindow = new google.maps.InfoWindow({
-          content: nodes[i].content,
-          position: nodes[i].coords
+          content: '<h1>$city</h1>'.replace('$city', datacenters[i].city),
+          position: datacenters[i].coords
         });
 
         circle.addListener('click', function(){
@@ -121,14 +162,26 @@
         });
       }
       
-      for (var i = 0; i < nodes.length; i++) {
+      for (var i = 0; i < datacenters.length; i++) {
         addCircle(i);
       }
-
+      
+      
+      add_form();
+    }
+    
+    function add_form() {
+      var $form_content = $('#form_datacenters');
+      $('<label>Which pair of datacenters do you want to display?&nbsp;</label>').appendTo($form_content);
+      var $options = $('<select>');
+      for (var i in datacenters) {
+        $('<option>', { html: datacenters[i].city } ).appendTo($options);
+      }
+      $options.appendTo($form_content);
     }
   </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
-    </script>
+  </script>
 </body>
 </html>
