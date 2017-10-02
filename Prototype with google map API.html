@@ -76,11 +76,11 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       
       function city_to_coords(city) {
         for (var d in datacenters) {
-          if (d.city === city) {
-            return d.coords;
+          if (datacenters[d].city === city) {
+            return datacenters[d].coords;
           }
         }
-        return new Error('Datacenter\'s not found in the dataset!');
+        return new Error('Datacenter not found in the dataset!');
       }
       
       path1 = path1.map(city_to_coords);
