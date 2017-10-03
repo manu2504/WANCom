@@ -25,7 +25,8 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
   <div id="map"></div>
   <form id="form_datacenters"></form>
   
-  <script src="jquery.min.js"></script>
+  <!-- Use of jQuery, a popular Javascript framework, is made in order to soften manipulation of HTML elements -->
+  <script src="jquery-3.2.1.min.js"></script>
   <script>
   
     var datacenters = [
@@ -34,14 +35,19 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       { city: 'Tokyo', coords: { lat: 35.6735408, lng: 139.5703019 } },
       { city: 'Oregon', coords: { lat: 44.1274394, lng: -122.8267425 } },
       { city: 'Seoul', coords: { lat: 37.5647689, lng: 126.7093638 } },
-      { city: 'NVirginia', coords: { lat: 38.3804953, lng: -78.6602516 } },/*
+      { city: 'NVirginia', coords: { lat: 38.3804953, lng: -78.6602516 } },
       
-      To figure out why some circles are bigger than other onto the world map:
+      /* To figure out why some circles are bigger than others onto the world map:
+      
+      // TO BE REMOVED SOON
+      
       { city: 'Groenland', coords: { lat: 74.283218, lng: -31.577798 } },
       { city: 'Equador', coords: { lat: 0.048303, lng: 22.325172 } },
       { city: 'SEquador', coords: { lat: -19.599556, lng: 23.820162 } },
-      { city: 'SSEquador', coords: { lat:  -56.687781, lng: 24.628136 } },*/
+      { city: 'SSEquador', coords: { lat:  -56.687781, lng: 24.628136 } },
+      */
     ];
+    
     
     function initMap() {
       // Map options
@@ -53,16 +59,10 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       // New map
       var map = new google.maps.Map(document.getElementById('map'), options);
       
-      var paths, polylines;
-
-      /*
-      var latLngs = { // Datacenters' latitudes and longitudes
-        Ireland: { lat: 53.3942357, lng: -10.1983269 },
-        Tokyo: { lat: 35.6735408, lng: 139.5703019 },
-        Oregon: { lat: 44.1274394, lng: -122.8267425 },
-        Seoul: { lat: 37.5647689, lng: 126.7093638 },
-        NVirginia: { lat: 38.3804953, lng: -78.6602516 },
-      }*/
+      var
+        paths,
+        polylines = [],
+        circles = [];
       
       paths = [
         [
@@ -73,8 +73,13 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
         [
           'NVirginia',
           'Ireland'
+        ],
+        [
+          'Seoul',
+          'NVirginia'
         ]
       ];
+
       
       function city_to_coords(city) {
         for (var d in datacenters) {
@@ -101,36 +106,11 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
           }],
           strokeColor: '#00e000',
           strokeOpacity: 1.0,
-          strokeWeight: 3
+          strokeWeight: 3 // to be weighted according to number of paths that go across the link
         });
+        polylines.push(polyline);
         polyline.setMap(map);
       }
-
-      /*
-      // Nodes representing datacenters
-      var nodes = [
-        {
-          coords: latLngs.Ireland,,
-          content:'<h1>Ireland</h1>'
-        },
-        {
-          coords: latLngs.Tokyo,
-          content:'<h1>Tokyo</h1>'
-        },
-        {
-          coords: latLngs.Oregon,
-          content:'<h1>Oregon</h1>'
-        },
-        {
-          coords: latLngs.Seoul,
-          content:'<h1>Seoul</h1>'
-        },
-        {
-          coords: latLngs.NVirginia,
-          content:'<h1>N.Virginia</h1>'
-        }
-      ];
-      */
       
       // add datacenters' representations onto the map
       // Docs for Circle class: https://developers.google.com/maps/documentation/javascript/shapes#circles
@@ -146,6 +126,8 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
           radius: 40*10000 // fixed size, in meters
         });
         
+        circles.push(circle);
+        
         var infoWindow = new google.maps.InfoWindow({
           content: '<h1>$city</h1>'.replace('$city', datacenters[i].city),
           position: datacenters[i].coords
@@ -160,19 +142,100 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
         addCircle(i);
       }
       
+      function add_form() {
+        var $form_content = $('#form_datacenters');
+        $('<label>Which pair of datacenters do you want to display?&nbsp;</label>').appendTo($form_content);
+        var $datacentersPair = $('<select>', { id: 'select1', on: { change: updatemap2 } } );
+        // Options are added under the form "Datacenter1–Datacenter2"
+        // NB: the en dash is used here for ranges (U+2013), instead of the minus sign (U+002D)
+        for (var i in paths) {
+          $('<option>', { html: paths[i][0] + '–' + paths[i][paths[i].length - 1] } ).appendTo([$datacentersPair]);
+        }
+        $datacentersPair.appendTo($form_content);
+        $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
+                  .appendTo($form_content);
+      }
+      
+      function updatemap(singlePath) {
+        // First check if the "All" checkbox is checked, unless a pair of datacenters has been explicitly selected
+        if ( !singlePath && $("input:checkbox[value='all']").prop('checked') ) {
+          displayAllPaths();
+          displayAllDatacenters();
+          return;
+        }
+        
+        // Unselect automatically the "All" checkbox
+        if (singlePath) {
+          $("input:checkbox[value='all']").prop('checked', false);
+        }
+        
+        var datacentersPair = $( "#select1 option:selected" ).text();
+        var datacenter1, datacenter2;
+        
+        // The pair of datacenters is retrieved as a string "Datacenter1–Datacenter2"
+        datacenter1 = datacentersPair.split('–')[0];
+        datacenter2 = datacentersPair.split('–')[1];
+        
+        removeAllPaths();
+        removeAllDatacenters();
+        displayPath(datacenter1, datacenter2);
+        displayDatacenter(datacenter1);
+        displayDatacenter(datacenter2);
+      }
+      window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
+      
+      function updatemap2() {
+        updatemap(true);
+      }
+      window.updatemap2 = updatemap2;
+      
+      
+      function displayDatacenter(dc) {
+        for (var i in datacenters) {
+          if (datacenters[i].city === dc) {
+            circles[i].setMap(map);
+          }
+        }
+      }
+      
+      function displayPath(d1, d2) {
+        for (var i in paths) {
+          // Let's check which path contain as its first element one of the datacenters, and as its last element the other datacenter
+          if ( $.inArray(d1, [ paths[i][0], paths[i][paths[i].length - 1] ]) >= 0 && $.inArray(d2, [ paths[i][0], paths[i][paths[i].length - 1] ]) >= 0 ) {
+            polylines[i].setMap(map);
+            return;
+          }
+        }
+      }
+      
+      function removeAllPaths() {
+        for (var i in polylines) {
+          polylines[i].setMap(null);
+        }
+      }
+      
+      function displayAllPaths() {
+        for (var i in polylines) {
+          polylines[i].setMap(map);
+        }
+      }
+      
+      function removeAllDatacenters() {
+        for (var i in circles) {
+          circles[i].setMap(null);
+        }
+      }
+      
+      function displayAllDatacenters() {
+        for (var i in circles) {
+          circles[i].setMap(map);
+        }
+      }
       
       add_form();
     }
     
-    function add_form() {
-      var $form_content = $('#form_datacenters');
-      $('<label>Which pair of datacenters do you want to display?&nbsp;</label>').appendTo($form_content);
-      var $options = $('<select>');
-      for (var i in datacenters) {
-        $('<option>', { html: datacenters[i].city } ).appendTo($options);
-      }
-      $options.appendTo($form_content);
-    }
+    
   </script>
   <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
