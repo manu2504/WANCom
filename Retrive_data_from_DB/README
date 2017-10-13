@@ -1,0 +1,10 @@
+This folder introduce how to retrive data from MySql to Google map.
+Step1:
+create config.php to indicate the database in my local laptop
+Step2:
+Convert AllgeoHops.csv to  AllgeoHops.xml by using output_xml.php
+Step3:
+draw the map with index.html which require AllgeoHops.xml to retrive data.
+
+However, we finally should finish all of these in WAN VM. The step for converting .csv to .xml should be ignored. 
+So I need to modify these files and descriptions latter.
