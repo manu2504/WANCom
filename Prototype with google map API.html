@@ -18,6 +18,9 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
     #form_datacenters{
       margin-top: 1em;
     }
+    select {
+      margin-right: 1em;
+    }
   </style>
 </head>
 <body>
@@ -29,6 +32,7 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
   <script src="jquery-3.2.1.min.js"></script>
   <script>
   
+    // datacenters to be displayed onto the map (hardcoded)
     var datacenters = [
       { city: 'Ireland', coords: { lat: 53.3942357, lng: -10.1983269 }, 
                          iconImage:'https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png' },
@@ -36,16 +40,6 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       { city: 'Oregon', coords: { lat: 44.1274394, lng: -122.8267425 } },
       { city: 'Seoul', coords: { lat: 37.5647689, lng: 126.7093638 } },
       { city: 'NVirginia', coords: { lat: 38.3804953, lng: -78.6602516 } },
-      
-      /* To figure out why some circles are bigger than others onto the world map:
-      
-      // TO BE REMOVED SOON
-      
-      { city: 'Groenland', coords: { lat: 74.283218, lng: -31.577798 } },
-      { city: 'Equador', coords: { lat: 0.048303, lng: 22.325172 } },
-      { city: 'SEquador', coords: { lat: -19.599556, lng: 23.820162 } },
-      { city: 'SSEquador', coords: { lat:  -56.687781, lng: 24.628136 } },
-      */
     ];
     
     
@@ -64,6 +58,7 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
         polylines = [],
         circles = [];
       
+      // Paths to be displayed onto the map (hardcoded)
       paths = [
         [
           'Tokyo',
