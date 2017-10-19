@@ -1,0 +1,2 @@
+
+curl -o test.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=53.3942357,-10.1983269|57.871468,13.580040|57.182993,53.143360|37.876851,111.103618|35.6735408,139.5703019&samples=20&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
