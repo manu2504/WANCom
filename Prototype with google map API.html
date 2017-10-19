@@ -56,7 +56,8 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       var
         paths,
         polylines = [],
-        circles = [];
+        circles = [],
+        infoWindows = [];
       
       // Paths to be displayed onto the map (hardcoded)
       paths = [
@@ -127,6 +128,8 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
           content: '<h1>$city</h1>'.replace('$city', datacenters[i].city),
           position: datacenters[i].coords
         });
+        
+        infoWindows.push(infoWindow);
 
         circle.addListener('click', function(){
           infoWindow.open(map);
@@ -218,6 +221,7 @@ It is built upon Google Maps API (https://developers.google.com/maps/)
       function removeAllDatacenters() {
         for (var i in circles) {
           circles[i].setMap(null);
+          infoWindows[i].close();
         }
       }
       
