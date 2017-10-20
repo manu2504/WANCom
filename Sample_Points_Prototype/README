@@ -1,0 +1,10 @@
+The folder is a prototype for get 20 samples on a specific path(from Ireland to Tokyo) with equal distance. I'll keep adding more paths.
+
+Description:
+1.Running "request_sample_LatLng_command" for getting a test.xml file with 20 LatLngs.
+2.Load this file into MySql, following the commands in "load_xml_command.sql".
+3.retrive these data by using PHP,including "config.php" and "output_xml.php" 
+4.Draw these points on Goole Map with "index.html", where I require the results from "output_xml.php".
+
+Note:
+Setup web server first then run “index.html” file.
