@@ -1,0 +1,48 @@
+
+// cd to a local folder where you want to save these xml file then run:
+
+
+
+curl -o trace6_1.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|46.821114,152.103251|50.700286,170.208720|51.963224,-169.884053|45.700286,-149.185811|45.5320828,-123.0053566&samples=11&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_2.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|37.706363,144.460581|36.980318,151.562911|36.034722,164.058499|39.545172,-161.704156|44.524892,-145.929496|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_3.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|35.063811,143.368933|35.172043,150.843713|33.574405,163.800076|34.278091,-161.704156|40.536526,-145.929496|45.5320828,-123.0053566&samples=7&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_4.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|33.249677,141.559240|32.853980,150.244381|30.217358,161.866483|27.829580,-161.704156|36.485349,-145.929496|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_5.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|31.195524,140.812053|31.057384,149.764916|26.348616,160.811795|25.196403,-160.997828|32.011320,-145.576332|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_6.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|32.465119,144.361193|29.728830,146.755848|22.832953,159.844998|23.480347,-160.056057|29.071589,-145.458611|45.5320828,-123.0053566&samples=7&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_7.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|39.057560,153.320951|39.454120,164.977703|43.252360,-161.350992|47.864397,-146.047217|45.5320828,-123.0053566&samples=8&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_8.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|37.706363,144.460581|36.034722,164.058499|39.545172,-161.704156|44.524892,-145.929496|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_9.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|35.172043,150.843713|33.574405,163.800076|34.278091,-161.704156|40.536526,-145.929496|45.5320828,-123.0053566&samples=10&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_10.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|33.249677,141.559240|30.217358,161.866483|27.829580,-161.704156|36.485349,-145.929496|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_11.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|31.057384,149.764916|22.832953,159.844998|25.196403,-160.997828|32.011320,-145.576332|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_12.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|32.465119,144.361193|29.728830,146.755848|27.829580,-161.704156|23.480349,-160.056060|29.071589,-145.458611|45.5320828,-123.0053566&samples=6&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_13.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|33.5320828,143.0053566|39.057560,153.320951|36.034722,164.058499|43.252360,-161.350992|47.864397,-146.047217|45.5320828,-123.0053566&samples=7&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_14.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|35.172043,150.843713|36.980318,151.562911|39.545172,-161.704156|44.524892,-145.929496|45.5320828,-123.0053566&samples=7&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_15.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|35.063811,143.368933|35.172043,150.843713|33.574405,163.800076|23.480347,-160.056057|40.536526,-145.929496|45.5320828,-123.0053566&samples=7&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_16.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|33.249677,141.559240|32.853980,150.244381|27.829580,-161.704156|36.485349,-145.929496|45.5320828,-123.0053566&samples=11&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_17.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|31.057384,149.764916|30.217358,161.866483|25.196403,-160.997828|34.278091,-161.704156|45.5320828,-123.0053566&samples=5&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_18.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|32.465119,144.361193|33.249677,141.559240|26.348616,160.811795|29.071589,-145.458611|45.5320828,-123.0053566&samples=6&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_19.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|45.5321828,145.0063566|39.057560,153.320951|30.217358,161.866483|43.252360,-161.350992|47.864397,-146.047217|45.5320828,-123.0053566&samples=6&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_20.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|37.706373,144.460591|36.980318,151.562911|36.034722,164.058499|44.524892,-145.929496|45.5320828,-123.0053566&samples=6&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_21.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|35.063811,143.368933|35.172043,150.843713|33.574405,163.800076|34.278091,-161.704156|40.536526,-145.929496|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'
+
+curl -o trace6_22.xml 'https://maps.googleapis.com/maps/api/elevation/xml?path=35.622094,139.7477703|32.853980,150.244381|30.217358,161.866483|27.829580,-161.704156|47.864397,-146.047217|45.5320828,-123.0053566&samples=9&key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps'

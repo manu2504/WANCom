@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElevationResponse>
+ <status>OK</status>
+ <result>
+  <location>
+   <lat>35.6220940</lat>
+   <lng>139.7477703</lng>
+  </location>
+  <elevation>2.7739751</elevation>
+  <resolution>0.5964970</resolution>
+ </result>
+ <result>
+  <location>
+   <lat>30.1880155</lat>
+   <lng>165.8300041</lng>
+  </location>
+  <elevation>-6136.2099609</elevation>
+  <resolution>610.8129272</resolution>
+ </result>
+ <result>
+  <location>
+   <lat>26.9107422</lat>
+   <lng>-167.7418080</lng>
+  </location>
+  <elevation>-4465.9472656</elevation>
+  <resolution>610.8129272</resolution>
+ </result>
+ <result>
+  <location>
+   <lat>38.3097149</lat>
+   <lng>-153.1325225</lng>
+  </location>
+  <elevation>-3904.9348145</elevation>
+  <resolution>610.8129272</resolution>
+ </result>
+ <result>
+  <location>
+   <lat>45.5320828</lat>
+   <lng>-123.0053566</lng>
+  </location>
+  <elevation>43.8696175</elevation>
+  <resolution>4.7719760</resolution>
+ </result>
+</ElevationResponse>
