@@ -24,102 +24,111 @@
     <script>
       
 
-        function initMap() {
+      function initMap() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: new google.maps.LatLng(59.326242, 17.8419701),
-          zoom: 2
+          zoom: 3
         });
         var infoWindow = new google.maps.InfoWindow;
-
-          // Change this depending on the name of PHP or XML file
-          downloadUrl('http://localhost/trace6/trace6.xml', function(data) {
-            var xml = data.responseXML;
-            var marker = xml.documentElement.getElementsByTagName('marker');
-            var PointObj = new Array();
-
-            Array.prototype.forEach.call(marker, function(markerElem) {
-              var idHop = markerElem.getAttribute('idHop');
-             // var ipSrc = markerElem.getAttribute('ipSrc');
-             // var country = markerElem.getAttribute('country');
-             // var city = markerElem.getAttribute('city');
-              var point = new google.maps.LatLng(
-                  parseFloat(markerElem.getAttribute('lat')),
-                  parseFloat(markerElem.getAttribute('lng')));
-              PointObj.push (point);
-             /* var infowincontent = document.createElement('div');
-              var strong = document.createElement('strong');
-              strong.textContent = ipSrc
-              infowincontent.appendChild(strong);
-              infowincontent.appendChild(document.createElement('br'));
-
-              var address = city + " , " + country
-              var text = document.createElement('text');
-              text.textContent = address;
-
-              infowincontent.appendChild(text);
-              // var icon =  {};   */
-              var marker = new google.maps.Marker({
-                map: map,
-                size:4,
-                position: point
-                
-              }); 
-              marker.addListener('click', function() {
-              //  infoWindow.setContent(infowincontent);
-                infoWindow.open(map, marker);
-              });
-
-              var polyline;
-                polyline = new google.maps.Polyline({
-                  path: PointObj,
-                  icons: [{
-                    icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-                    offset: '100%'
-                  }],
-                  strokeColor: '#00e000',
-                  strokeOpacity: 1.0,
-                  strokeWeight: 3 // to be weighted according to number of paths that go across the link
-                });
-                polyline.setMap(map);
-                function addCircle(i) {
-                  var circle = new google.maps.Circle({
-                    strokeColor: '#FF0000',
-                    strokeOpacity: 0.8,
-                    strokeWeight: 2,
-                    fillColor: '#FF0000',
-                    fillOpacity: 0.35,
-                    map: map,
-                    center: PointObj,
-                    radius: 40*10000 // fixed size, in meters
-                  });
-                  
-                  /*circles.push(circle);
-                  
-                  var infoWindow = new google.maps.InfoWindow({
-                    content: '<h1>$city</h1>'.replace('$city', datacenters[i].city),
-                    position: datacenters[i].coords
-                  });
-                  
-                  infoWindows.push(infoWindow);
-                  */
-
-                  /*circle.addListener('click', function(){
-                    infoWindow.open(map);
-                  }); */
-                  circle.setMap(map);
-
-
-                }
-                
-                for (var i = 0; i < PointObj.length; i++) {
-                  addCircle(i);
-                }
-
-
-
-            });
+        
+        /**
+         * Add a red circle on the map. Used to represent a hop.
+         *
+         * @param {object} centerCoordinates - The coordinates of center of the circle.
+         * @param {Google Map object} map - A map object, created with 'new Google.maps.Map()'.
+         * @param {string} contentInfoWindow - Content of the infoWindow for this circle.
+                                               If absent, no infoWindow will be displayed.
+                                               The infoWindow will be positioned at the center of the circle.
+         */
+        function addCircle(centerCoordinates, map, contentInfoWindow) {
+          if (map == null) {
+            map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
+          }
+          var circle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: centerCoordinates,
+            radius: 10*10000 // fixed size, in meters
+          });
+          
+          circle.setMap(map);
+          
+          if (contentInfoWindow) {
+            addInfoWindow(centerCoordinates, contentInfoWindow);
+          }
+        }
+          
+        function addInfoWindow(coords, content) {
+          var infoWindow = new google.maps.InfoWindow({
+            content: content,
+            position: coords
           });
         }
+
+        // Change this depending on the name of PHP or XML file
+        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'trace6.xml', function(data) {
+          var xml = data.responseXML;
+          var marker = xml.documentElement.getElementsByTagName('marker');
+          var PointObj = new Array();
+          
+
+          Array.prototype.forEach.call(marker, function(markerElem) {
+
+            var idHop = markerElem.getAttribute('idHop');
+            // var ipSrc = markerElem.getAttribute('ipSrc');
+            // var country = markerElem.getAttribute('country');
+            // var city = markerElem.getAttribute('city');
+            var point = new google.maps.LatLng(
+                parseFloat(markerElem.getAttribute('lat')),
+                parseFloat(markerElem.getAttribute('lng')));
+            PointObj.push (point);
+            /* var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = ipSrc
+            infowincontent.appendChild(strong);
+            infowincontent.appendChild(document.createElement('br'));
+
+            var address = city + " , " + country
+            var text = document.createElement('text');
+            text.textContent = address;
+
+            infowincontent.appendChild(text);
+            // var icon =  {};   */
+            
+            /* MANU: Commented that to replace the default marker symbols by the red circles
+            var marker = new google.maps.Marker({
+              map: map,
+              size:0,
+              position: point
+            }); 
+            marker.addListener('click', function() {
+              // infoWindow.setContent(infowincontent);
+              infoWindow.open(map, marker);
+            });
+            */
+            
+            addCircle(point, map, '');
+
+            var polyline;
+              polyline = new google.maps.Polyline({
+                path: PointObj,
+                icons: [{
+                  icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+                  offset: '100%'
+                }],
+                strokeColor: '#00e000',
+                strokeOpacity: 1.0,
+                strokeWeight: 1 // to be weighted according to number of paths that go across the link
+              });
+              polyline.setMap(map);
+              
+          });
+        });
+      }
 
 // 把 XML 文档解析到 XML DOM 对象中：
 
