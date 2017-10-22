@@ -29,19 +29,19 @@
           center: new google.maps.LatLng(59.326242, 17.8419701),
           zoom: 2
         });
-        var infoWindow = new google.maps.InfoWindow;
         
         /**
          * Add a red circle on the map. Used to represent a hop.
          *
-         * @param {object} centerCoordinates - The coordinates of center of the circle.
-         * @param {Google Map object} map - A map object, created with 'new Google.maps.Map()'.
+         * @param {object} centerCoordinates - The coordinates of the center of the circle, in the format
+                                               { lat: <float>, lng: <float> }, or as a google.maps.LatLng object.
+         * @param {Google Map object} map - A map object, created with 'new google.maps.Map()'.
          * @param {string} contentInfoWindow - Content of the infoWindow for this circle.
                                                If absent, no infoWindow will be displayed.
                                                The infoWindow will be positioned at the center of the circle.
          */
         function addCircle(centerCoordinates, map, contentInfoWindow) {
-          if (map == null) {
+          if (map === undefined) {
             map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
           }
           var circle = new google.maps.Circle({
@@ -58,15 +58,19 @@
           circle.setMap(map);
           
           if (contentInfoWindow) {
-            addInfoWindow(centerCoordinates, contentInfoWindow);
+            circle.addListener('click', function(){
+              addInfoWindow(centerCoordinates, contentInfoWindow, map);
+            });
           }
         }
           
-        function addInfoWindow(coords, content) {
+        function addInfoWindow(coords, content, map) {
           var infoWindow = new google.maps.InfoWindow({
             content: content,
             position: coords
           });
+          
+          infoWindow.open(map);
         }
 
         // Change this depending on the name of PHP or XML file
@@ -111,7 +115,7 @@
             });
             */
             
-            addCircle(point, map, '');
+            addCircle(point, map, 'Lorem ipsum');
 
             var polyline;
               polyline = new google.maps.Polyline({
