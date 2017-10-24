@@ -1,5 +1,4 @@
 The folder generate all 22 paths in Trace6(from Tokyo to Oregon) with equal distance. 
-Still some bugs. But can generate a rough result. I’ll keep debugging.
 
 Description:
-Lots of files are for connecting DB, retrieving, organizing, loading data. If you want to run on local laptop, just need “index.html” and “trace6.xml”. Then you don’t need to run web server on backend.
+Lots of files are for connecting DB, retrieving, organizing, loading data. If you want to run on local laptop, just need “index.html” and “trace6.xml”. But you need to run web server on backend.

@@ -16,8 +16,12 @@
         margin: 0;
         padding: 0em;
       }
+      form {
+        margin: 1em;
+      }
       select {
-        padding: 1em;
+        margin-right: 0.5em;
+        margin-left: 0.5em;
       }
     </style>
   </head>
@@ -80,23 +84,32 @@
         }
         
         var polylines = new Array();
+        var cables;
 
         // Change this depending on the name of PHP or XML file
-        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'trace6.xml', function(data) {
+        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace6_with_3cables.xml', function(data) {
           var xml = data.responseXML;
           var marker = xml.documentElement.getElementsByTagName('marker');
+          // Paths used to create polylines
           var Paths = new Array();
           for(var i=1;i<23;i++){
             Paths[i] = new Array();
           }
-          var PointObj = new Array();
+          // HopObj used to store data about each hop
+          var HopObj = new Array();
           for(var i=1;i<23;i++){
-            PointObj[i] = new Array();
+            HopObj[i] = new Array();
           }
           
-
+          // Arbitrary assignement of paths to cables
+          cables = {1: [1,2,3,10,11,12,19, 22],
+                        2: [4,5,6,13,14,15,20],
+                        3: [7,8,9,16,17,18,21]};
+          
+          var currPathId;
           Array.prototype.forEach.call(marker, function(markerElem) {
 
+            var markerId = markerElem.getAttribute('id');
             var idHop = markerElem.getAttribute('idHop');
             var ipSrc = markerElem.getAttribute('ipSrc');
             var idPath = markerElem.getAttribute('idPath');
@@ -106,13 +119,20 @@
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
                 
+            if (currPathId !== idPath) {
+              currPathId = idPath;
+            }
+            /*Paths
+            HopObj    
+            */
+                
            // console.log (idPath);
 
             switch(idPath)
             {
                 case '33':
                     Paths[1].push(point)
-                    PointObj[1].push({point: point, cableId: 1, idPath: idPath})
+                    HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
                 case '56':
                     Paths[2].push (point);
@@ -183,7 +203,7 @@
             //Paths.push (point);
             var infowincontent = document.createElement('div');
             var strong = document.createElement('strong');
-            strong.textContent = "idHop:" + idHop
+            strong.textContent = "idHop:" + idHop;
             infowincontent.appendChild(strong);
             infowincontent.appendChild(document.createElement('br'));
 
@@ -215,11 +235,9 @@
         
         
         function add_form() {
-          var $form_content = $('<form>', { id: 'form_datacenters' }).appendTo($('body'));
-          $('<label>Which cable do you want to display?&nbsp;</label>').appendTo($form_content);
+          var $form_content = $('<form>', { id: 'form_datacenters' }).appendTo('body');
+          $('<label>For which cable you want to display the paths that go across it?</label>').appendTo($form_content);
           var $cableId = $('<select>', { on: { change: updatemap2 } } );
-          // Options are added under the form "Datacenter1–Datacenter2"
-          // NB: the en dash is used here for ranges (U+2013), instead of the minus sign (U+002D)
           for (var i = 1; i < 4; i++) {
             $('<option>', { html: i } ).appendTo($cableId);
           }
@@ -243,6 +261,7 @@
           var userSelection = parseInt($( 'select option:selected' ).text());
           
           removeAllPaths();
+          displayPathsFromCable(userSelection);
         }
         window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
 
@@ -250,6 +269,14 @@
           updatemap(true);
         }
         window.updatemap2 = updatemap2;
+        
+        function displayPathsFromCable(cableId) {
+          for (var i in polylines) {
+            if ( $.inArray( polylines[i].idPath, cables[cableId] ) != -1 ) {
+              polylines[i].polyline.setMap(map);
+            }
+          }
+        }
         
         function displayAllPaths() {
           for (var i in polylines) {
@@ -264,7 +291,6 @@
         }
         
         add_form();
-        
       }
 
       function downloadUrl(url, callback) {

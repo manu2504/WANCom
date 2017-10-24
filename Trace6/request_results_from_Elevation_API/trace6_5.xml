@@ -11,58 +11,58 @@
  </result>
  <result>
   <location>
-   <lat>31.0785339</lat>
-   <lng>149.3280973</lng>
+   <lat>30.9529134</lat>
+   <lng>153.2176012</lng>
   </location>
-  <elevation>-6132.2534180</elevation>
+  <elevation>-5805.2734375</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
   <location>
-   <lat>26.4242493</lat>
-   <lng>161.5471373</lng>
+   <lat>27.6047776</lat>
+   <lng>166.3051620</lng>
   </location>
-  <elevation>-5987.2617188</elevation>
+  <elevation>-5481.1816406</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
   <location>
-   <lat>27.1280222</lat>
-   <lng>174.7503652</lng>
+   <lat>25.3805213</lat>
+   <lng>179.6880009</lng>
   </location>
-  <elevation>-5868.3349609</elevation>
+  <elevation>-5645.2031250</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
   <location>
-   <lat>26.5939212</lat>
-   <lng>-172.0265368</lng>
+   <lat>23.1988120</lat>
+   <lng>-167.1908935</lng>
   </location>
-  <elevation>-4856.8989258</elevation>
+  <elevation>-4949.5703125</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
   <location>
-   <lat>26.0875389</lat>
-   <lng>-159.2795566</lng>
+   <lat>22.5892236</lat>
+   <lng>-154.4634196</lng>
   </location>
-  <elevation>-5179.6362305</elevation>
+  <elevation>-4374.1811523</elevation>
+  <resolution>76.3516159</resolution>
+ </result>
+ <result>
+  <location>
+   <lat>26.7199869</lat>
+   <lng>-142.1966724</lng>
+  </location>
+  <elevation>-4807.8613281</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
   <location>
-   <lat>31.4001736</lat>
-   <lng>-147.2451275</lng>
+   <lat>35.9350664</lat>
+   <lng>-132.9366200</lng>
   </location>
-  <elevation>-5355.3544922</elevation>
-  <resolution>610.8129272</resolution>
- </result>
- <result>
-  <location>
-   <lat>38.8321724</lat>
-   <lng>-136.1577568</lng>
-  </location>
-  <elevation>-4869.4736328</elevation>
+  <elevation>-5055.9140625</elevation>
   <resolution>610.8129272</resolution>
  </result>
  <result>
