@@ -29,10 +29,6 @@
           center: new google.maps.LatLng(59.326242, 17.8419701),
           zoom: 2
         });
-<<<<<<< HEAD
-        
-=======
->>>>>>> branc_trace6
         /**
          * Add a red circle on the map. Used to represent a hop.
          *
@@ -55,11 +51,7 @@
             fillOpacity: 0.35,
             map: map,
             center: centerCoordinates,
-<<<<<<< HEAD
-            radius: 10*10000 // fixed size, in meters
-=======
             radius: 8*10000 // fixed size, in meters
->>>>>>> branc_trace6
           });
           
           circle.setMap(map);
@@ -84,44 +76,24 @@
         downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace6_with_3cables.xml', function(data) {
           var xml = data.responseXML;
           var marker = xml.documentElement.getElementsByTagName('marker');
-<<<<<<< HEAD
-          var PointObj = new Array();
-=======
           
 
           var PointObj = new Array(22);
           for(var i=1;i<23;i++){
           PointObj[i] = new Array();
           }
->>>>>>> branc_trace6
           
 
           Array.prototype.forEach.call(marker, function(markerElem) {
 
             var idHop = markerElem.getAttribute('idHop');
-<<<<<<< HEAD
-            // var ipSrc = markerElem.getAttribute('ipSrc');
-=======
             var ipSrc = markerElem.getAttribute('ipSrc');
             var idPath = markerElem.getAttribute('idPath');
->>>>>>> branc_trace6
             // var country = markerElem.getAttribute('country');
             // var city = markerElem.getAttribute('city');
             var point = new google.maps.LatLng(
                 parseFloat(markerElem.getAttribute('lat')),
                 parseFloat(markerElem.getAttribute('lng')));
-<<<<<<< HEAD
-            PointObj.push (point);
-            /* var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = ipSrc
-            infowincontent.appendChild(strong);
-            infowincontent.appendChild(document.createElement('br'));
-
-            var address = city + " , " + country
-            var text = document.createElement('text');
-            text.textContent = address;
-=======
            // console.log (idPath);
 
             switch(idPath)
@@ -205,7 +177,6 @@
            // var address = city + " , " + country
             var text = document.createElement('text');
             text.textContent = ipSrc;
->>>>>>> branc_trace6
 
             infowincontent.appendChild(text);
             // var icon =  {};   */
@@ -222,14 +193,8 @@
             });
             */
             
-<<<<<<< HEAD
-            addCircle(point, map, 'Lorem ipsum');
-
-            var polyline;
-=======
             addCircle(point, map, infowincontent);
            /* var polyline;
->>>>>>> branc_trace6
               polyline = new google.maps.Polyline({
                 path: PointObj,
                 icons: [{
@@ -238,11 +203,6 @@
                 }],
                 strokeColor: '#00e000',
                 strokeOpacity: 1.0,
-<<<<<<< HEAD
-                strokeWeight: 1 // to be weighted according to number of paths that go across the link
-              });
-              polyline.setMap(map);
-=======
                 strokeWeight: 2 // to be weighted according to number of paths that go across the link
               });
               polyline.setMap(map);*/
@@ -262,16 +222,10 @@
            }
 
             
->>>>>>> branc_trace6
               
           });
         });
       }
-<<<<<<< HEAD
-
-// 把 XML 文档解析到 XML DOM 对象中：
-=======
->>>>>>> branc_trace6
 
       function downloadUrl(url, callback) {
         var request = window.ActiveXObject ?
