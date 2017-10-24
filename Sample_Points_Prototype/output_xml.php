@@ -35,6 +35,7 @@ header("Content-type: text/xml");
 // Start XML file, echo parent node
 echo '<markers>';
 
+
 // Iterate through the rows, printing XML nodes for each
 while ($row = @mysql_fetch_assoc($result)){
   // Add to XML document node
