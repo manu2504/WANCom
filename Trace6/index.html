@@ -272,7 +272,7 @@
         
         function displayPathsFromCable(cableId) {
           for (var i in polylines) {
-            if ( $.inArray( polylines[i].idPath, cables[cableId] ) != -1 ) {
+            if ( $.inArray( polylines[i].idPath, cables[cableId] ) !== -1 ) {
               polylines[i].polyline.setMap(map);
             }
           }
