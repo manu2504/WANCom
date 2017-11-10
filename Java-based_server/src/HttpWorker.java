@@ -1,6 +1,5 @@
 import java.io.*;
 import java.net.Socket;
-import java.util.zip.Inflater;
 
 enum FileType {JPEG, GIF, HTML, XML,  JS, CSS, NONE}
 
@@ -24,10 +23,6 @@ public class HttpWorker extends Thread {
 
 
     public void run() {
-        /* A compléter */
-    	// on utilise la forme try-with pour profiter du fait que les
-    	// classes BufferedReader, DataOutputStream et Socket implémentent
-    	// l'interface AutoCloseable
     	try {
     		input = new java.io.BufferedReader(new InputStreamReader(socket.getInputStream()));
 			output = new DataOutputStream(socket.getOutputStream());
@@ -42,34 +37,33 @@ public class HttpWorker extends Thread {
 
 
     /**
-     *  Traite une requête HTTP
+     *  Process an HTTP request
      */
     private void httpHandler() {
-        /* A compléter TODO continuer ici */
     	try {
     		clientSentence = input.readLine();
     	} catch (IOException e) {
     		System.err.println(e);
     	}
     	String[] clientCommand = clientSentence.split(" ");
-    	//System.out.println("commande du client : " + clientCommand); // pour le debug
+    	//System.out.println("commande du client : " + clientCommand); // for debugging
     	String typeRequete = clientCommand[0];
-    	//System.out.println("type requête : " + typeRequete); // pour le debug
+    	//System.out.println("type requête : " + typeRequete); // for debugging
     	
     	if (typeRequete.equals("GET")) {
 			String path = clientCommand[1];
-			//System.out.println("path: " + path); // pour le debug
+			//System.out.println("path: " + path); // for debugging
 			if (path.equals("/")) path = "index.html";
 			if (path.startsWith("/")) path = path.substring(1);
-			//System.out.println("path: " + path); // pour le debug
+			//System.out.println("path: " + path); // for debugging
 			String pathRequested = this.pathHeader + path;
-			System.out.println("pathRequested: " + pathRequested); // pour le debug
+			System.out.println("pathRequested: " + pathRequested); // for debugging
 			int i = path.lastIndexOf('.');
 			String extension = "";
 			if (i > 0) {
 				extension = path.substring(i+1);
 			}
-			//System.out.println("extension : " + extension); // pour le debug
+			//System.out.println("extension : " + extension); // for debugging
 			FileType filetype;
 			switch (extension.toUpperCase()) {
 				case "HTML":
@@ -124,12 +118,12 @@ public class HttpWorker extends Thread {
     }
 
 
-    /** Cette méthode gère une ressource non trouvée
-     * @param path : chemin de la ressource non trouvée
+    /** This method handles a resource nowhere to be found
+     * @param path : path of the resource not found
      */
     public void fileNotFoundHandler(String path) {
         try {
-            // Envoi de l'erreur 404 : Fichier non trouvé
+            // Sending a 404 error : File not found
             String retMessage = "<html><head></head><body>Fichier "+path+" non trouvé...</body></html>\n";
 
 //            output.writeUTF(HttpServer.constructHttpHeader(404, FileType.HTML));

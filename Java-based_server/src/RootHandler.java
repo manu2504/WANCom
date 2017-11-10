@@ -38,9 +38,9 @@ public class RootHandler implements HttpHandler {
      }
 
      /**
-      * Cette méthode écrit le contenu fichier "f" dans le buffer d'émission "out"
-      * @param f : fichier à copier
-      * @param out : buffer d'émission dans lequel sur copier le contenu du fichier
+      * This method writes the content of the file "f" in the output buffer "out"
+      * @param f : file to copy
+      * @param out : output buffer into which to copy the content of the file
       */
      static void outputFile(FileInputStream f, OutputStream out) throws IOException {
          while (true) {
