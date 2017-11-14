@@ -1,0 +1,4 @@
+The result of "Unidirection_Oregon_to_N.Virginia" is more readable because of few amount of paths.
+At start of phase3, it's much better to test on this one.
+
+However, we finally need to apply Dijkstra's algorithm on the Bidirection one, which has more points.

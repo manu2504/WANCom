@@ -1,0 +1,274 @@
+<!DOCTYPE html >
+  <head>
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>Using MySQL and PHP with Google Maps</title>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 80%;
+        width: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0em;
+      }
+      form {
+        margin: 1em;
+      }
+      select {
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="map"></div>
+
+    <!-- Use of jQuery, a popular Javascript framework, is made in order to soften manipulation of HTML elements -->
+    <script src="jquery-3.2.1.min.js"></script>
+    <script>
+      
+
+      function initMap() {
+        var map = new google.maps.Map(document.getElementById('map'), {
+          center: new google.maps.LatLng(59.326242, 17.8419701),
+          zoom: 2
+        });
+        
+        /**
+         * Add a red circle on the map. Used to represent a hop.
+         *
+         * @param {object} centerCoordinates - The coordinates of the center of the circle, in the format
+                                               { lat: <float>, lng: <float> }, or as a google.maps.LatLng object.
+         * @param {Google Map object} map - A map object, created with 'new google.maps.Map()'.
+         * @param {string} contentInfoWindow - Content of the infoWindow for this circle.
+                                               If absent, no infoWindow will be displayed.
+                                               The infoWindow will be positioned at the center of the circle.
+         */
+        function addCircle(centerCoordinates, map, contentInfoWindow) {
+          if (map === undefined) {
+            map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
+          }
+          var circle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: centerCoordinates,
+            radius: 8*10000 // fixed size, in meters
+          });
+          
+          circle.setMap(map);
+          
+          if (contentInfoWindow) {
+            circle.addListener('click', function(){
+              addInfoWindow(centerCoordinates, contentInfoWindow, map);
+            });
+          }
+        }
+          
+        function addInfoWindow(coords, content, map) {
+          var infoWindow = new google.maps.InfoWindow({
+            content: content,
+            position: coords
+          });
+          
+          infoWindow.open(map);
+        }
+        
+        var polylines = new Array();
+        var cables;
+
+        // Change this depending on the name of PHP or XML file
+        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace1219.xml', function(data) {
+          var xml = data.responseXML;
+          var marker = xml.documentElement.getElementsByTagName('marker');
+          // Paths used to create polylines
+          var Paths = new Array();
+          for(var i=1;i<7;i++){
+            Paths[i] = new Array();
+          }
+  /*        // HopObj used to store data about each hop
+          var HopObj = new Array();
+          for(var i=1;i<4;i++){
+            HopObj[i] = new Array();
+          }
+  */        
+          // Arbitrary assignement of paths to cables
+          cables = {1: [1,2,3],
+                    2: [4,5,6]
+                    };
+          
+          var currPathId;
+          Array.prototype.forEach.call(marker, function(markerElem) {
+
+            var markerId = markerElem.getAttribute('id');
+            //var idHop = markerElem.getAttribute('idHop');
+            var ipSrc = markerElem.getAttribute('ipSrc');
+            var idPath = markerElem.getAttribute('idPath');
+            // var country = markerElem.getAttribute('country');
+            // var city = markerElem.getAttribute('city');
+            var point = new google.maps.LatLng(
+                parseFloat(markerElem.getAttribute('lat')),
+                parseFloat(markerElem.getAttribute('lng')));
+                
+            if (currPathId !== idPath) {
+              currPathId = idPath;
+            }
+            /*Paths
+            HopObj    
+            */
+                
+           // console.log (idPath);
+
+            switch(idPath)
+            {
+                case '19':
+                    Paths[1].push(point)
+             //       HopObj[1].push({point: point, cableId: 1, idPath: idPath})
+                    break;
+                case '22':
+                    Paths[2].push (point);
+                    break;
+                case '30':
+                    Paths[3].push (point);
+                    break;
+                case '15':
+                    Paths[4].push(point)
+            //        HopObj[1].push({point: point, cableId: 1, idPath: idPath})
+                    break;
+                case '315':
+                    Paths[5].push (point);
+                    break;
+                case '412':
+                    Paths[6].push (point);
+                    break;
+            }
+
+              //  console.log (Paths);
+            //Paths.push (point);
+            var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "idPath:" + idPath;
+            infowincontent.appendChild(strong);
+            infowincontent.appendChild(document.createElement('br'));
+
+           // var address = city + ", " + country
+            var text = document.createTextNode(ipSrc);
+
+            infowincontent.appendChild(text);
+            
+            addCircle(point, map, infowincontent);
+
+            var polyline;
+            for(var i=1;i<7;i++){
+              polyline = new google.maps.Polyline({
+                path: Paths[i],
+                icons: [{
+                  icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+                  offset: '100%'
+                }],
+                strokeColor: '#00e000',
+                strokeOpacity: 1.0,
+                strokeWeight: 2 // to be weighted according to number of paths that go across the link
+              });
+              polyline.setMap(map);
+              polylines.push({idPath: i, polyline: polyline});
+            }
+              
+          });
+        });
+        
+        
+        function add_form() {
+          var $form_content = $('<form>', { id: 'form_datacenters' }).appendTo('body');
+          $('<label>For which cable you want to display the paths that go across it?</label>').appendTo($form_content);
+          var $cableId = $('<select>', { on: { change: updatemap2 } } );
+          /*for (var i = 1; i < 3; i++) {
+            $('<option>', { html: i } ).appendTo($cableId);
+          }*/
+          $('<option>', { html: [1, ' Oregon to N.Virginia'] } ).appendTo($cableId);
+          $('<option>', { html: [2, ' N.Virginia to Oregon'] } ).appendTo($cableId);
+
+          $cableId.appendTo($form_content);
+          $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
+                    .appendTo($form_content);
+        }
+        
+        function updatemap(userSelected) {
+          // First check if the "All" checkbox is checked, unless a pair of datacenters has been explicitly selected
+          if ( !userSelected && $("input:checkbox[value='all']").prop('checked') ) {
+            displayAllPaths();
+            return;
+          }
+          
+          // Unselect automatically the "All" checkbox
+          if (userSelected) {
+            $("input:checkbox[value='all']").prop('checked', false);
+          }
+          
+          var userSelection = parseInt($( 'select option:selected' ).text());
+          
+          removeAllPaths();
+          displayPathsFromCable(userSelection);
+        }
+        window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
+
+        function updatemap2() {
+          updatemap(true);
+        }
+        window.updatemap2 = updatemap2;
+        
+        function displayPathsFromCable(cableId) {
+          for (var i in polylines) {
+            if ( $.inArray( polylines[i].idPath, cables[cableId] ) != -1 ) {
+              polylines[i].polyline.setMap(map);
+            }
+          }
+        }
+        
+        function displayAllPaths() {
+          for (var i in polylines) {
+            polylines[i].polyline.setMap(map);
+          }
+        }
+        
+        function removeAllPaths() {
+          for (var i in polylines) {
+            polylines[i].polyline.setMap(null);
+          }
+        }
+        
+        add_form();
+      }
+
+      function downloadUrl(url, callback) {
+        var request = window.ActiveXObject ?
+            new ActiveXObject('Microsoft.XMLHTTP') :
+            new XMLHttpRequest;
+
+        request.onreadystatechange = function() {
+          if (request.readyState == 4) {
+            request.onreadystatechange = doNothing;
+            callback(request, request.status);
+          }
+        };  
+
+        request.open('GET', url, true);
+        request.send(null);
+      }
+      
+      function doNothing() {}
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
+    </script>
+  </body>
+</html>
