@@ -38,7 +38,7 @@ public class TestDijkstraAlgorithm {
 		addLane("Edge_9", 4, 9, 502);
 		addLane("Edge_10", 9, 10, 40);
 		addLane("Edge_11", 1, 10, 600);
-                //reverse
+                //reverse path
                 addLane("Edge_0", 1, 0, 85);
 		addLane("Edge_1", 2, 0, 217);
 		addLane("Edge_2", 4, 0, 173);
