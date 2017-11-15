@@ -12,7 +12,7 @@ public class Test {
 		staticFiles.location("public"); // Static files
 		get("/hello", (request, response) -> "Hello guys!");
 		post("/sendmedata", (request, response) -> {
-			System.out.println("data required");
+			System.out.println("data received " + request.body());
 			return "{ \"lat\": 123.0, \"lng\": 146.0 }";
 		});
 	}
