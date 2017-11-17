@@ -166,24 +166,24 @@
             infowincontent.appendChild(text);
             
             addCircle(point, map, infowincontent);
-
-            var polyline;
-            for(var i=1;i<7;i++){
-              polyline = new google.maps.Polyline({
-                path: Paths[i],
-                icons: [{
-                  icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-                  offset: '100%'
-                }],
-                strokeColor: '#00e000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2 // to be weighted according to number of paths that go across the link
-              });
-              polyline.setMap(map);
-              polylines.push({idPath: i, polyline: polyline});
-            }
               
           });
+
+          var polyline;
+          for(var i=1;i<7;i++){
+            polyline = new google.maps.Polyline({
+              path: Paths[i],
+              icons: [{
+                icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+                offset: '100%'
+              }],
+              strokeColor: '#00e000',
+              strokeOpacity: 1.0,
+              strokeWeight: 2 // to be weighted according to number of paths that go across the link
+            });
+            polyline.setMap(map);
+            polylines.push({idPath: i, polyline: polyline});
+          }
         });
         
         

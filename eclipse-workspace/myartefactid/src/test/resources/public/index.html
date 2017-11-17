@@ -83,25 +83,21 @@
           infoWindow.open(map);
         }
         
-        var polylines = new Array();
+        var polylines = new Array(); // A polyline is the graphical representation of a path
         var cables;
 
         // Change this depending on the name of PHP or XML file
         downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace6101219.xml', function(data) {
           var xml = data.responseXML;
           var marker = xml.documentElement.getElementsByTagName('marker');
-          // Paths used to create polylines
+          // Paths (represented by polylines)
           var Paths = new Array();
-          for(var i=1;i<13;i++){
+          var noPaths = 12;
+          for (var i = 1; i <= noPaths; i++) {
             Paths[i] = new Array();
           }
-  /*        // HopObj used to store data about each hop
-          var HopObj = new Array();
-          for(var i=1;i<4;i++){
-            HopObj[i] = new Array();
-          }
-  */        
-          // Arbitrary assignement of paths to cables
+          
+          // Arbitrary assignment of paths to cables
           cables = {1: [1,2,3],
                     2: [4,5,6],
                     3: [7,8,9],
@@ -124,9 +120,6 @@
             if (currPathId !== idPath) {
               currPathId = idPath;
             }
-            /*Paths
-            HopObj    
-            */
                 
            // console.log (idPath);
 
@@ -134,7 +127,6 @@
             {
                 case '33':
                     Paths[1].push(point)
-             //       HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
                 case '1017':
                     Paths[2].push (point);
@@ -144,7 +136,6 @@
                     break;
                 case '11':
                     Paths[4].push(point)
-            //        HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
                 case '531':
                     Paths[5].push (point);
@@ -154,7 +145,6 @@
                     break;
                     case '19':
                     Paths[7].push(point)
-             //       HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
                 case '22':
                     Paths[8].push (point);
@@ -164,48 +154,48 @@
                     break;
                 case '15':
                     Paths[10].push(point)
-            //        HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
                 case '315':
                     Paths[11].push (point);
                     break;
                 case '412':
                     Paths[12].push (point);
-                    break;
+                    break;				
             }
 
-              //  console.log (Paths);
-            //Paths.push (point);
+            // console.log (Paths);
+            // Paths.push (point);
             var infowincontent = document.createElement('div');
             var strong = document.createElement('strong');
             strong.textContent = "idPath:" + idPath;
             infowincontent.appendChild(strong);
             infowincontent.appendChild(document.createElement('br'));
 
-           // var address = city + ", " + country
+            // var address = city + ", " + country
             var text = document.createTextNode(ipSrc);
 
             infowincontent.appendChild(text);
             
             addCircle(point, map, infowincontent);
-
-            var polyline;
-            for(var i=1;i<13;i++){
-              polyline = new google.maps.Polyline({
-                path: Paths[i],
-                icons: [{
-                  icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-                  offset: '100%'
-                }],
-                strokeColor: '#00e000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2 // to be weighted according to number of paths that go across the link
-              });
-              polyline.setMap(map);
-              polylines.push({idPath: i, polyline: polyline});
-            }
               
           });
+          
+
+	        var polyline;
+	        for (var i = 1; i <= noPaths; i++) {
+	          polyline = new google.maps.Polyline({
+	            path: Paths[i],
+	            icons: [{
+	              icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+	              offset: '100%'
+	            }],
+	            strokeColor: '#00e000',
+	            strokeOpacity: 1.0,
+	            strokeWeight: 2 // to be weighted according to number of paths that go across the link
+	          });
+	          polyline.setMap(map);
+	          polylines.push({idPath: i, polyline: polyline});
+	        }
         });
         
         
@@ -237,7 +227,7 @@
 		      dataType: 'json'
 			})
 			  .fail(function() {
-				alert( "error" );
+				alert( "The request to the server isn't a success. Maybe your Internet connection is down, or the server is so." );
 			  })
 			  .done(function( msg ) {
 			  	console.log("JSON received successfully from the server:", JSON.stringify(msg));
@@ -273,6 +263,7 @@
           for (var i in polylines) {
             if ( $.inArray( polylines[i].idPath, cables[cableId] ) != -1 ) {
               polylines[i].polyline.setMap(map);
+              console.log("Polyline added to the map for cableId ", cableId);
             }
           }
         }
@@ -280,6 +271,7 @@
         function displayAllPaths() {
           for (var i in polylines) {
             polylines[i].polyline.setMap(map);
+            console.log("DisplayAllPaths: polyline added to the map");
           }
         }
         
