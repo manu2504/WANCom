@@ -1,0 +1,3418 @@
+{
+    "directed": false, 
+    "graph": {
+        "DateObtained": "14/01/11", 
+        "GeoLocation": "USA", 
+        "GeoExtent": "Country", 
+        "Customer": 1, 
+        "Network": "UUNET", 
+        "IX": 0, 
+        "Provenance": "Secondary", 
+        "Access": 1, 
+        "Source": "http://www.nthelp.com/images/uunet.jpg", 
+        "Version": "1.0", 
+        "DateType": "Current", 
+        "LastAccess": "14/01/11", 
+        "Layer": "IP", 
+        "Classification": "Backbone Access Customer ", 
+        "Creator": "Topology Zoo Toolset", 
+        "Type": "COM", 
+        "Transit": 0, 
+        "Backbone": 1, 
+        "Commercial": 0, 
+        "NetworkDate": "2011-01", 
+        "label": "uunet", 
+        "Testbed": 0, 
+        "Developed": 1, 
+        "SvnVersion": 8123
+    }, 
+    "nodes": [
+        {
+            "Latitude": 36.17497, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Las Vegas", 
+            "Longitude": -115.13722
+        }, 
+        {
+            "Latitude": 39.95234, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Philadelphia", 
+            "Longitude": -75.16379
+        }, 
+        {
+            "Latitude": 39.73915, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Denver", 
+            "Longitude": -104.9847
+        }, 
+        {
+            "Latitude": 32.78306, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Dallas", 
+            "Longitude": -96.80667
+        }, 
+        {
+            "Latitude": 49.24966, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Vancouver", 
+            "Longitude": -123.11934
+        }, 
+        {
+            "Latitude": 51.05011, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Calgary", 
+            "Longitude": -114.08529
+        }, 
+        {
+            "Latitude": 37.77493, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "San Francisco", 
+            "Longitude": -122.41942
+        }, 
+        {
+            "Latitude": 29.95465, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "New Orleans", 
+            "Longitude": -90.07507
+        }, 
+        {
+            "Latitude": 38.62727, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "St Louis", 
+            "Longitude": -90.19789
+        }, 
+        {
+            "Latitude": 39.76838, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Indianapolis", 
+            "Longitude": -86.15804
+        }, 
+        {
+            "Latitude": 42.33143, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Detroit", 
+            "Longitude": -83.04575
+        }, 
+        {
+            "Latitude": 33.44838, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Phoenix", 
+            "Longitude": -112.07404
+        }, 
+        {
+            "Latitude": 40.44062, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Pittsburgh", 
+            "Longitude": -79.99589
+        }, 
+        {
+            "Latitude": 30.26715, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Austin", 
+            "Longitude": -97.74306
+        }, 
+        {
+            "Latitude": 32.71533, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "San Diego", 
+            "Longitude": -117.15726
+        }, 
+        {
+            "Latitude": 38.89511, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Washington, DC", 
+            "Longitude": -77.03637
+        }, 
+        {
+            "Latitude": 41.76371, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Hartford", 
+            "Longitude": -72.68509
+        }, 
+        {
+            "Latitude": 45.50884, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Montreal", 
+            "Longitude": -73.58781
+        }, 
+        {
+            "Latitude": 34.05223, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Los Angeles", 
+            "Longitude": -118.24368
+        }, 
+        {
+            "Latitude": 42.98339, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "London", 
+            "Longitude": -81.23304
+        }, 
+        {
+            "Latitude": 33.749, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Atlanta", 
+            "Longitude": -84.38798
+        }, 
+        {
+            "Latitude": 30.33218, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Jacksonville", 
+            "Longitude": -81.65565
+        }, 
+        {
+            "Latitude": 43.70011, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Toronto", 
+            "Longitude": -79.4163
+        }, 
+        {
+            "Latitude": 41.85003, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Chicago", 
+            "Longitude": -87.65005
+        }, 
+        {
+            "Latitude": 25.77427, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Miami", 
+            "Longitude": -80.19366
+        }, 
+        {
+            "Latitude": 28.53834, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Orlando", 
+            "Longitude": -81.37924
+        }, 
+        {
+            "Latitude": 39.11417, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Kansas City", 
+            "Longitude": -94.62746
+        }, 
+        {
+            "Latitude": 45.41117, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Ottawa", 
+            "Longitude": -75.69812
+        }, 
+        {
+            "Latitude": 35.7721, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Raleigh", 
+            "Longitude": -78.63861
+        }, 
+        {
+            "Latitude": 43.4501, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Kitchener", 
+            "Longitude": -80.48299
+        }, 
+        {
+            "Latitude": 44.646, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Halifax", 
+            "Longitude": -63.57333
+        }, 
+        {
+            "Latitude": 39.29038, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Baltimore", 
+            "Longitude": -76.61219
+        }, 
+        {
+            "Latitude": 29.76328, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Houston", 
+            "Longitude": -95.36327
+        }, 
+        {
+            "Latitude": 42.35843, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Boston", 
+            "Longitude": -71.05977
+        }, 
+        {
+            "Latitude": 53.55014, 
+            "Country": "Canada", 
+            "Internal": 1, 
+            "id": "Edmonton", 
+            "Longitude": -113.46871
+        }, 
+        {
+            "Latitude": 42.88645, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Buffalo", 
+            "Longitude": -78.87837
+        }, 
+        {
+            "Latitude": 44.97997, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Minneapolis", 
+            "Longitude": -93.26384
+        }, 
+        {
+            "Latitude": 40.71427, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "New York", 
+            "Longitude": -74.00597
+        }, 
+        {
+            "Latitude": 40.76078, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Salt Lake City", 
+            "Longitude": -111.89105
+        }, 
+        {
+            "Latitude": 41.4995, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Cleveland", 
+            "Longitude": -81.69541
+        }, 
+        {
+            "Latitude": 45.52345, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Portland", 
+            "Longitude": -122.67621
+        }, 
+        {
+            "Latitude": 47.60621, 
+            "Country": "United States", 
+            "Internal": 1, 
+            "id": "Seattle", 
+            "Longitude": -122.33207
+        }
+    ], 
+    "links": [
+        {
+            "LinkType": "DS-3", 
+            "source": "Las Vegas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Phoenix"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Las Vegas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Denver"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Las Vegas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Los Angeles"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Philadelphia", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Philadelphia", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Baltimore"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Denver", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Salt Lake City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Denver", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Washington, DC"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Los Angeles"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "San Francisco"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Atlanta"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Dallas", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Austin"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Vancouver", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Calgary"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Vancouver", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Calgary", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Toronto"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Calgary", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Edmonton"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Washington, DC"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Salt Lake City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Los Angeles"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Portland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Francisco", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "New Orleans", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Miami"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "New Orleans", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "New Orleans", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Orlando"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "St Louis", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Indianapolis"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "St Louis", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Indianapolis", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Detroit", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Detroit", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Cleveland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Phoenix", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Phoenix", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "San Diego"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Pittsburgh", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Washington, DC"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Pittsburgh", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Cleveland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Austin", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "San Diego", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Los Angeles"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Boston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Raleigh"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Los Angeles"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Atlanta"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Washington, DC", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Baltimore"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Hartford", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Boston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Hartford", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Buffalo"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Montreal", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Halifax"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Montreal", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Montreal", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Ottawa"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "London", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Toronto"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Atlanta", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Miami"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Atlanta", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Chicago"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Atlanta", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Raleigh"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Atlanta", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Jacksonville"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Jacksonville", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Orlando"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Toronto", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Buffalo"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Toronto", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kitchener"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Toronto", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Ottawa"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Chicago", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Kansas City"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Chicago", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Minneapolis"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Chicago", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Chicago", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Miami", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Houston"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Miami", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Orlando"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Kansas City", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Boston", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "New York"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Buffalo", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Cleveland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Minneapolis", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Cleveland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "New York", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Cleveland"
+        }, 
+        {
+            "LinkType": "DS-3", 
+            "source": "Portland", 
+            "LinkLabel": "45 Mbps DS-3", 
+            "LinkNote": "45 Mbps ", 
+            "target": "Seattle"
+        }
+    ], 
+    "directed1": false,
+    "multigraph1": false,
+    "graph1": {
+        "DateObtained": "19/10/10",
+        "GeoLocation": "China",
+        "GeoExtent": "Country",
+        "Network": "China Telecom ",
+        "Provenance": "Primary",
+        "Access": 0,
+        "Source": "http://www.chinatelecomusa.com/content.asp?pl=627&sl=637&contentid=660&id=1&indexid=0",
+        "Version": "1.0",
+        "Type": "COM",
+        "DateType": "Current",
+        "Backbone": 1,
+        "Commercial": 0,
+        "label": "Chinanet",
+        "ToolsetVersion": "0.3.34dev-20120328",
+        "Customer": 1,
+        "IX": 0,
+        "SourceGitVersion": "e278b1b",
+        "DateModifier": "=",
+        "DateMonth": "08",
+        "LastAccess": "3/08/10",
+        "Layer": "IP",
+        "Creator": "Topology Zoo Toolset",
+        "Developed": 0,
+        "Transit": 1,
+        "NetworkDate": "2010_08",
+        "DateYear": "2010",
+        "LastProcessed": "2011_09_01",
+        "Testbed": 0
+    },
+    "nodes1": [
+        {
+            "Country": "China",
+            "Longitude": 91.1,
+            "Internal": 1,
+            "Latitude": 29.65,
+            "type": "Blue",
+            "id": "Lhasa"
+        },
+        {
+            "Country": "China",
+            "Longitude": 104.06667,
+            "Internal": 1,
+            "Latitude": 30.66667,
+            "type": "Blue",
+            "id": "Chengdu"
+        },
+        {
+            "Country": "China",
+            "Longitude": 80.06667,
+            "Internal": 1,
+            "Latitude": 32.51667,
+            "type": "Blue",
+            "id": "Shiquanhe"
+        },
+        {
+            "Country": "China",
+            "Longitude": 116.39723,
+            "Internal": 1,
+            "Latitude": 39.9075,
+            "type": "Green",
+            "id": "Beijing"
+        },
+        {
+            "Country": "China",
+            "Longitude": 103.79222,
+            "Internal": 1,
+            "Latitude": 36.05639,
+            "type": "Blue",
+            "id": "Lanzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 108.92861,
+            "Internal": 1,
+            "Latitude": 34.25833,
+            "type": "Blue",
+            "id": "Xi'an"
+        },
+        {
+            "Country": "China",
+            "Longitude": 75.97972,
+            "Internal": 1,
+            "Latitude": 39.45472,
+            "type": "Blue",
+            "id": "Kashi"
+        },
+        {
+            "Country": "China",
+            "Longitude": 87.58333,
+            "Internal": 1,
+            "Latitude": 43.8,
+            "type": "Blue",
+            "id": "Urumqi"
+        },
+        {
+            "Country": "China",
+            "Longitude": 116.99722,
+            "Internal": 1,
+            "Latitude": 36.66833,
+            "type": "Blue",
+            "id": "Jinan"
+        },
+        {
+            "Country": "China",
+            "Longitude": 121.45806,
+            "Internal": 1,
+            "Latitude": 31.22222,
+            "type": "Green",
+            "id": "Shanghai"
+        },
+        {
+            "Country": "China",
+            "Longitude": 120.37194,
+            "Internal": 1,
+            "Latitude": 36.09861,
+            "type": "Blue",
+            "id": "Qingdao"
+        },
+        {
+            "Country": "China",
+            "Longitude": 117.17667,
+            "Internal": 1,
+            "Latitude": 39.14222,
+            "type": "Blue",
+            "id": "Tianjin"
+        },
+        {
+            "Country": "China",
+            "Longitude": 112.56028,
+            "Internal": 1,
+            "Latitude": 37.86944,
+            "type": "Blue",
+            "id": "Taiyuan"
+        },
+        {
+            "Country": "China",
+            "Longitude": 114.47861,
+            "Internal": 1,
+            "Latitude": 38.04139,
+            "type": "Blue",
+            "id": "Shilazhuang"
+        },
+        {
+            "Country": "China",
+            "Longitude": 120.61806,
+            "Internal": 1,
+            "Latitude": 31.31139,
+            "type": "Blue",
+            "id": "Suzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 100.51803,
+            "Internal": 1,
+            "Latitude": 30.13062,
+            "type": "Pink",
+            "id": "Hong Kong"
+        },
+        {
+            "Country": "China",
+            "Longitude": 120.16889,
+            "Internal": 1,
+            "Latitude": 30.25528,
+            "type": "Blue",
+            "id": "Hangzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 114.26667,
+            "Internal": 1,
+            "Latitude": 30.58333,
+            "type": "Blue",
+            "id": "Wuhan"
+        },
+        {
+            "Country": "China",
+            "Longitude": 117.28083,
+            "Internal": 1,
+            "Latitude": 31.86389,
+            "type": "Blue",
+            "id": "Hefei"
+        },
+        {
+            "Country": "China",
+            "Longitude": 118.77778,
+            "Internal": 1,
+            "Latitude": 32.06167,
+            "type": "Blue",
+            "id": "Nanjing"
+        },
+        {
+            "Country": "China",
+            "Longitude": 113.25,
+            "Internal": 1,
+            "Latitude": 23.11667,
+            "type": "Green",
+            "id": "Guangzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 115.88333,
+            "Internal": 1,
+            "Latitude": 28.68333,
+            "type": "Blue",
+            "id": "Nandhang"
+        },
+        {
+            "Country": "China",
+            "Longitude": 108.31667,
+            "Internal": 1,
+            "Latitude": 22.81667,
+            "type": "Blue",
+            "id": "Nanning"
+        },
+        {
+            "Country": "China",
+            "Longitude": 112.96667,
+            "Internal": 1,
+            "Latitude": 28.2,
+            "type": "Blue",
+            "id": "Changsha"
+        },
+        {
+            "Country": "China",
+            "Longitude": 106.71667,
+            "Internal": 1,
+            "Latitude": 26.58333,
+            "type": "Blue",
+            "id": "Guiyang"
+        },
+        {
+            "Country": "China",
+            "Longitude": 106.55278,
+            "Internal": 1,
+            "Latitude": 29.56278,
+            "type": "Blue",
+            "id": "Chongqing"
+        },
+        {
+            "Country": "China",
+            "Longitude": 102.71833,
+            "Internal": 1,
+            "Latitude": 25.03889,
+            "type": "Blue",
+            "id": "Kunming"
+        },
+        {
+            "Country": "China",
+            "Longitude": 101.76667,
+            "Internal": 1,
+            "Latitude": 36.61667,
+            "type": "Blue",
+            "id": "Xining"
+        },
+        {
+            "Country": "China",
+            "Longitude": 106.27306,
+            "Internal": 1,
+            "Latitude": 38.46806,
+            "type": "Blue",
+            "id": "Yinchuan"
+        },
+        {
+            "Country": "China",
+            "Longitude": 111.65222,
+            "Internal": 1,
+            "Latitude": 40.81056,
+            "type": "Blue",
+            "id": "Hohhot"
+        },
+        {
+            "Country": "China",
+            "Longitude": 113.64861,
+            "Internal": 1,
+            "Latitude": 34.75778,
+            "type": "Blue",
+            "id": "Zhengzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 110.34167,
+            "Internal": 1,
+            "Latitude": 20.04583,
+            "type": "Blue",
+            "id": "Haikou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 119.30611,
+            "Internal": 1,
+            "Latitude": 26.06139,
+            "type": "Blue",
+            "id": "Fuzhou"
+        },
+        {
+            "Country": "China",
+            "Longitude": 118.08187,
+            "Internal": 1,
+            "Latitude": 24.47979,
+            "type": "Blue",
+            "id": "Xiamen"
+        },
+        {
+            "Country": "China",
+            "Longitude": 126.65,
+            "Internal": 1,
+            "Latitude": 45.75,
+            "type": "Blue",
+            "id": "Harbin"
+        },
+        {
+            "Country": "China",
+            "Longitude": 125.32278,
+            "Internal": 1,
+            "Latitude": 43.88,
+            "type": "Blue",
+            "id": "Changchun"
+        },
+        {
+            "Country": "China",
+            "Longitude": 123.43278,
+            "Internal": 1,
+            "Latitude": 41.79222,
+            "type": "Blue",
+            "id": "Shenyang"
+        },
+        {
+            "Country": "China",
+            "Longitude": 121.60222,
+            "Internal": 1,
+            "Latitude": 38.91222,
+            "type": "Blue",
+            "id": "Dalian"
+        }
+    ],
+    "links1": [
+        {
+            "LinkLabel": "Red Link",
+            "source": 0,
+            "target": 1
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 0,
+            "target": 2
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 0,
+            "target": 3
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 1,
+            "target": 9
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 1,
+            "target": 24
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 1,
+            "target": 25
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 1,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 1,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 4
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 12
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 13
+        },
+        {
+            "LinkLabel": "Blue Link",
+            "source": 3,
+            "target": 9
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 5
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 30
+        },
+        {
+            "LinkLabel": "Green Link",
+            "source": 3,
+            "target": 15
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 17
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Blue Link",
+            "source": 3,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 27
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 7
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 34
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 35
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 36
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 11
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 28
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 3,
+            "target": 29
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 4,
+            "target": 5
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 12
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 9
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 27
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 7
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 28
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 29
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 17
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 5,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 6,
+            "target": 7
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 8,
+            "target": 9
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 11
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 14
+        },
+        {
+            "LinkLabel": "Green Link",
+            "source": 9,
+            "target": 15
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 16
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 17
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 18
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Blue Link",
+            "source": 9,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 9,
+            "target": 21
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 10,
+            "target": 11
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 11,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 11,
+            "target": 37
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 14,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 15,
+            "target": 20
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 17,
+            "target": 23
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 17,
+            "target": 31
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 17,
+            "target": 19
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 19,
+            "target": 32
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 22
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 24
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 25
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 26
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 31
+        },
+        {
+            "LinkLabel": "Red Link",
+            "source": 20,
+            "target": 33
+        }
+    ],
+    
+    "directed2": false,
+    "multigraph2": false,
+    "graph2": {
+        "DateObtained": "2/01/11",
+        "GeoLocation": "Germany",
+        "GeoExtent": "Country",
+        "Network": "DFN",
+        "Provenance": "Primary",
+        "Note": "Don't know how their customers are set-up. External connection from page 5 of http://www.dfn.de/fileadmin/1Dienstleistungen/XWIN/X-WiN-Broschuere_deutsch.pdf",
+        "Source": "http://www-win.rrze.uni-erlangen.de/cgi-bin/ipqos/map.pl?config=win",
+        "Version": "1.0",
+        "Type": "REN",
+        "DateType": "Current",
+        "Backbone": 1,
+        "Commercial": 0,
+        "label": "Dfn",
+        "ToolsetVersion": "0.3.34dev-20120328",
+        "Customer": 0,
+        "IX": 0,
+        "SourceGitVersion": "e278b1b",
+        "DateModifier": "=",
+        "DateMonth": "01",
+        "LastAccess": "2/01/11",
+        "Access": 0,
+        "Layer": "IP",
+        "Creator": "Topology Zoo Toolset",
+        "Developed": 0,
+        "Transit": 0,
+        "NetworkDate": "2011_01",
+        "DateYear": "2011",
+        "LastProcessed": "2011_09_01",
+        "Testbed": 1
+    },
+    "nodes2": [
+        {
+            "Country": "Germany",
+            "Longitude": 12.91667,
+            "Internal": 1,
+            "Latitude": 50.83333,
+            "id": "CHE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 12.37129,
+            "Internal": 1,
+            "Latitude": 51.33962,
+            "id": "LEI"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.73832,
+            "Internal": 1,
+            "Latitude": 51.05089,
+            "id": "DRE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.00389,
+            "Internal": 1,
+            "Latitude": 49.58972,
+            "id": "ERL"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.58333,
+            "Internal": 1,
+            "Latitude": 50.93333,
+            "id": "JEN"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.41053,
+            "Internal": 1,
+            "Latitude": 52.52437,
+            "id": "ADH"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.41053,
+            "Internal": 1,
+            "Latitude": 52.52437,
+            "id": "ZIB"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.41053,
+            "Internal": 1,
+            "Latitude": 52.52437,
+            "id": "HUB"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.06566,
+            "Internal": 1,
+            "Latitude": 52.39886,
+            "id": "POT"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.64944,
+            "Internal": 1,
+            "Latitude": 49.87056,
+            "id": "GSI"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.68333,
+            "Internal": 1,
+            "Latitude": 50.11667,
+            "id": "FRA"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.69079,
+            "Internal": 1,
+            "Latitude": 49.40768,
+            "id": "HEI"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.38583,
+            "Internal": 1,
+            "Latitude": 49.00472,
+            "id": "FZK"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.9,
+            "Internal": 1,
+            "Latitude": 50.68333,
+            "id": "ILM"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 9.17702,
+            "Internal": 1,
+            "Latitude": 48.78232,
+            "id": "STU"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.75,
+            "Internal": 1,
+            "Latitude": 49.45,
+            "id": "KAI"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.65,
+            "Internal": 1,
+            "Latitude": 48.25,
+            "id": "GAR"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.53333,
+            "Internal": 1,
+            "Latitude": 52.03333,
+            "id": "BIE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.75439,
+            "Internal": 1,
+            "Latitude": 51.71905,
+            "id": "PAD"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 9.73322,
+            "Internal": 1,
+            "Latitude": 52.37052,
+            "id": "HAN"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.62571,
+            "Internal": 1,
+            "Latitude": 51.96236,
+            "id": "MUE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 9.93333,
+            "Internal": 1,
+            "Latitude": 51.53333,
+            "id": "GOE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 9.5,
+            "Internal": 1,
+            "Latitude": 51.31667,
+            "id": "KAS"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.80777,
+            "Internal": 1,
+            "Latitude": 53.07516,
+            "id": "BRE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.2,
+            "Internal": 1,
+            "Latitude": 53.16667,
+            "id": "EWE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.0,
+            "Internal": 1,
+            "Latitude": 53.55,
+            "id": "HAM"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.18333,
+            "Internal": 1,
+            "Latitude": 51.26667,
+            "id": "WUP"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 6.95,
+            "Internal": 1,
+            "Latitude": 50.93333,
+            "id": "BIR"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.45,
+            "Internal": 1,
+            "Latitude": 51.51667,
+            "id": "DOR"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.1,
+            "Internal": 1,
+            "Latitude": 50.73333,
+            "id": "BON"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 6.08342,
+            "Internal": 1,
+            "Latitude": 50.77664,
+            "id": "AAC"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.76667,
+            "Internal": 1,
+            "Latitude": 50.81667,
+            "id": "MAR"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 8.65,
+            "Internal": 1,
+            "Latitude": 50.58333,
+            "id": "GIE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.01667,
+            "Internal": 1,
+            "Latitude": 51.45,
+            "id": "DUI"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.0,
+            "Internal": 1,
+            "Latitude": 49.23333,
+            "id": "SAA"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.0,
+            "Internal": 1,
+            "Latitude": 53.55,
+            "id": "DES"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.41053,
+            "Internal": 1,
+            "Latitude": 52.52437,
+            "id": "TUB"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.13489,
+            "Internal": 1,
+            "Latitude": 54.32133,
+            "id": "KIE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 12.14049,
+            "Internal": 1,
+            "Latitude": 54.0887,
+            "id": "ROS"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.38333,
+            "Internal": 1,
+            "Latitude": 54.1,
+            "id": "GRE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.66667,
+            "Internal": 1,
+            "Latitude": 52.16667,
+            "id": "MAG"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.53333,
+            "Internal": 1,
+            "Latitude": 52.26667,
+            "id": "BRA"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 7.21667,
+            "Internal": 1,
+            "Latitude": 51.48333,
+            "id": "BOC"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.57549,
+            "Internal": 1,
+            "Latitude": 48.13743,
+            "id": "FHM"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 12.09556,
+            "Internal": 1,
+            "Latitude": 49.015,
+            "id": "REG"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 10.88333,
+            "Internal": 1,
+            "Latitude": 48.36667,
+            "id": "AUG"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 6.36667,
+            "Internal": 1,
+            "Latitude": 50.93333,
+            "id": "FZJ"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 9.93611,
+            "Internal": 1,
+            "Latitude": 49.78778,
+            "id": "WUE"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 13.61667,
+            "Internal": 1,
+            "Latitude": 52.36667,
+            "id": "ZEU"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 14.55062,
+            "Internal": 1,
+            "Latitude": 52.34714,
+            "id": "FFO"
+        },
+        {
+            "Country": "Germany",
+            "Longitude": 11.57833,
+            "Internal": 1,
+            "Latitude": 49.94806,
+            "id": "BAY"
+        }
+    ],
+    "links2": [
+        {
+            "id": "e52",
+            "source": 0,
+            "target": 1
+        },
+        {
+            "id": "e51",
+            "source": 0,
+            "target": 2
+        },
+        {
+            "id": "e38",
+            "source": 1,
+            "target": 3
+        },
+        {
+            "id": "e54",
+            "source": 1,
+            "target": 4
+        },
+        {
+            "id": "e31",
+            "source": 2,
+            "target": 8
+        },
+        {
+            "id": "e37",
+            "source": 2,
+            "target": 3
+        },
+        {
+            "id": "e39",
+            "source": 3,
+            "target": 13
+        },
+        {
+            "id": "e41",
+            "source": 3,
+            "target": 44
+        },
+        {
+            "id": "e40",
+            "source": 3,
+            "target": 45
+        },
+        {
+            "id": "e42",
+            "source": 3,
+            "target": 47
+        },
+        {
+            "id": "e2",
+            "source": 3,
+            "target": 19
+        },
+        {
+            "id": "e14",
+            "source": 3,
+            "target": 10
+        },
+        {
+            "id": "e26",
+            "source": 3,
+            "target": 8
+        },
+        {
+            "id": "e36",
+            "source": 3,
+            "target": 50
+        },
+        {
+            "id": "e55",
+            "source": 4,
+            "target": 13
+        },
+        {
+            "id": "e45",
+            "source": 5,
+            "target": 6
+        },
+        {
+            "id": "e50",
+            "source": 5,
+            "target": 7
+        },
+        {
+            "id": "e44",
+            "source": 6,
+            "target": 36
+        },
+        {
+            "id": "e29",
+            "source": 6,
+            "target": 8
+        },
+        {
+            "id": "e43",
+            "source": 6,
+            "target": 49
+        },
+        {
+            "id": "e46",
+            "source": 6,
+            "target": 48
+        },
+        {
+            "id": "e49",
+            "source": 7,
+            "target": 36
+        },
+        {
+            "id": "e32",
+            "source": 8,
+            "target": 40
+        },
+        {
+            "id": "e33",
+            "source": 8,
+            "target": 39
+        },
+        {
+            "id": "e30",
+            "source": 8,
+            "target": 36
+        },
+        {
+            "id": "e1",
+            "source": 8,
+            "target": 19
+        },
+        {
+            "id": "e13",
+            "source": 8,
+            "target": 10
+        },
+        {
+            "id": "e27",
+            "source": 8,
+            "target": 50
+        },
+        {
+            "id": "e28",
+            "source": 8,
+            "target": 49
+        },
+        {
+            "id": "e12",
+            "source": 9,
+            "target": 10
+        },
+        {
+            "id": "e56",
+            "source": 9,
+            "target": 11
+        },
+        {
+            "id": "e19",
+            "source": 10,
+            "target": 12
+        },
+        {
+            "id": "e25",
+            "source": 10,
+            "target": 27
+        },
+        {
+            "id": "e15",
+            "source": 10,
+            "target": 32
+        },
+        {
+            "id": "e17",
+            "source": 10,
+            "target": 34
+        },
+        {
+            "id": "e16",
+            "source": 10,
+            "target": 15
+        },
+        {
+            "id": "e20",
+            "source": 10,
+            "target": 16
+        },
+        {
+            "id": "e24",
+            "source": 10,
+            "target": 30
+        },
+        {
+            "id": "e23",
+            "source": 10,
+            "target": 47
+        },
+        {
+            "id": "e0",
+            "source": 10,
+            "target": 19
+        },
+        {
+            "id": "e57",
+            "source": 11,
+            "target": 12
+        },
+        {
+            "id": "e58",
+            "source": 12,
+            "target": 14
+        },
+        {
+            "id": "e59",
+            "source": 12,
+            "target": 15
+        },
+        {
+            "id": "e60",
+            "source": 14,
+            "target": 16
+        },
+        {
+            "id": "e85",
+            "source": 15,
+            "target": 34
+        },
+        {
+            "id": "e62",
+            "source": 16,
+            "target": 43
+        },
+        {
+            "id": "e61",
+            "source": 16,
+            "target": 45
+        },
+        {
+            "id": "e77",
+            "source": 17,
+            "target": 18
+        },
+        {
+            "id": "e9",
+            "source": 17,
+            "target": 19
+        },
+        {
+            "id": "e86",
+            "source": 17,
+            "target": 20
+        },
+        {
+            "id": "e75",
+            "source": 18,
+            "target": 22
+        },
+        {
+            "id": "e4",
+            "source": 19,
+            "target": 21
+        },
+        {
+            "id": "e5",
+            "source": 19,
+            "target": 23
+        },
+        {
+            "id": "e7",
+            "source": 19,
+            "target": 37
+        },
+        {
+            "id": "e6",
+            "source": 19,
+            "target": 38
+        },
+        {
+            "id": "e8",
+            "source": 19,
+            "target": 41
+        },
+        {
+            "id": "e11",
+            "source": 19,
+            "target": 33
+        },
+        {
+            "id": "e3",
+            "source": 19,
+            "target": 49
+        },
+        {
+            "id": "e78",
+            "source": 20,
+            "target": 24
+        },
+        {
+            "id": "e67",
+            "source": 20,
+            "target": 33
+        },
+        {
+            "id": "e76",
+            "source": 21,
+            "target": 22
+        },
+        {
+            "id": "e74",
+            "source": 22,
+            "target": 31
+        },
+        {
+            "id": "e79",
+            "source": 23,
+            "target": 24
+        },
+        {
+            "id": "e80",
+            "source": 23,
+            "target": 25
+        },
+        {
+            "id": "e81",
+            "source": 25,
+            "target": 35
+        },
+        {
+            "id": "e71",
+            "source": 26,
+            "target": 27
+        },
+        {
+            "id": "e70",
+            "source": 26,
+            "target": 28
+        },
+        {
+            "id": "e72",
+            "source": 27,
+            "target": 29
+        },
+        {
+            "id": "e69",
+            "source": 28,
+            "target": 42
+        },
+        {
+            "id": "e64",
+            "source": 29,
+            "target": 30
+        },
+        {
+            "id": "e65",
+            "source": 30,
+            "target": 46
+        },
+        {
+            "id": "e73",
+            "source": 31,
+            "target": 32
+        },
+        {
+            "id": "e68",
+            "source": 33,
+            "target": 42
+        },
+        {
+            "id": "e66",
+            "source": 33,
+            "target": 46
+        },
+        {
+            "id": "e48",
+            "source": 35,
+            "target": 36
+        },
+        {
+            "id": "e47",
+            "source": 36,
+            "target": 48
+        },
+        {
+            "id": "e82",
+            "source": 37,
+            "target": 38
+        },
+        {
+            "id": "e83",
+            "source": 38,
+            "target": 39
+        },
+        {
+            "id": "e84",
+            "source": 40,
+            "target": 41
+        },
+        {
+            "id": "e63",
+            "source": 43,
+            "target": 44
+        }
+    ],
+
+    "directed3": false,
+    "multigraph3": false,
+    "graph3": {
+        "DateObtained": "1/02/11",
+        "GeoLocation": "France",
+        "GeoExtent": "Country",
+        "Network": "Renater",
+        "Provenance": "Primary",
+        "Note": "Very hard to work out but they do appear to have 'customers', rather than acting as an ISP",
+        "Source": "http://www.renater.fr/IMG/pdf/Poster_RENATER_aout2010.pdf",
+        "Version": "1.0",
+        "Type": "REN",
+        "DateType": "Historic",
+        "Backbone": 1,
+        "Commercial": 0,
+        "label": "Renater2010",
+        "ToolsetVersion": "0.3.34dev-20120328",
+        "Customer": 1,
+        "IX": 0,
+        "SourceGitVersion": "e278b1b",
+        "DateModifier": "=",
+        "DateMonth": "08",
+        "LastAccess": "1/02/11",
+        "Access": 0,
+        "Layer": "IP",
+        "Creator": "Topology Zoo Toolset",
+        "Developed": 1,
+        "Transit": 0,
+        "NetworkDate": "2010_08",
+        "DateYear": "2010",
+        "LastProcessed": "2011_09_01",
+        "Testbed": 0
+    },
+    "nodes3": [
+        {
+            "Country": "France",
+            "Longitude": -0.56667,
+            "Internal": 1,
+            "Latitude": 44.83333,
+            "type": "Noueds RENATER",
+            "id": "Bordeaux"
+        },
+        {
+            "Country": "France",
+            "Longitude": -1.55336,
+            "Internal": 1,
+            "Latitude": 47.21725,
+            "type": "Noueds RENATER",
+            "id": "Nantes"
+        },
+        {
+            "Country": "France",
+            "Longitude": 0.33333,
+            "Internal": 1,
+            "Latitude": 46.58333,
+            "type": "Noueds RENATER",
+            "id": "Poiters"
+        },
+        {
+            "Country": "France",
+            "Longitude": 3.08333,
+            "Internal": 1,
+            "Latitude": 45.78333,
+            "type": "Noueds RENATER",
+            "id": "Clermont-Ferrand"
+        },
+        {
+            "Country": "France",
+            "Longitude": 1.44367,
+            "Internal": 1,
+            "Latitude": 43.60426,
+            "type": "Noueds RENATER",
+            "id": "Toulouse"
+        },
+        {
+            "Country": "France",
+            "Longitude": -0.36667,
+            "Internal": 1,
+            "Latitude": 43.3,
+            "type": "Noueds RENATER",
+            "id": "Pau"
+        },
+        {
+            "Country": "France",
+            "Longitude": 1.9,
+            "Internal": 1,
+            "Latitude": 47.91667,
+            "type": "Noueds RENATER",
+            "id": "Orleans"
+        },
+        {
+            "Country": "France",
+            "Longitude": 2.3488,
+            "Internal": 1,
+            "Latitude": 48.85341,
+            "type": "Noeuds RENATER Internationaux",
+            "id": "Paris"
+        },
+        {
+            "Country": "France",
+            "Longitude": 0.68333,
+            "Internal": 1,
+            "Latitude": 47.38333,
+            "type": "Noueds RENATER",
+            "id": "Tours"
+        },
+        {
+            "Country": "France",
+            "Longitude": 2.08333,
+            "Internal": 1,
+            "Latitude": 47.21667,
+            "type": "Noueds RENATER",
+            "id": "Vierzon"
+        },
+        {
+            "Country": "France",
+            "Longitude": 1.2578,
+            "Internal": 1,
+            "Latitude": 45.83153,
+            "type": "Noueds RENATER",
+            "id": "Limoges"
+        },
+        {
+            "Country": "France",
+            "Longitude": 4.85,
+            "Internal": 1,
+            "Latitude": 45.75,
+            "type": "Noeuds RENATER Internationaux",
+            "id": "Lyon"
+        },
+        {
+            "Country": "France",
+            "Longitude": 5.01667,
+            "Internal": 1,
+            "Latitude": 47.31667,
+            "type": "Noueds RENATER",
+            "id": "Dijon"
+        },
+        {
+            "Country": "France",
+            "Longitude": 6.03333,
+            "Internal": 1,
+            "Latitude": 47.25,
+            "type": "Noueds RENATER",
+            "id": "Besancon"
+        },
+        {
+            "Country": "France",
+            "Longitude": 3.88333,
+            "Internal": 1,
+            "Latitude": 43.6,
+            "type": "Noueds RENATER",
+            "id": "Montpellier"
+        },
+        {
+            "Country": "France",
+            "Longitude": 5.4,
+            "Internal": 1,
+            "Latitude": 43.3,
+            "type": "Noueds RENATER",
+            "id": "Marseille"
+        },
+        {
+            "Country": "France",
+            "Longitude": 7.75,
+            "Internal": 1,
+            "Latitude": 48.58333,
+            "type": "Noueds RENATER",
+            "id": "Strasbourg"
+        },
+        {
+            "Country": "France",
+            "Longitude": 5.71667,
+            "Internal": 1,
+            "Latitude": 45.16667,
+            "type": "Noueds RENATER",
+            "id": "Grenoble"
+        },
+        {
+            "Country": "France",
+            "Longitude": 5.75,
+            "Internal": 1,
+            "Latitude": 43.7,
+            "type": "Noueds RENATER",
+            "id": "Cadarache"
+        },
+        {
+            "Country": "Switzerland",
+            "Longitude": 6.46906,
+            "Internal": 1,
+            "Latitude": 46.43774,
+            "type": "Noueds RENATER",
+            "id": "Geneve"
+        },
+        {
+            "Country": "France",
+            "Longitude": -3.46667,
+            "Internal": 1,
+            "Latitude": 48.73333,
+            "type": "Noueds RENATER",
+            "id": "Lannion"
+        },
+        {
+            "Country": "France",
+            "Longitude": -4.48333,
+            "Internal": 1,
+            "Latitude": 48.4,
+            "type": "Noueds RENATER",
+            "id": "Brest"
+        },
+        {
+            "Country": "France",
+            "Longitude": -2.78333,
+            "Internal": 1,
+            "Latitude": 48.51667,
+            "type": "Noueds RENATER",
+            "id": "Saint-Brieuc"
+        },
+        {
+            "Country": "France",
+            "Longitude": -4.1,
+            "Internal": 1,
+            "Latitude": 48.0,
+            "type": "Noueds RENATER",
+            "id": "Quimper"
+        },
+        {
+            "Country": "France",
+            "Longitude": 0.2,
+            "Internal": 1,
+            "Latitude": 48.0,
+            "type": "Noueds RENATER",
+            "id": "Le Mans"
+        },
+        {
+            "Country": "France",
+            "Longitude": -0.55,
+            "Internal": 1,
+            "Latitude": 47.46667,
+            "type": "Noueds RENATER",
+            "id": "Angers"
+        },
+        {
+            "Country": "France",
+            "Longitude": -2.75,
+            "Internal": 1,
+            "Latitude": 47.66667,
+            "type": "Noueds RENATER",
+            "id": "Vannes"
+        },
+        {
+            "Country": "France",
+            "Longitude": -3.36667,
+            "Internal": 1,
+            "Latitude": 47.75,
+            "type": "Noueds RENATER",
+            "id": "Loreient"
+        },
+        {
+            "Country": "France",
+            "Longitude": -1.68333,
+            "Internal": 1,
+            "Latitude": 48.08333,
+            "type": "Noueds RENATER",
+            "id": "Rennes"
+        },
+        {
+            "Country": "France",
+            "Longitude": 9.15,
+            "Internal": 1,
+            "Latitude": 42.3,
+            "type": "Noueds RENATER",
+            "id": "Corte"
+        },
+        {
+            "Country": "France",
+            "Longitude": 7.26608,
+            "Internal": 1,
+            "Latitude": 43.70313,
+            "type": "Noueds RENATER",
+            "id": "Nice"
+        },
+        {
+            "Country": "France",
+            "Longitude": 4.03333,
+            "Internal": 1,
+            "Latitude": 49.25,
+            "type": "Noueds RENATER",
+            "id": "Reims"
+        },
+        {
+            "Country": "France",
+            "Longitude": 2.82606,
+            "Internal": 1,
+            "Latitude": 49.41794,
+            "type": "Noueds RENATER",
+            "id": "Compiegne"
+        },
+        {
+            "Country": "France",
+            "Longitude": 3.06667,
+            "Internal": 1,
+            "Latitude": 50.63333,
+            "type": "Noueds RENATER",
+            "id": "Lille"
+        },
+        {
+            "Country": "France",
+            "Longitude": 1.09932,
+            "Internal": 1,
+            "Latitude": 49.44313,
+            "type": "Noueds RENATER",
+            "id": "Rouen"
+        },
+        {
+            "Country": "France",
+            "Longitude": 6.2,
+            "Internal": 1,
+            "Latitude": 48.68333,
+            "type": "Noueds RENATER",
+            "id": "Nancy"
+        },
+        {
+            "Country": "France",
+            "Longitude": -0.35912,
+            "Internal": 1,
+            "Latitude": 49.18585,
+            "type": "Noueds RENATER",
+            "id": "Caen"
+        }
+    ],
+    "links3": [
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 0,
+            "target": 1
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 0,
+            "target": 2
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 0,
+            "target": 3
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 0,
+            "target": 4
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 0,
+            "target": 5
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 1,
+            "target": 26
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 1,
+            "target": 25
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 1,
+            "target": 28
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 2,
+            "target": 6
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 2,
+            "target": 10
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 3,
+            "target": 10
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 3,
+            "target": 11
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 4,
+            "target": 5
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 4,
+            "target": 14
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 6,
+            "target": 7
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 6,
+            "target": 8
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 6,
+            "target": 9
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 7,
+            "target": 11
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 7,
+            "target": 31
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 7,
+            "target": 32
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 7,
+            "target": 33
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 7,
+            "target": 34
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 8,
+            "target": 24
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 11,
+            "target": 12
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 11,
+            "target": 17
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 11,
+            "target": 19
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 11,
+            "target": 15
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 12,
+            "target": 13
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 13,
+            "target": 16
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 14,
+            "target": 15
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 15,
+            "target": 29
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 15,
+            "target": 18
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 15,
+            "target": 30
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 16,
+            "target": 35
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 17,
+            "target": 18
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 17,
+            "target": 19
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 18,
+            "target": 30
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 20,
+            "target": 21
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 20,
+            "target": 22
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 21,
+            "target": 23
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 22,
+            "target": 28
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 23,
+            "target": 27
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 24,
+            "target": 25
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 26,
+            "target": 27
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 28,
+            "target": 36
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 31,
+            "target": 35
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 32,
+            "target": 33
+        },
+        {
+            "LinkSpeed": "155",
+            "LinkLabel": "155 Mbps",
+            "LinkSpeedUnits": "M",
+            "LinkSpeedRaw": 155000000.0,
+            "source": 34,
+            "target": 36
+        }
+    ],
+    "directed4": false,
+    "multigraph4": false,
+    "graph4": {
+        "DateObtained": "21/10/10",
+        "GeoLocation": "Finland",
+        "GeoExtent": "Country+",
+        "Network": "FUNET",
+        "Provenance": "Primary",
+        "Access": 0,
+        "Source": "http://www.csc.fi/english/institutions/funet/status/weathermap/index_html",
+        "Version": "1.0",
+        "DateType": "Current",
+        "Type": "REN",
+        "Backbone": 1,
+        "Commercial": 0,
+        "label": "Funet",
+        "ToolsetVersion": "0.3.34dev-20120328",
+        "Customer": 1,
+        "IX": 0,
+        "SourceGitVersion": "e278b1b",
+        "DateModifier": "=",
+        "DateMonth": "10",
+        "LastAccess": "21/10/10",
+        "Layer": "Simplified Fibre",
+        "Creator": "Topology Zoo Toolset",
+        "Developed": 1,
+        "Transit": 0,
+        "NetworkDate": "2010_10",
+        "DateYear": "2010",
+        "LastProcessed": "2011_09_01",
+        "Testbed": 0
+    },
+    "nodes4": [
+        {
+            "Country": "Finland",
+            "Longitude": 26.7,
+            "Internal": 1,
+            "Latitude": 60.86667,
+            "type": "Fiber network connection sites",
+            "id": "Kouvola"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 25.66151,
+            "Internal": 1,
+            "Latitude": 60.98267,
+            "type": "Fiber network connection sites",
+            "id": "Lahti"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 26.91667,
+            "Internal": 1,
+            "Latitude": 60.46667,
+            "type": "Fiber network connection sites",
+            "id": "Kotka"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 27.27227,
+            "Internal": 1,
+            "Latitude": 61.68857,
+            "type": "Fiber network connection sites",
+            "id": "Mikkeli"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 28.18871,
+            "Internal": 1,
+            "Latitude": 61.05871,
+            "type": "IP and fiber network connection sites",
+            "id": "Lappeenranta"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 24.93545,
+            "Internal": 1,
+            "Latitude": 60.16952,
+            "type": "IP and fiber network connection sites",
+            "id": "Helsinki"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 27.67703,
+            "Internal": 1,
+            "Latitude": 62.89238,
+            "type": "IP and fiber network connection sites",
+            "id": "Koupio"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 25.73333,
+            "Internal": 1,
+            "Latitude": 62.23333,
+            "type": "Fiber network connection sites",
+            "id": "Jyvaskyla"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 23.78712,
+            "Internal": 1,
+            "Latitude": 61.49911,
+            "type": "Fiber network connection sites",
+            "id": "Tampere"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 22.83333,
+            "Internal": 1,
+            "Latitude": 62.8,
+            "type": "Fiber network connection sites",
+            "id": "Seinajoki"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 21.61577,
+            "Internal": 1,
+            "Latitude": 63.096,
+            "type": "IP and fiber network connection sites",
+            "id": "Vaasa"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 21.78333,
+            "Internal": 1,
+            "Latitude": 61.48333,
+            "type": "Fiber network connection sites",
+            "id": "Pori"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 21.51127,
+            "Internal": 1,
+            "Latitude": 61.12724,
+            "type": "Fiber network connection sites",
+            "id": "Rauma"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 24.46434,
+            "Internal": 1,
+            "Latitude": 60.99596,
+            "type": "Fiber network connection sites",
+            "id": "Hameenlinna"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 24.6522,
+            "Internal": 1,
+            "Latitude": 60.2052,
+            "type": "IP and fiber network connection sites",
+            "id": "Espoo"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 22.26869,
+            "Internal": 1,
+            "Latitude": 60.45148,
+            "type": "IP and fiber network connection sites",
+            "id": "Turku"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 23.13333,
+            "Internal": 1,
+            "Latitude": 60.38333,
+            "type": "Fiber network connection sites",
+            "id": "Salo"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 29.76667,
+            "Internal": 1,
+            "Latitude": 62.6,
+            "type": "IP and fiber network connection sites",
+            "id": "Joensuu"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 25.46816,
+            "Internal": 1,
+            "Latitude": 65.01236,
+            "type": "IP and fiber network connection sites",
+            "id": "Oulu"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 25.35233,
+            "Internal": 1,
+            "Latitude": 65.17654,
+            "type": "Fiber network connection sites",
+            "id": "Haukipudas"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 28.21667,
+            "Internal": 1,
+            "Latitude": 64.5,
+            "type": "Fiber network connection sites",
+            "id": "Ristijavi"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 23.13066,
+            "Internal": 1,
+            "Latitude": 63.83847,
+            "type": "Fiber network connection sites",
+            "id": "Kokkola"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 25.71667,
+            "Internal": 1,
+            "Latitude": 66.5,
+            "type": "IP and fiber network connection sites",
+            "id": "Rovaniemi"
+        },
+        {
+            "Country": "Finland",
+            "Longitude": 26.6,
+            "Internal": 1,
+            "Latitude": 67.41667,
+            "type": "Fiber network connection sites",
+            "id": "Sodankyla"
+        }
+    ],
+    "links4": [
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 0,
+            "target": 1
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 0,
+            "target": 2
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 0,
+            "target": 3
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 0,
+            "target": 4
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 1,
+            "target": 5
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 3,
+            "target": 6
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 3,
+            "target": 7
+        },
+        {
+            "LinkLabel": "transmission",
+            "source": 4,
+            "target": 17
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 5,
+            "target": 14
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 6,
+            "target": 17
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 6,
+            "target": 20
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 7,
+            "target": 8
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 8,
+            "target": 13
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 9,
+            "target": 10
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 9,
+            "target": 11
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 10,
+            "target": 21
+        },
+        {
+            "id": "e22",
+            "source": 11,
+            "target": 12
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 12,
+            "target": 15
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 13,
+            "target": 14
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 14,
+            "target": 16
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 15,
+            "target": 16
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 18,
+            "target": 19
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 18,
+            "target": 20
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 18,
+            "target": 21
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 19,
+            "target": 22
+        },
+        {
+            "LinkLabel": "Transmission",
+            "source": 20,
+            "target": 22
+        },
+        {
+            "LinkType": "Fiber",
+            "LinkLabel": "fiber",
+            "source": 22,
+            "target": 23
+        }
+    ],
+    
+    "multigraph": false
+}

@@ -3,3 +3,6 @@ In case of you may confusing on this folder, I write some descriptions for this 
 As TA said in the 14/11/2017 email, I am creating UUNET topologies recently.  Not just for phase 2, the data of “UUNET node and edge” should be also used in Phase3. Thus, TA suggested us to unify our data format in the last meeting. 
 
 The folder is about data format.  “Uunet.json” is the final result and need to be draw on Google map, which means the new points or links should follow json format. The others are talking about how to generate “Uunet.json”.
+
+
+updating: "country.json"merge all the 5 countrys' nodes. Please load this one into your code.
