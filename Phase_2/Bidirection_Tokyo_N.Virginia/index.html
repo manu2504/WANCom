@@ -87,7 +87,7 @@
         var cables;
 
         // Change this depending on the name of PHP or XML file
-        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace1219.xml', function(data) {
+        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace610.xml', function(data) {
           var xml = data.responseXML;
           var marker = xml.documentElement.getElementsByTagName('marker');
           // Paths used to create polylines
@@ -130,24 +130,24 @@
 
             switch(idPath)
             {
-                case '19':
+                case '33':
                     Paths[1].push(point)
              //       HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
-                case '22':
+                case '1017':
                     Paths[2].push (point);
                     break;
-                case '30':
+                case '1289':
                     Paths[3].push (point);
                     break;
-                case '15':
+                case '11':
                     Paths[4].push(point)
             //        HopObj[1].push({point: point, cableId: 1, idPath: idPath})
                     break;
-                case '315':
+                case '531':
                     Paths[5].push (point);
                     break;
-                case '412':
+                case '1367':
                     Paths[6].push (point);
                     break;
             }
@@ -166,24 +166,24 @@
             infowincontent.appendChild(text);
             
             addCircle(point, map, infowincontent);
-
-            var polyline;
-            for(var i=1;i<7;i++){
-              polyline = new google.maps.Polyline({
-                path: Paths[i],
-                icons: [{
-                  icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-                  offset: '100%'
-                }],
-                strokeColor: '#00e000',
-                strokeOpacity: 1.0,
-                strokeWeight: 2 // to be weighted according to number of paths that go across the link
-              });
-              polyline.setMap(map);
-              polylines.push({idPath: i, polyline: polyline});
-            }
               
           });
+
+          var polyline;
+          for(var i=1;i<7;i++){
+            polyline = new google.maps.Polyline({
+              path: Paths[i],
+              icons: [{
+                icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+                offset: '100%'
+              }],
+              strokeColor: '#00e000',
+              strokeOpacity: 1.0,
+              strokeWeight: 2 // to be weighted according to number of paths that go across the link
+            });
+            polyline.setMap(map);
+            polylines.push({idPath: i, polyline: polyline});
+          }
         });
         
         
@@ -194,8 +194,8 @@
           /*for (var i = 1; i < 3; i++) {
             $('<option>', { html: i } ).appendTo($cableId);
           }*/
-          $('<option>', { html: [1, ' Oregon to N.Virginia'] } ).appendTo($cableId);
-          $('<option>', { html: [2, ' N.Virginia to Oregon'] } ).appendTo($cableId);
+          $('<option>', { html: [1, ' Tokyo to Oregon'] } ).appendTo($cableId);
+          $('<option>', { html: [2, ' Oregon to Tokyo'] } ).appendTo($cableId);
 
           $cableId.appendTo($form_content);
           $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
