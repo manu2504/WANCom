@@ -223,7 +223,7 @@
         	$.ajax({
 			  method: "POST",
 			  url: "/sendmedata",
-			  data: { name: "John", location: "Boston" },
+			  data: { "name": "John", "location": "Boston" },
 		      dataType: 'json'
 			})
 			  .fail(function() {
@@ -231,7 +231,7 @@
 			  })
 			  .done(function( msg ) {
 			  	console.log("JSON received successfully from the server:", JSON.stringify(msg));
-			    alert( "Data returned by the server: " + msg );
+			    alert( "Data returned by the server: " + JSON.stringify(msg) );
 			  });
         }
         
