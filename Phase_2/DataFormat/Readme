@@ -5,4 +5,4 @@ As TA said in the 14/11/2017 email, I am creating UUNET topologies recently.  No
 The folder is about data format.  “Uunet.json” is the final result and need to be draw on Google map, which means the new points or links should follow json format. The others are talking about how to generate “Uunet.json”.
 
 
-updating patch2: "country.json"merge all the 5 countrys' nodes. Please load this one into your code.
+Important updating: "All_countries.json"merge all the 5 countrys' nodes. Please load this one into your code.
