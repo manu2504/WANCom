@@ -1,0 +1,49 @@
+Propose a new node
+1. run Dijkstra algorithm to find the exist shortest path
+2. BEGIN LOOP
+Fetch ‘node1’ from ‘ShortestPath’
+Fetch ‘node2’ from ‘ShortestPath’
+IF ‘edge [source node1, target node2]’ does not exist
+Assign (the Distance between ‘node1’ and ‘node2’)/2 to ‘EllipseFocus’ IF 2*EllipseFocus < cost_limitation
+Choose ‘node1’ and ‘node2’
+End of IF
+End of IF End of Loop
+3. Find all edges alone the path from node1 to node2 Assign (SUM length of edges)/2 to ‘EllipseWidth’
+4. Assign square(EllipseWidth*EllipseWidth - EllipseFocus*EllipseFocus) to
+‘EllipseHeight’
+5. angle = random(TWO_PI);
+X = cos (angle) * EllipseWidth
+Y = cos (angle) * EllipseHeight
+Assign X to nodenew[Longitude]
+Assign Y to nodenew[Latitude]
+edgenew1 [source node1, target nodenew] edgenew2 [source nodenew, target node2]
+6. Assign SUM (length edgenew1, length edgnew2) to ‘Cost’
+Propose a new edge
+1. run Dijkstra algorithm to find the exist shortest path
+2. BEGIN LOOP
+Fetch ‘node1’ from ‘ShortestPath’
+Fetch ‘node2’ from ‘ShortestPath’
+IF ‘edge [source node1, target node2]’ does not exist
+Assign (the Distance between ‘node1’ and ‘node2’)/2 to ‘EllipseFocus’ IF 2*EllipseFocus < cost_limitation
+Choose ‘node1’ and ‘node2’
+End of IF
+End of IF End of Loop
+3. Assign node1[Longitude] to ‘X1’ Assign node1[Latitude] to ‘Y1’ Assign node1[Longitude] to ‘X2’ Assign node1[Latitude] to ‘Y2’ X0 = (X1+X2)/2
+Y0 = (Y1+Y2)/2
+4. Find all edges alone the path from node1 to node2
+Assign (SUM length of edges)/2 to ‘EllipseWidth’
+5. Assign square(EllipseWidth*EllipseWidth - EllipseFocus*EllipseFocus) to
+‘EllipseHeight’
+6. angle = random(TWO_PI);
+X = cos (angle) * EllipseWidth
+Y = cos (angle) * EllipseHeight 7. For exist node3
+IF min(X1, X2) < node3[Longitude] and node3[Longitude] < max(X1, X2)
+IF (node3[Longitude]-X0)* (node3[Longitude]-X0)/(EllipseWidth*EllipseWidth)+ (node3[Latitude]-Y0)* (node3[Latitude]-Y0)/(EllipseHeight*EllipseHeight) < 1
+Assign node3[Longitude] to ‘X3’
+Assign node3[Latitude] to ‘Y3’
+8. For edge [source node1, target node3] does not exist
+edgenew [source node1, target node3]
+Assign ‘Distance between node1 and node3’ to ‘Cost’
+For edge [source node3, target node2]
+edgenew [source node3, target node2]
+Assign ‘Distance between node2 and node3’ to ‘Cost’
