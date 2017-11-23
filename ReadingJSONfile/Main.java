@@ -1,7 +1,5 @@
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -15,17 +13,20 @@ public class Main {
         JSONObject jsonObject;
         JSONArray nodes;
         JSONArray links;
+// output the results to a text file
+        PrintStream out= new PrintStream(new FileOutputStream("C:\\Users\\ibrah\\Desktop\\distance.txt"));
+
         try {
             jsonObject = (JSONObject) parser.parse(new FileReader("C:\\Users\\ibrah\\Desktop\\testJSON.json"));
+            // save the results from reading nodes and links into a JSON arrays
             nodes = (JSONArray) jsonObject.get("nodes");
             links =(JSONArray) jsonObject.get("links") ;
-
+            // create a map that has id as a key and json object
             Map<String, JSONObject> mappedNodes = new HashMap<String, JSONObject>();
             for (Object tmpNode : nodes){
                 JSONObject tmpNode1 = (JSONObject) tmpNode;
                 mappedNodes.put(tmpNode1.get("id").toString(), tmpNode1);
             }
-
             for(Object linkObj : links) {
                 JSONObject link = (JSONObject) linkObj;
                 JSONObject source = mappedNodes.get(link.get("source").toString());
@@ -34,12 +35,13 @@ public class Main {
                 double srcLongitude = Double.parseDouble(source.get("Longitude").toString());
                 double dstLatitude = Double.parseDouble(target.get("Latitude").toString());
                 double dstLongitude = Double.parseDouble(target.get("Longitude").toString());
-                Double distance = getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
+                double distance = getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
                 System.out.println("Distance between source " + source.get("id")+ " and destination " + target.get("id") + " is " + distance);
+                out.print(source.get("id")+",");
+                out.print(target.get("id")+ ",");
+                out.println(distance);
             }
-
         }
-
         catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
