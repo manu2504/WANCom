@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: new google.maps.LatLng(2.8,-187.3),
+          mapTypeId: 'terrain'
+        });
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src = '/All_countries.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      
+
+      window.All_countries = function(results) {
+
+        function addCircle(centerCoordinates, map, contentInfoWindow) {
+          if (map === undefined) {
+            map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
+          }
+          var circle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: centerCoordinates,
+            radius: 2.5*10000 // fixed size, in meters
+          });
+          
+          circle.setMap(map);
+          
+          if (contentInfoWindow) {
+            circle.addListener('click', function(){
+              addInfoWindow(centerCoordinates, contentInfoWindow, map);
+            });
+          }
+        }
+          
+        function addInfoWindow(coords, content, map) {
+          var infoWindow = new google.maps.InfoWindow({
+            content: content,
+            position: coords
+          });
+          
+          infoWindow.open(map);
+        }
+
+        function Label2latLng(label) {
+  //console.log(label);
+  //console.log(objs[3][0]);
+          for (var d in objs) {
+            if (objs[d][0] === label) {
+              return objs[d][1];
+            }
+          }
+          return new Error('label not found in the label set!');
+        }
+
+
+        var objs = [];
+        var paths = [];
+        var polyline;
+   //     var polylines = [];
+        
+        var listNodes = new Array("nodes1","nodes2","nodes3","nodes4","nodes5");
+        var listLinks = new Array("links1","links2","links3","links4","links5");
+        for (var num =0; num< listNodes.length; num++){ 
+          node = listNodes[num];
+          link = listLinks[num];
+       
+          for (var i = 0; i < results[node].length; i++) {
+            var Lat = results[node][i].Latitude;
+            var Lng = results[node][i].Longitude;
+            var latLng = new google.maps.LatLng(Lat,Lng);
+            var label = results[node][i].id;  
+
+            var coordinate = {lat:Lat, lng: Lng};
+
+            var obj = new Array (2);
+            obj[0] = label;
+            obj[1] = coordinate;
+                objs.push(obj);
+
+            var infowincontent = document.createElement('div');
+              var strong = document.createElement('strong');
+              strong.textContent = "label:" + label;
+              infowincontent.appendChild(strong);     
+              addCircle(latLng, map, infowincontent);
+
+          }
+
+          for (var j = 0; j < results[link].length; j++) {
+            var source = results[link][j].source;
+            var target = results[link][j].target;
+            //var line = Object.assign(source, target);
+            //    paths.push(line);
+            var arr = new Array(2);
+            arr[0] = source;
+            arr[1] = target;
+            arr.join();
+            paths.push(arr);
+          }
+        }
+       
+        for (var i in paths) {
+              
+          path = paths[i].map(Label2latLng);
+          
+          polyline = new google.maps.Polyline({
+            path: path,
+         /*   icons: [{
+              icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+              offset: '100%'
+            }],
+          */
+            strokeColor: '#FFFF99',
+            strokeOpacity: 1.0,
+            strokeWeight: 2 // to be weighted according to number of paths that go across the link
+          });
+      //    polylines.push(polyline);
+          polyline.setMap(map);
+   
+          console.log(path);
+
+        }
+      }
+
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
+    </script>
+  </body>
+</html>
