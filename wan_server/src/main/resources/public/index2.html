@@ -26,8 +26,6 @@
           mapTypeId: 'terrain'
         });
 
-
-
         // Create a <script> tag and set the USGS URL as the source.
         var script = document.createElement('script');
         // This example uses a local copy of the GeoJSON stored at
@@ -74,12 +72,6 @@
           
           infoWindow.open(map);
         }
-        
-       /* var list = new Array("nodes","nodes1","nodes2","nodes3","nodes4","nodes5");
-       for (var num =0; num< list.length; num++){ 
-          node = list[num];
-       }*/
-//try to make a loop here, always debug failed with "Cannot read property" error, then I copy this code module a few times...
 
         function Label2latLng(label) {
   //console.log(label);
@@ -111,22 +103,19 @@
             var label = results[node][i].id;  
 
             var coordinate = {lat:Lat, lng: Lng};
-            
 
             var obj = new Array (2);
             obj[0] = label;
             obj[1] = coordinate;
                 objs.push(obj);
 
-            
             var infowincontent = document.createElement('div');
               var strong = document.createElement('strong');
               strong.textContent = "label:" + label;
               infowincontent.appendChild(strong);     
               addCircle(latLng, map, infowincontent);
 
-          };
-//console.log(objs);
+          }
 
           for (var j = 0; j < results[link].length; j++) {
             var source = results[link][j].source;
@@ -138,188 +127,32 @@
             arr[1] = target;
             arr.join();
             paths.push(arr);
-          };
+          }
         }
-
-
-/*
-        for (var i = 0; i < results.nodes2.length; i++) {
-          var Lat = results.nodes2[i].Latitude;
-          var Lng = results.nodes2[i].Longitude;
-          var latLng = new google.maps.LatLng(Lat,Lng);
-          var label = results.nodes2[i].id;  
-
-          var coordinate = {lat:Lat, lng: Lng};
-          
-
-          var obj = new Array (2);
-          obj[0] = label;
-          obj[1] = coordinate;
-              objs.push(obj);
-
-          
-         var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = "label:" + label;
-            infowincontent.appendChild(strong);     
-            addCircle(latLng, map, infowincontent);
-
-        };
-//console.log(objs);
-
-        for (var j = 0; j < results.links2.length; j++) {
-          var source = results.links2[j].source;
-          var target = results.links2[j].target;
-          //var line = Object.assign(source, target);
-          //    paths.push(line);
-          var arr = new Array(2);
-          arr[0] = source;
-          arr[1] = target;
-          arr.join();
-          paths.push(arr);
-        };
-
-
-        for (var i = 0; i < results.nodes3.length; i++) {
-          var Lat = results.nodes3[i].Latitude;
-          var Lng = results.nodes3[i].Longitude;
-          var latLng = new google.maps.LatLng(Lat,Lng);
-          var label = results.nodes3[i].id;  
-
-          var coordinate = {lat:Lat, lng: Lng};
-          
-
-          var obj = new Array (2);
-          obj[0] = label;
-          obj[1] = coordinate;
-              objs.push(obj);
-
-          
-         var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = "label:" + label;
-            infowincontent.appendChild(strong);     
-            addCircle(latLng, map, infowincontent);
-
-        };
-//console.log(objs);
-
-        for (var j = 0; j < results.links3.length; j++) {
-          var source = results.links3[j].source;
-          var target = results.links3[j].target;
-          //var line = Object.assign(source, target);
-          //    paths.push(line);
-          var arr = new Array(2);
-          arr[0] = source;
-          arr[1] = target;
-          arr.join();
-          paths.push(arr);
-        };
-
-
-        for (var i = 0; i < results.nodes4.length; i++) {
-          var Lat = results.nodes4[i].Latitude;
-          var Lng = results.nodes4[i].Longitude;
-          var latLng = new google.maps.LatLng(Lat,Lng);
-          var label = results.nodes4[i].id;  
-
-          var coordinate = {lat:Lat, lng: Lng};
-          
-
-          var obj = new Array (2);
-          obj[0] = label;
-          obj[1] = coordinate;
-              objs.push(obj);
-
-          
-         var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = "label:" + label;
-            infowincontent.appendChild(strong);     
-            addCircle(latLng, map, infowincontent);
-
-        };
-//console.log(objs);
-
-        for (var j = 0; j < results.links4.length; j++) {
-          var source = results.links4[j].source;
-          var target = results.links4[j].target;
-          //var line = Object.assign(source, target);
-          //    paths.push(line);
-          var arr = new Array(2);
-          arr[0] = source;
-          arr[1] = target;
-          arr.join();
-          paths.push(arr);
-        };
-
-
-        for (var i = 0; i < results.nodes5.length; i++) {
-          var Lat = results.nodes5[i].Latitude;
-          var Lng = results.nodes5[i].Longitude;
-          var latLng = new google.maps.LatLng(Lat,Lng);
-          var label = results.nodes5[i].id;  
-
-          var coordinate = {lat:Lat, lng: Lng};
-          
-
-          var obj = new Array (2);
-          obj[0] = label;
-          obj[1] = coordinate;
-              objs.push(obj);
-
-          
-         var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = "label:" + label;
-            infowincontent.appendChild(strong);     
-            addCircle(latLng, map, infowincontent);
-
-        };
-//console.log(objs);
-
-        for (var j = 0; j < results.links5.length; j++) {
-          var source = results.links5[j].source;
-          var target = results.links5[j].target;
-          //var line = Object.assign(source, target);
-          //    paths.push(line);
-          var arr = new Array(2);
-          arr[0] = source;
-          arr[1] = target;
-          arr.join();
-          paths.push(arr);
-        };
-
-        */
-
        
         for (var i in paths) {
               
-                path = paths[i].map(Label2latLng);
-                
-                polyline = new google.maps.Polyline({
-                  path: path,
-               /*   icons: [{
-                    icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-                    offset: '100%'
-                  }],
-                */
-                  strokeColor: '#FFFF99',
-                  strokeOpacity: 1.0,
-                  strokeWeight: 2 // to be weighted according to number of paths that go across the link
-                });
-            //    polylines.push(polyline);
-                polyline.setMap(map);
-         
+          path = paths[i].map(Label2latLng);
+          
+          polyline = new google.maps.Polyline({
+            path: path,
+         /*   icons: [{
+              icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
+              offset: '100%'
+            }],
+          */
+            strokeColor: '#FFFF99',
+            strokeOpacity: 1.0,
+            strokeWeight: 2 // to be weighted according to number of paths that go across the link
+          });
+      //    polylines.push(polyline);
+          polyline.setMap(map);
+   
+          console.log(path);
 
-                console.log(path);
+        }
+      }
 
-              };
-
-
-       }
-
-    
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
