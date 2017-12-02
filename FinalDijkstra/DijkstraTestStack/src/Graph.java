@@ -33,15 +33,11 @@ public class Graph {
         public Vertex(String name) {
             this.name = name;
         }
-
+/*
         private void printPath() {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObj = new JSONObject();
             if (this == this.previous) {
-               // jsonObj.put("source", this.name);
-
-               // jsonObj.put("source",this.name);
-                //this.previous.printPath();
                  System.out.printf("%s", this.name);
 
             } else if (this.previous == null) {
@@ -52,32 +48,23 @@ public class Graph {
                this.previous.printPath();
                System.out.printf(" -> %s", this.name) ;
 
-             //   jsonObj.put("target",this.name);
-
-                //jsonObj.put("distance",this.distance);
             }
-/*
-            jsonArray.add(jsonObj);
 
-            JSONObject mainObj = new JSONObject();
-            mainObj.put("links", jsonArray);
-
-            try {
-                // Writing to a file
-                FileWriter file = new FileWriter("Testtest.json");
-                file.append(mainObj.toJSONString());
-                // FileWriter file = new FileWriter(file);
-                System.out.println();
-                System.out.print(mainObj.toJSONString());
-
-                //  file.write(jsonArray.toJSONString());
-                file.flush();
-                file.close();
-
-            } catch (IOException e) {
-                e.printStackTrace();
+        }
+        */
+        private JSONArray printPath() {
+            JSONArray jsonArray = new JSONArray();
+            if (this == this.previous) {
+                System.out.printf("%s", this.name);
+                jsonArray.add((Object) this.name);
+            } else if (this.previous == null) {
+                System.out.printf("%s(unreached)", this.name);
+            } else {
+                jsonArray = this.previous.printPath();
+                System.out.printf(" -> %s", this.name);
+                jsonArray.add(this.name);
             }
-*/
+            return jsonArray;
         }
 
         public int compareTo(Vertex other) {
@@ -150,6 +137,7 @@ public class Graph {
     }
 
     /** Prints a path from the source to the specified vertex */
+   /*
     public void printPath(String endName) {
         if (!graph.containsKey(endName)) {
             System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endName);
@@ -158,6 +146,18 @@ public class Graph {
 
         graph.get(endName).printPath();
         System.out.printf("\nTotal distance = %d", graph.get(endName).distance) ;
+    }
+*/
+    public JSONArray printPath(String endName) {
+        if (!graph.containsKey(endName)) {
+            System.err.printf("Graph doesn't contain end vertex \"%s\"\n", endName);
+            return null;
+        }
+
+        JSONArray ja = graph.get(endName).printPath();
+       // System.out.println();
+        System.out.printf("\nTotal distance = %d", graph.get(endName).distance) ;
+        return ja;
     }
 
     /** Prints the path from the source to every vertex (output order is not guaranteed) */
