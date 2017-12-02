@@ -1,3 +1,4 @@
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -50,13 +51,11 @@ public class Main {
                 double dstLongitude = Double.parseDouble(target.get("Longitude").toString());
                 int distance = getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
                 allPlaces.add(source.get("id").toString());
-
                 allPlaces.add( target.get("id").toString());
 
                 GRAPH[i]= new Graph.Edge( source.get("id").toString(), target.get("id").toString(), distance);
                 i++;
             }
-           // System.out.println("here"+allPlaces);
             allPlaces.toArray();
         }
         catch (FileNotFoundException e) {
@@ -64,13 +63,27 @@ public class Main {
         } catch (IOException e) {
             e.printStackTrace();
         }
+        Scanner in = new Scanner(System.in);
+        String srcNode;
+        String dstNode;
+        System.out.print("choose a source node: ");
+        srcNode= in.nextLine();
+
+        System.out.print("choose a destination node: ");
+        dstNode= in.nextLine();
 
         Graph g = new Graph(GRAPH);
+        g.dijkstra(srcNode);
+        g.printPath(dstNode);
+
+ /*
         for (String s: allPlaces) {
             g.dijkstra(s);
             g.printAllPaths();
         }
-        }
+        */
+
+    }
 
     private static int getDistance(double lat1, double lon1, double lat2, double lon2) {
         double theta = lon1 - lon2;

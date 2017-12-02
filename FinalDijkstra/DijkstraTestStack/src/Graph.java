@@ -38,36 +38,46 @@ public class Graph {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObj = new JSONObject();
             if (this == this.previous) {
+               // jsonObj.put("source", this.name);
+
+               // jsonObj.put("source",this.name);
+                //this.previous.printPath();
                  System.out.printf("%s", this.name);
-                 return jsonArray.put(this.name);
-            }
-            else if (this.previous == null) {
+
+            } else if (this.previous == null) {
                 System.out.printf("%s(unreached)", this.name);
             }
+
             else {
-                jsonArray = this.previous.printPath();
-                System.out.printf(" -> %s(%d)", this.name, this.distance);
-                jsonArray.put(this.name);
-                return jsonArray;
+               this.previous.printPath();
+               System.out.printf(" -> %s", this.name) ;
+
+             //   jsonObj.put("target",this.name);
+
+                //jsonObj.put("distance",this.distance);
             }
-            //jsonArray.add(jsonObj);
+/*
+            jsonArray.add(jsonObj);
 
-           // try {
+            JSONObject mainObj = new JSONObject();
+            mainObj.put("links", jsonArray);
 
+            try {
                 // Writing to a file
-                //File file=new File("C:\\Users\\ibrah\\Desktop\\Utest.json");
-                // file.createNewFile();
-                //FileWriter fileWriter = new FileWriter(file);
-                // System.out.println("Writing JSON object to file");
-                //   System.out.println("-----------------------");
-               // System.out.print(jsonArray);
-              //  fileWriter.write(jsonArray.toJSONString());
-               // fileWriter.flush();
-                //fileWriter.close();
+                FileWriter file = new FileWriter("Testtest.json");
+                file.append(mainObj.toJSONString());
+                // FileWriter file = new FileWriter(file);
+                System.out.println();
+                System.out.print(mainObj.toJSONString());
 
-            //} catch (IOException e) {
-              //  e.printStackTrace();
-            //}
+                //  file.write(jsonArray.toJSONString());
+                file.flush();
+                file.close();
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+*/
         }
 
         public int compareTo(Vertex other) {
@@ -78,6 +88,7 @@ public class Graph {
     }
     /** Builds a graph from a set of edges */
     public Graph(Edge[] edges) {
+       // graph = new HashMap<String, Vertex>(edges.length);
         graph = new HashMap<String, Vertex>(edges.length);
 
         //one pass to find all vertices
@@ -127,6 +138,7 @@ public class Graph {
                 v = a.getKey(); //the neighbour in this iteration
 
                 final int alternateDist = u.distance + a.getValue();
+
                 if (alternateDist < v.distance) { // shorter path to neighbour found
                     q.remove(v);
                     v.distance = alternateDist;
@@ -145,7 +157,7 @@ public class Graph {
         }
 
         graph.get(endName).printPath();
-        System.out.println();
+        System.out.printf("\nTotal distance = %d", graph.get(endName).distance) ;
     }
 
     /** Prints the path from the source to every vertex (output order is not guaranteed) */
