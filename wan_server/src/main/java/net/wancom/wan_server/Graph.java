@@ -39,7 +39,7 @@ public class Graph {
       JSONArray jsonArray = new JSONArray();
       if (this == this.previous) {
         System.out.printf("%s", this.name);
-        jsonArray.add((Object) this.name);
+        jsonArray.add(this.name);
       } else if (this.previous == null) {
         System.out.printf("%s(unreached)", this.name);
       } else {

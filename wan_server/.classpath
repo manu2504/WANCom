@@ -10,7 +10,7 @@
 		<attributes>
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
-  </classpathentry>
+	</classpathentry>
 	<classpathentry kind="src" output="target/test-classes" path="src/test/java">
 		<attributes>
 			<attribute name="optional" value="true"/>
@@ -27,6 +27,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/manuc/Downloads/slf4j-1.7.25/slf4j-1.7.25/slf4j-nop-1.7.25.jar"/>
+	<classpathentry kind="lib" path="lib/slf4j-nop-1.7.25.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
