@@ -221,18 +221,18 @@
         function sendmedata() {
         	console.log('test');
         	$.ajax({
-			  method: "POST",
-			  url: "/sendmedata",
-			  data: { "name": "John", "location": "Boston" },
-		      dataType: 'json'
-			})
-			  .fail(function() {
-				alert( "The request to the server isn't a success. Maybe your Internet connection is down, or the server is so." );
-			  })
-			  .done(function( msg ) {
-			  	console.log("JSON received successfully from the server:", JSON.stringify(msg));
-			    alert( "Data returned by the server: " + JSON.stringify(msg) );
-			  });
+            method: "POST",
+            url: "/sendmedata",
+            data: { "name": "John", "location": "Boston" },
+              dataType: 'json'
+          })
+          .fail(function() {
+            alert( "The request to the server isn't a success. Maybe your Internet connection is down, or the server is so." );
+          })
+          .done(function( msg ) {
+            console.log("JSON received successfully from the server:", JSON.stringify(msg));
+            alert( "Data returned by the server: " + JSON.stringify(msg) );
+          });
         }
         
         function updatemap(userSelected) {

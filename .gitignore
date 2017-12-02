@@ -1,5 +1,7 @@
 /.metadata/
-/eclipse-workspace/myartefactid/target/
 .DS_Store
 Phase2/.DS_store
 .recommenders
+.idea/
+*.iml
+out/

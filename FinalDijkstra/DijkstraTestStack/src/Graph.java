@@ -38,18 +38,17 @@ public class Graph {
             JSONArray jsonArray = new JSONArray();
             JSONObject jsonObj = new JSONObject();
             if (this == this.previous) {
-               // jsonObj.put("source", this.name);
-
                  System.out.printf("%s", this.name);
-
-            } else if (this.previous == null) {
+                 return jsonArray.put(this.name);
+            }
+            else if (this.previous == null) {
                 System.out.printf("%s(unreached)", this.name);
             }
-
             else {
-                this.previous.printPath();
-                //jsonObj.put("target", this.name);
-                   System.out.printf(" -> %s(%d)", this.name, this.distance);
+                jsonArray = this.previous.printPath();
+                System.out.printf(" -> %s(%d)", this.name, this.distance);
+                jsonArray.put(this.name);
+                return jsonArray;
             }
             //jsonArray.add(jsonObj);
 
