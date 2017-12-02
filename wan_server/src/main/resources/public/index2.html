@@ -5,7 +5,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 80%;
+        height: 73%;
         width: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
@@ -14,8 +14,12 @@
         margin: 0;
         padding: 0;
       }
-      form {
+      #dashboard {
         margin: 1em;
+      }
+      #shortest_path > p {
+        font-weight: bold;
+        margin-bottom: auto;
       }
       select {
         margin-right: 0.5em;
@@ -198,29 +202,31 @@
           'Finland': 5
         }
       
-        function add_form() {
-          var $form_content = $('<form>', { id: 'form_datacenters' }).appendTo('body');
-          $('<label>For which country you want to display the paths that go across it?</label>').appendTo($form_content);
-          var $countryId = $('<select>', { on: { change: function() { updatemap(true); } } } );
+        function add_UI() {
+          var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
+          $('<label>For which country you want to display the paths that go across it?</label>').appendTo($user_dashboard);
+          var $countryId = $('<select>', { on: { blur: function() { updatemap(true); }, change: function() { updatemap(true); } } } );
           
           for (var c in countries) {
             $('<option>', { html: [countries[c] + ' ' + c] } ).appendTo($countryId);
           }
-          $countryId.appendTo($form_content);
+          $countryId.appendTo($user_dashboard);
           $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
-                    .appendTo($form_content);
+                    .appendTo($user_dashboard);
           
-          $('<div>', { html: 'Shortest path:' } ).css({'font-weight': 'bold'})
-                    .appendTo('body');
+          var $shortest_path_params = $('<div>', { html: '<p">Shortest path:</p>', id: 'shortest_path' } );
+          $shortest_path_params.appendTo($user_dashboard);
           $input1 = $('<input>', { type: "text", name:"fname"});
           $input2 = $('<input>', { type: "text", name:"fname2"});
-          $input1.appendTo('body');
-          $input2.appendTo('body');
+          $input1.appendTo($shortest_path_params);
+          $input2.appendTo($shortest_path_params);
           $input1.before('<label for="fname">Source hop</label>');
           $input2.before('<label for="fname2">Destination hop</label>');
          
-          $dumb_button = $('<button>', { html: 'Request shortest path' }).click(function(){senddata();});
-          $dumb_button.appendTo('body');
+          $req_button = $('<button>', { html: 'Request shortest path' }).click(senddata);
+          $reset_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_dijkstra);
+          $req_button.appendTo($shortest_path_params);
+          $reset_button.appendTo($shortest_path_params);
         }
       
         function senddata() {
@@ -234,7 +240,8 @@
           var input1 = $(":input[name='fname']");
           var input2 = $(":input[name='fname2']");
           if (input1.val() === '' || input2.val() === '') {
-            $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('body');
+            $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
+            return;
           }
           topo['src'] = input1.val().substring( 0, input1.val().lastIndexOf(',') );
           topo['dst'] = input2.val().substring( 0, input2.val().lastIndexOf(',') );
@@ -250,7 +257,7 @@
           })
           .done(function( msg ) { // msg is for now an array of nodes constituting the shortest path
             console.log("JSON received successfully from the server:", JSON.stringify(msg));
-            $('<div>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green'}).appendTo('body');
+            $('<div>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green'}).appendTo('#dashboard');
             highlightShortestPath(msg, countries[country]);
           })
           .fail(function(jqXHR, textStatus, errorThrown ) {
@@ -261,6 +268,10 @@
               alert(errorThrown);
             }
           });
+        }
+        
+        function reset_dijkstra() {
+          $('#shortest_path input').val('');
         }
         
         function updatemap(userSelected) {
@@ -329,7 +340,7 @@
           polylinesShowingShortestPaths.push(polyline);
         }
         
-        add_form();
+        add_UI();
       }
 
     </script>

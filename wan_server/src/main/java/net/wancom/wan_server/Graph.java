@@ -35,6 +35,7 @@ public class Graph {
       this.name = name;
     }
 
+    @SuppressWarnings("unchecked")
     private JSONArray printPath() {
       JSONArray jsonArray = new JSONArray();
       if (this == this.previous) {

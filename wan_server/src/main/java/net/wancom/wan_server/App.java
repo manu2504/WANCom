@@ -3,21 +3,17 @@ package net.wancom.wan_server;
 import static spark.Spark.*;
 
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
-import net.sf.json.util.JSONUtils;
 
 /**
  * Hello world!
@@ -26,7 +22,7 @@ import net.sf.json.util.JSONUtils;
 public class App {
  
   public static void main(String[] args) throws FileNotFoundException, IOException {
-    staticFiles.location("public"); // Static files
+    staticFiles.location("/public"); // Static files
     get("/hello", (request, response) -> "Hello guys!");
     System.out.println("Server listening on port 4567");
     
