@@ -214,7 +214,7 @@
           $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
                     .appendTo($user_dashboard);
           
-          var $shortest_path_params = $('<div>', { html: '<p">Shortest path:</p>', id: 'shortest_path' } );
+          var $shortest_path_params = $('<div>', { html: '<p>Shortest path:</p>', id: 'shortest_path' } );
           $shortest_path_params.appendTo($user_dashboard);
           $input1 = $('<input>', { type: "text", name:"fname"});
           $input2 = $('<input>', { type: "text", name:"fname2"});
@@ -326,7 +326,7 @@
           }
           var polyline = new google.maps.Polyline({
             path: coords,
-            strokeColor: 'green',
+            strokeColor: randomColor(),
             strokeOpacity: 1.0,
             strokeWeight: 2,
             zIndex: 10
@@ -339,6 +339,14 @@
           */
           polyline.setMap(map);
           polylinesShowingShortestPaths.push(polyline);
+        }
+        
+        function randomColor() {
+          rc = "#";
+          for(i=0;i<6;i++){
+            rc += Math.floor(Math.random()*16).toString(16);
+          }
+          return rc;
         }
         
         add_UI();
