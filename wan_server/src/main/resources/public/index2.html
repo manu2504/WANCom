@@ -21,6 +21,11 @@
         font-weight: bold;
         margin-bottom: auto;
       }
+      #shortest_path + p {
+        font-weight: bold !important;
+        margin-top: 0.5em !important;
+        margin-bottom: 0.5em !important;
+      }
       select {
         margin-right: 0.5em;
         margin-left: 0.5em;
@@ -199,6 +204,7 @@
           'China': 2,
           'Germany': 3,
           'France': 4,
+          'Switzerland': 4,
           'Finland': 5
         }
       
@@ -257,7 +263,8 @@
           })
           .done(function( msg ) { // msg is for now an array of nodes constituting the shortest path
             console.log("JSON received successfully from the server:", JSON.stringify(msg));
-            $('<div>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green'}).appendTo('#dashboard');
+            var $shortest_info = $('<p>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green', 'margin': 'auto'});
+            $('#shortest_path').after($shortest_info);
             highlightShortestPath(msg, countries[country]);
           })
           .fail(function(jqXHR, textStatus, errorThrown ) {
