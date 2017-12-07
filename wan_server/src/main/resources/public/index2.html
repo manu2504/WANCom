@@ -21,10 +21,10 @@
         font-weight: bold;
         margin-bottom: auto;
       }
-      #shortest_path + p {
-        font-weight: bold !important;
-        margin-top: 0.5em !important;
-        margin-bottom: 0.5em !important;
+      #shortest_path + div {
+        font-weight: bold;
+        margin-top: 0.8em;
+        margin-bottom: 0.5em;
       }
       select {
         margin-right: 0.5em;
@@ -263,7 +263,7 @@
           })
           .done(function( msg ) { // msg is for now an array of nodes constituting the shortest path
             console.log("JSON received successfully from the server:", JSON.stringify(msg));
-            var $shortest_info = $('<p>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green', 'margin': 'auto'});
+            var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + msg.join(' -> ') }).css({'color': 'green'});
             $('#shortest_path').after($shortest_info);
             highlightShortestPath(msg, countries[country]);
           })
