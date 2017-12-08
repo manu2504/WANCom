@@ -25,6 +25,10 @@ public class App {
     staticFiles.location("/public"); // Static files
     get("/hello", (request, response) -> "Hello guys!");
     System.out.println("Server listening on port 4567");
+
+    // launching the function to find the point of intersection between
+    // a circle and a curve
+    IntersectionPoint.test();
     
     /*
     JSONParser parser = new JSONParser();

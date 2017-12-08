@@ -200,13 +200,15 @@
         
         var countries = {
           'United States': 1,
-          'Canada': 1,
           'China': 2,
           'Germany': 3,
           'France': 4,
-          'Switzerland': 4,
           'Finland': 5
-        }
+        };
+        var country_aliases = {
+          'Canada': 1,
+          'Switzerland': 4
+        };
       
         function add_UI() {
           var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
@@ -252,7 +254,7 @@
           topo['src'] = input1.val().substring( 0, input1.val().lastIndexOf(',') );
           topo['dst'] = input2.val().substring( 0, input2.val().lastIndexOf(',') );
           var country = input1.val().substr( input1.val().lastIndexOf(',') + 2 );
-          topo['countryId'] = countries[country];
+          topo['countryId'] = countries[country] || country_aliases[country];
           // topo['cost'] = input3.val();
           
           $.ajax({
