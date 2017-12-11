@@ -7,14 +7,18 @@ import java.util.Map;
 
 public class IntersectionPoint {
   /*
+   * This class contains utility functions to find the intersection
+   * between a circle and a line on a sphere.
+   * Earth can be considered as a sphere with an error up to 0.3%[1].
+   * This allows to determine a new hop located on an existing path
+   * at the optimal position while respecting the constraint.
+   * 
+   * [1] https://gis.stackexchange.com/questions/36841/line-intersection-with-circle-on-a-sphere-globe-or-earth#answer-36979
    */
 
   /*
-   * This function seeks to find the point of intersection between a circle on the Earth,
-   * and a (curved) line defined by two points on the Earth. Earth is considered as a sphere
-   * Error (due to considering the Earth as a sphere) is up to 0.3%
-   * 
-   * It computes and prints the coordinates of the point of intersection.
+   * This function tests the functionality and prints the coordinates
+   * of the point of intersection to the standard output.
    * 
    * This Java code has been translated from the R code located here:
    * https://gis.stackexchange.com/questions/36841/line-intersection-with-circle-on-a-sphere-globe-or-earth#answer-36979
@@ -44,12 +48,6 @@ public class IntersectionPoint {
     a0.put("lat", 32.78306 * degree);  a0.put("lng", -96.80667 * degree); // Point A in (lat, lon) (in this example -> Dallas)
     b0.put("lat", 29.76328 * degree);  b0.put("lng", -95.36327 * degree); // Point B (in this example -> Houston)
     c0.put("lat", 29.95465 * degree);  c0.put("lng", -90.07507 * degree); // Center (in this example -> New Orleans)
-    /*
-    a0.put("lat", 48.139115 * degree);  a0.put("lng", 11.578081 * degree); // Point A in (lat, lon)
-    b0.put("lat", 48.146303 * degree);  b0.put("lng", 11.593102 * degree); // Point B
-    c0.put("lat", 48.137024 * degree);  c0.put("lng", 11.575249 * degree); // Center
-    r = 1000.0; 
-    */
     r = 650.0 * 1000.0; // constraint, in meters (radius of the circle)
     System.out.println("a0="+a0.toString() + ", b0="+b0.toString() + ", c0="+c0.toString());
     
@@ -84,12 +82,8 @@ public class IntersectionPoint {
       return;
     }
     
-    // TODO: translate this R statement to Java:
-    // x <- (a0 + (b0-a0) %o% t) * radian  // Columns are (lat, lon)
-    
     // attempt:
     h0.put("lat", b0.get("lat") - a0.get("lat"));  h0.put("lng", b0.get("lng") - a0.get("lng")); // h0 = b0-a0 (cf. R code)
-    //y.put("lat", transposeMatrix(tl)); // TODO: transposeMatrix needs to return Array (not [][] like currently)
     
     if (tl.size() == 1) {
       System.out.println("tl size == 1");
@@ -98,8 +92,6 @@ public class IntersectionPoint {
       System.out.println(x.toString());
     } else if (tl.size() == 2) {
       System.out.println("tl size == 2");
-//      x.add( h0.get("lat") * tl.get(0) );  x.add( h0.get("lng") * tl.get(0) );
-//      x.add( h0.get("lat") * tl.get(1) );  x.add( h0.get("lng") * tl.get(1) );
       x.add(0, (a0.get("lat") + h0.get("lat") * tl.get(0)) * radian);  x.add(1, (a0.get("lng") + h0.get("lng") * tl.get(0)) * radian);
       x.add(2, (a0.get("lat") + h0.get("lat") * tl.get(1)) * radian);  x.add(3, (a0.get("lng") + h0.get("lng") * tl.get(1)) * radian);
       System.out.println(x.toString());
@@ -107,14 +99,5 @@ public class IntersectionPoint {
       System.err.println("tl.size() == " + tl.size() + " !");
     }
   }
-  
-  /* public static List<Double> transposeMatrix(List<Double> m) {
-    // first signature double[][] m , but code of the function has not been changed since then
-    double[][] temp = new double[m[0].length][m.length];
-    for (int i = 0; i < m.length; i++)
-      for (int j = 0; j < m[0].length; j++)
-        temp[j][i] = m[i][j];
-    return temp;
-  } */
 
 }
