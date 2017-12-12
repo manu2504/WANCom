@@ -28,7 +28,7 @@ public class App {
 
     // launching the function to find the point of intersection between
     // a circle and a curve
-    IntersectionPoint.test();
+    SphericalGeometry.intersectionPoint();
     
     /*
     JSONParser parser = new JSONParser();
@@ -57,87 +57,57 @@ public class App {
       } catch (ParseException e) {
         System.err.println("Parsing error");
       }
-      // return "{ \"lat\": 123.0, \"lng\": 146.0 }";
       return shortestPath;
-    }, new JsonTransformer());
+    });
   }
 
   /*
-   * private JSONObject shortestPathFromJSONTopology(JSONObject topo, String src,
-   * String target) { return new JSONObject(); }
+   * Takes this topology as a JSON object:
+   * https://gits-15.sys.kth.se/iaq/WANCom/blob/master/wan_server/src/main/resources/public/All_countries.js
+   * And return a Graph object for running Dijkstra against it
    */
   private static Graph graphFromJSONTopology(JSONObject jsonObject, int graphId) {
+    int topology_length = 5;
     List<List<Graph.Edge>> GRAPHS = new ArrayList<List<Graph.Edge>>();
-    //JSONArray nodes;
-    //JSONArray links;
-    //Set<String> allPlaces = new HashSet<String>();
-
-    JSONArray[] nodess = new JSONArray[5];
-    JSONArray[] linkss = new JSONArray[5];
-    List<Map<String, JSONObject>> mappedNodess = new ArrayList<Map<String, JSONObject>>();
-    for (int i = 0; i < 5; i++) {
-      nodess[i] = (JSONArray) jsonObject.get("nodes" + Integer.toString(i+1) );
-      linkss[i] = (JSONArray) jsonObject.get("links" + Integer.toString(i+1) );
-      mappedNodess.add(i, new HashMap<String, JSONObject>());
+    JSONArray[] nodes_lists = new JSONArray[topology_length];
+    JSONArray[] links_lists = new JSONArray[topology_length];
+    List<Map<String, JSONObject>> mappedNodes = new ArrayList<Map<String, JSONObject>>();
+    
+    // The topologies are numbered from 1 to 5 
+    for (int i = 0; i < topology_length; i++) {
+      nodes_lists[i] = (JSONArray) jsonObject.get("nodes" + Integer.toString(i+1) );
+      links_lists[i] = (JSONArray) jsonObject.get("links" + Integer.toString(i+1) );
+      mappedNodes.add(i, new HashMap<String, JSONObject>());
     }
-    /*
-    nodes = (JSONArray) jsonObject.get("nodes");
-    links = (JSONArray) jsonObject.get("links");
-    // create a map that has id as a key and json object
-    Map<String, JSONObject> mappedNodes = new HashMap<String, JSONObject>();*/
-    for (int i = 0; i < 5; i++) {
-      for (Object tmpNode : nodess[i]) {
+
+    for (int i = 0; i < topology_length; i++) {
+      for (Object tmpNode : nodes_lists[i]) {
         JSONObject tmpNode1 = (JSONObject) tmpNode;
-        mappedNodess.get(i).put(tmpNode1.get("id").toString(), tmpNode1);
+        mappedNodes.get(i).put(tmpNode1.get("id").toString(), tmpNode1);
       }
     }
 
-    for (int i = 0; i < 5; i++) {
-      GRAPHS.add( i, new ArrayList<Graph.Edge>(linkss[i].size()) );
+    for (int i = 0; i < topology_length; i++) {
+      GRAPHS.add( i, new ArrayList<Graph.Edge>(links_lists[i].size()) );
     }
-    for (int j = 0; j < 5; j++) {
-      int i = 0;
-      for (Object linkObj : linkss[j]) {
-  
+    for (int i = 0; i < topology_length; i++) {
+      int j = 0;
+      for (Object linkObj : links_lists[i]) {
         JSONObject link = (JSONObject) linkObj;
-        JSONObject source = mappedNodess.get(j).get(link.get("source").toString());
-        JSONObject target = mappedNodess.get(j).get(link.get("target").toString());
+        JSONObject source = mappedNodes.get(i).get(link.get("source").toString());
+        JSONObject target = mappedNodes.get(i).get(link.get("target").toString());
         double srcLatitude = Double.parseDouble(source.get("Latitude").toString());
         double srcLongitude = Double.parseDouble(source.get("Longitude").toString());
         double dstLatitude = Double.parseDouble(target.get("Latitude").toString());
         double dstLongitude = Double.parseDouble(target.get("Longitude").toString());
-        int distance = getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
-        //allPlaces.add(source.get("id").toString());
+        int distance = SphericalGeometry.getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
   
-        //allPlaces.add(target.get("id").toString());
-  
-        GRAPHS.get(j).add( i, new Graph.Edge(source.get("id").toString(), target.get("id").toString(), distance) );
-        i++;
+        GRAPHS.get(i).add( j, new Graph.Edge(source.get("id").toString(), target.get("id").toString(), distance) );
+        j++;
       }
     }
-    //System.out.println("here"+allPlaces);
-    //allPlaces.toArray();
 
     Graph g = new Graph(GRAPHS.get(graphId-1));
     return g;
-  }
-
-  private static int getDistance(double lat1, double lon1, double lat2, double lon2) {
-    double theta = lon1 - lon2;
-    double dist = Math.sin(degreeToRadiens(lat1)) * Math.sin(degreeToRadiens(lat2))
-        + Math.cos(degreeToRadiens(lat1)) * Math.cos(degreeToRadiens(lat2)) * Math.cos(degreeToRadiens(theta));
-    dist = Math.acos(dist);
-    dist = radiensTodegrees(dist);
-    dist = dist * 60 * 1.1515;
-    dist = dist * 1.609344;
-    return (int) dist;
-  }
-
-  private static double degreeToRadiens(double degree) {
-    return (degree * Math.PI / 180.0);
-  }
-
-  private static double radiensTodegrees(double radines) {
-    return (radines * 180 / Math.PI);
   }
 }
