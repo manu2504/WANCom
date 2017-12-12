@@ -28,7 +28,7 @@ public class App {
 
     // launching the function to find the point of intersection between
     // a circle and a curve
-    SphericalGeometry.intersectionPoint();
+    SphericalGeometry.printIntersectionPoints();
     
     /*
     JSONParser parser = new JSONParser();
