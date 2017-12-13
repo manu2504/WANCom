@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="map"></div>
+    <script>
+      var map;
+      function initMap() {
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: new google.maps.LatLng(2.8,-187.3),
+          mapTypeId: 'terrain'
+        });
+
+
+
+        // Create a <script> tag and set the USGS URL as the source.
+        var script = document.createElement('script');
+        // This example uses a local copy of the GeoJSON stored at
+        // http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
+        script.src = 'data.js';
+        document.getElementsByTagName('head')[0].appendChild(script);
+      }
+
+      // Loop through the results array and place a marker for each
+      // set of coordinates.
+      
+
+      window.country = function(results) {
+
+      function addCircle(centerCoordinates, map, contentInfoWindow) {
+          if (map === undefined) {
+            map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
+          }
+          var circle = new google.maps.Circle({
+            strokeColor: '#FF0000',
+            strokeOpacity: 0.8,
+            strokeWeight: 2,
+            fillColor: '#FF0000',
+            fillOpacity: 0.35,
+            map: map,
+            center: centerCoordinates,
+            radius: 0.5*10000 // fixed size, in meters
+          });
+          
+          circle.setMap(map);
+          
+          if (contentInfoWindow) {
+            circle.addListener('click', function(){
+              addInfoWindow(centerCoordinates, contentInfoWindow, map);
+            });
+          }
+        }
+          
+        function addInfoWindow(coords, content, map) {
+          var infoWindow = new google.maps.InfoWindow({
+            content: content,
+            position: coords
+          });
+          
+          infoWindow.open(map);
+        }
+        
+     /* var list = new Array("nodes","nodes1","nodes2","nodes3","nodes4","nodes5");
+     for (var num =0; num< list.length; num++){} 
+        node = list[num];
+        console.log(node);*/
+//try to make a loop here, always debug failed with "Cannot read property" error, then I copy this code module a few times...
+
+        
+        for (var i = 0; i < results.nodes.length; i++) {
+          var Lat = results.nodes[i].Latitude;
+          var Lng = results.nodes[i].Longitude;
+          var latLng = new google.maps.LatLng(Lat,Lng);
+        //  var label = results.nodes[i].id;      
+       /*  var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "label:" + label;
+            infowincontent.appendChild(strong);     */
+            addCircle(latLng, map);
+        };
+        
+/*        for (var i = 0; i < results.nodes1.length; i++) {
+          var Lat = results.nodes1[i].Latitude;
+          var Lng = results.nodes1[i].Longitude;
+          var latLng = new google.maps.LatLng(Lat,Lng);
+          var label = results.nodes1[i].id;      
+         var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "label:" + label;
+            infowincontent.appendChild(strong);     
+            addCircle(latLng, map, infowincontent);
+        };
+
+        for (var i = 0; i < results.nodes2.length; i++) {
+          var Lat = results.nodes2[i].Latitude;
+          var Lng = results.nodes2[i].Longitude;
+          var latLng = new google.maps.LatLng(Lat,Lng);
+          var label = results.nodes2[i].id;      
+         var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "label:" + label;
+            infowincontent.appendChild(strong);     
+            addCircle(latLng, map, infowincontent);
+        };
+
+        for (var i = 0; i < results.nodes3.length; i++) {
+          var Lat = results.nodes3[i].Latitude;
+          var Lng = results.nodes3[i].Longitude;
+          var latLng = new google.maps.LatLng(Lat,Lng);
+          var label = results.nodes3[i].id;      
+         var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "label:" + label;
+            infowincontent.appendChild(strong);     
+            addCircle(latLng, map, infowincontent);
+        };
+
+        for (var i = 0; i < results.nodes4.length; i++) {
+          var Lat = results.nodes4[i].Latitude;
+          var Lng = results.nodes4[i].Longitude;
+          var latLng = new google.maps.LatLng(Lat,Lng);
+          var label = results.nodes4[i].id;      
+         var infowincontent = document.createElement('div');
+            var strong = document.createElement('strong');
+            strong.textContent = "label:" + label;
+            infowincontent.appendChild(strong);     
+            addCircle(latLng, map, infowincontent);
+        };
+*/
+
+       }
+
+    
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
+    </script>
+  </body>
+</html>
