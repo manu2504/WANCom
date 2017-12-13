@@ -11,53 +11,6 @@ import org.json.simple.JSONArray;
 public class Graph {
   private final Map<String, Vertex> graph; // mapping of vertex names to Vertex objects, built from a set of Edges
 
-  /** One edge of the graph (only used by Graph constructor) */
-  public static class Edge {
-    public final String source, destination;
-    public final int distance;
-
-    public Edge(String source, String destination, int distance) {
-      this.source = source;
-      this.destination = destination;
-      this.distance = distance;
-    }
-
-  }
-
-  /** One vertex of the graph, complete with mappings to neighbouring vertices */
-  public static class Vertex implements Comparable<Vertex> {
-    public final String name;
-    public int distance = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
-    public Vertex previous = null;
-    public final Map<Vertex, Integer> neighbours = new HashMap<Vertex, Integer>();
-
-    public Vertex(String name) {
-      this.name = name;
-    }
-
-    @SuppressWarnings("unchecked")
-    private JSONArray printPath() {
-      JSONArray jsonArray = new JSONArray();
-      if (this == this.previous) {
-        System.out.printf("%s", this.name);
-        jsonArray.add(this.name);
-      } else if (this.previous == null) {
-        System.out.printf("%s(unreached)", this.name);
-      } else {
-        jsonArray = this.previous.printPath();
-        System.out.printf(" -> %s(%d)", this.name, this.distance);
-        jsonArray.add(this.name);
-      }
-      return jsonArray;
-    }
-
-    public int compareTo(Vertex other) {
-      if (distance == other.distance)
-        return name.compareTo(other.name);
-      return Integer.compare(distance, other.distance);
-    }
-  }
-
   /** Builds a graph from a set of edges */
   public Graph(List<Edge> edges) {
     graph = new HashMap<String, Vertex>(edges.size());
@@ -140,6 +93,56 @@ public class Graph {
     for (Vertex v : graph.values()) {
       v.printPath();
       System.out.println();
+    }
+  }
+
+
+  //Inner Classes:
+
+  /** One edge of the graph (only used by Graph constructor) */
+  public static class Edge {
+    public final String source, destination;
+    public final int distance;
+
+    public Edge(String source, String destination, int distance) {
+      this.source = source;
+      this.destination = destination;
+      this.distance = distance;
+    }
+
+  }
+
+  /** One vertex of the graph, complete with mappings to neighbouring vertices */
+  public static class Vertex implements Comparable<Vertex> {
+    public final String name;
+    public int distance = Integer.MAX_VALUE; // MAX_VALUE assumed to be infinity
+    public Vertex previous = null;
+    public final Map<Vertex, Integer> neighbours = new HashMap<Vertex, Integer>();
+
+    public Vertex(String name) {
+      this.name = name;
+    }
+
+    @SuppressWarnings("unchecked")
+    private JSONArray printPath() {
+      JSONArray jsonArray = new JSONArray();
+      if (this == this.previous) {
+        System.out.printf("%s", this.name);
+        jsonArray.add(this.name);
+      } else if (this.previous == null) {
+        System.out.printf("%s(unreached)", this.name);
+      } else {
+        jsonArray = this.previous.printPath();
+        System.out.printf(" -> %s(%d)", this.name, this.distance);
+        jsonArray.add(this.name);
+      }
+      return jsonArray;
+    }
+
+    public int compareTo(Vertex other) {
+      if (distance == other.distance)
+        return name.compareTo(other.name);
+      return Integer.compare(distance, other.distance);
     }
   }
 }
