@@ -1,309 +1,336 @@
-<!DOCTYPE html >
+<!DOCTYPE html>
+<html>
   <head>
-    <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
-    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
-    <title>Using MySQL and PHP with Google Maps</title>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 80%;
+        height: 73%;
         width: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
-        padding: 0em;
+        padding: 0;
       }
-      form {
+      #dashboard {
         margin: 1em;
+      }
+      #shortest_path > p {
+        font-weight: bold;
+        margin-bottom: auto;
+      }
+      #shortest_path + div {
+        font-weight: bold;
+        margin-top: 0.8em;
+        margin-bottom: 0.5em;
       }
       select {
         margin-right: 0.5em;
         margin-left: 0.5em;
       }
+      input {
+        margin-right: 0.5em;
+        margin-left: 0.5em;
+      }
     </style>
   </head>
-
   <body>
     <div id="map"></div>
-
+    
     <!-- Use of jQuery, a popular Javascript framework, is made in order to soften manipulation of HTML elements -->
     <script src="jquery-3.2.1.min.js"></script>
+    
     <script>
-      
-
+      var map;
       function initMap() {
-        var map = new google.maps.Map(document.getElementById('map'), {
-          center: new google.maps.LatLng(59.326242, 17.8419701),
-          zoom: 2
+        map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 2,
+          center: new google.maps.LatLng(2.8,-187.3),
+          mapTypeId: 'terrain'
         });
-        
-        /**
-         * Add a red circle on the map. Used to represent a hop.
-         *
-         * @param {object} centerCoordinates - The coordinates of the center of the circle, in the format
-                                               { lat: <float>, lng: <float> }, or as a google.maps.LatLng object.
-         * @param {Google Map object} map - A map object, created with 'new google.maps.Map()'.
-         * @param {string} contentInfoWindow - Content of the infoWindow for this circle.
-                                               If absent, no infoWindow will be displayed.
-                                               The infoWindow will be positioned at the center of the circle.
-         */
-        function addCircle(centerCoordinates, map, contentInfoWindow) {
-          if (map === undefined) {
-            map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function signature
-          }
-          var circle = new google.maps.Circle({
-            strokeColor: '#FF0000',
-            strokeOpacity: 0.8,
-            strokeWeight: 2,
-            fillColor: '#FF0000',
-            fillOpacity: 0.35,
-            map: map,
-            center: centerCoordinates,
-            radius: 8*10000 // fixed size, in meters
-          });
-          
-          circle.setMap(map);
-          
-          if (contentInfoWindow) {
-            circle.addListener('click', function(){
-              addInfoWindow(centerCoordinates, contentInfoWindow, map);
-            });
-          }
-        }
-          
-        function addInfoWindow(coords, content, map) {
-          var infoWindow = new google.maps.InfoWindow({
-            content: content,
-            position: coords
-          });
-          
-          infoWindow.open(map);
-        }
-        
-        var polylines = new Array(); // A polyline is the graphical representation of a path
-        var cables;
-
-        // Change this depending on the name of PHP or XML file
-        downloadUrl(/*'http://localhost/trace6/trace6.xml'*/ 'Trace6101219.xml', function(data) {
-          var xml = data.responseXML;
-          var marker = xml.documentElement.getElementsByTagName('marker');
-          // Paths (represented by polylines)
-          var Paths = new Array();
-          var noPaths = 12;
-          for (var i = 1; i <= noPaths; i++) {
-            Paths[i] = new Array();
-          }
-          
-          // Arbitrary assignment of paths to cables
-          cables = {1: [1,2,3],
-                    2: [4,5,6],
-                    3: [7,8,9],
-                    4: [10,11,12]
-                    };
-          
-          var currPathId;
-          Array.prototype.forEach.call(marker, function(markerElem) {
-
-            var markerId = markerElem.getAttribute('id');
-            //var idHop = markerElem.getAttribute('idHop');
-            var ipSrc = markerElem.getAttribute('ipSrc');
-            var idPath = markerElem.getAttribute('idPath');
-            // var country = markerElem.getAttribute('country');
-            // var city = markerElem.getAttribute('city');
-            var point = new google.maps.LatLng(
-                parseFloat(markerElem.getAttribute('lat')),
-                parseFloat(markerElem.getAttribute('lng')));
-                
-            if (currPathId !== idPath) {
-              currPathId = idPath;
-            }
-                
-           // console.log (idPath);
-
-            switch(idPath)
-            {
-                case '33':
-                    Paths[1].push(point)
-                    break;
-                case '1017':
-                    Paths[2].push (point);
-                    break;
-                case '1289':
-                    Paths[3].push (point);
-                    break;
-                case '11':
-                    Paths[4].push(point)
-                    break;
-                case '531':
-                    Paths[5].push (point);
-                    break;
-                case '1367':
-                    Paths[6].push (point);
-                    break;
-                    case '19':
-                    Paths[7].push(point)
-                    break;
-                case '22':
-                    Paths[8].push (point);
-                    break;
-                case '30':
-                    Paths[9].push (point);
-                    break;
-                case '15':
-                    Paths[10].push(point)
-                    break;
-                case '315':
-                    Paths[11].push (point);
-                    break;
-                case '412':
-                    Paths[12].push (point);
-                    break;				
-            }
-
-            // console.log (Paths);
-            // Paths.push (point);
-            var infowincontent = document.createElement('div');
-            var strong = document.createElement('strong');
-            strong.textContent = "idPath:" + idPath;
-            infowincontent.appendChild(strong);
-            infowincontent.appendChild(document.createElement('br'));
-
-            // var address = city + ", " + country
-            var text = document.createTextNode(ipSrc);
-
-            infowincontent.appendChild(text);
-            
-            addCircle(point, map, infowincontent);
-              
-          });
-          
-
-	        var polyline;
-	        for (var i = 1; i <= noPaths; i++) {
-	          polyline = new google.maps.Polyline({
-	            path: Paths[i],
-	            icons: [{
-	              icon: { path: google.maps.SymbolPath.FORWARD_CLOSED_ARROW },
-	              offset: '100%'
-	            }],
-	            strokeColor: '#00e000',
-	            strokeOpacity: 1.0,
-	            strokeWeight: 2 // to be weighted according to number of paths that go across the link
-	          });
-	          polyline.setMap(map);
-	          polylines.push({idPath: i, polyline: polyline});
-	        }
-        });
-        
-        
-        function add_form() {
-          var $form_content = $('<form>', { id: 'form_datacenters' }).appendTo('body');
-          $('<label>For which cable you want to display the paths that go across it?</label>').appendTo($form_content);
-          var $cableId = $('<select>', { on: { change: updatemap2 } } );
-          /*for (var i = 1; i < 3; i++) {
-            $('<option>', { html: i } ).appendTo($cableId);
-          }*/
-          $('<option>', { html: [1, ' Tokyo to Oregon'] } ).appendTo($cableId);
-          $('<option>', { html: [2, ' Oregon to Tokyo'] } ).appendTo($cableId);
-          $('<option>', { html: [3, ' Oregon to N.Virginia'] } ).appendTo($cableId);
-          $('<option>', { html: [4, ' N.Virginia to Oregon'] } ).appendTo($cableId);
-
-          $cableId.appendTo($form_content);
-          $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
-                    .appendTo($form_content);
-          $dumb_button = $('<button>', { html: 'Send data' }).click(function(){sendmedata();});
-          $form_content.after($dumb_button);
-        }
-        
-        function sendmedata() {
-        	console.log('test');
-        	$.ajax({
-            method: "POST",
-            url: "/sendmedata",
-            data: { "name": "John", "location": "Boston" },
-              dataType: 'json'
-          })
-          .fail(function() {
-            alert( "The request to the server isn't a success. Maybe your Internet connection is down, or the server is so." );
-          })
-          .done(function( msg ) {
-            console.log("JSON received successfully from the server:", JSON.stringify(msg));
-            alert( "Data returned by the server: " + JSON.stringify(msg) );
-          });
-        }
-        
-        function updatemap(userSelected) {
-          // First check if the "All" checkbox is checked, unless a pair of datacenters has been explicitly selected
-          if ( !userSelected && $("input:checkbox[value='all']").prop('checked') ) {
-            displayAllPaths();
-            return;
-          }
-          
-          // Unselect automatically the "All" checkbox
-          if (userSelected) {
-            $("input:checkbox[value='all']").prop('checked', false);
-          }
-          
-          var userSelection = parseInt($( 'select option:selected' ).text());
-          
-          removeAllPaths();
-          displayPathsFromCable(userSelection);
-        }
-        window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
-
-        function updatemap2() {
-          updatemap(true);
-        }
-        window.updatemap2 = updatemap2;
-        
-        function displayPathsFromCable(cableId) {
-          for (var i in polylines) {
-            if ( $.inArray( polylines[i].idPath, cables[cableId] ) != -1 ) {
-              polylines[i].polyline.setMap(map);
-              console.log("Polyline added to the map for cableId ", cableId);
-            }
-          }
-        }
-        
-        function displayAllPaths() {
-          for (var i in polylines) {
-            polylines[i].polyline.setMap(map);
-            console.log("DisplayAllPaths: polyline added to the map");
-          }
-        }
-        
-        function removeAllPaths() {
-          for (var i in polylines) {
-            polylines[i].polyline.setMap(null);
-          }
-        }
-        
-        add_form();
-      }
-
-      function downloadUrl(url, callback) {
-        var request = window.ActiveXObject ?
-            new ActiveXObject('Microsoft.XMLHTTP') :
-            new XMLHttpRequest;
-
-        request.onreadystatechange = function() {
-          if (request.readyState == 4) {
-            request.onreadystatechange = doNothing;
-            callback(request, request.status);
-          }
-        };  
-
-        request.open('GET', url, true);
-        request.send(null);
       }
       
-      function doNothing() {}
+      /* topos = {
+        "France": { "nodes": [...], "links": [...] },
+        "USA": {"nodes": [...], "links":[...] },
+        ...
+       }
+      */
+      var topos = {};
+      
+      /* nodes = {
+		      "USA": {
+		        "Denver": {lat: ..., lng: ...},
+		        "Dallas": {lat: ..., lng: ...},
+		        ...
+		      },
+		      "France": ...,
+		      ...
+		    }
+		  */
+		  var nodes = {};
+      
+		  /* polylines =(same format as)= polylinesShowingShortestPaths = {
+		      "USA": [Polyline, Polyline, ...],
+		      "France": [...],
+		      ...
+		   }
+		  */
+		  var polylines = {};
+		  var polylinesShowingShortestPaths = {};
+		  
+      var countries = ["USA", "China", "Germany", "France", "Finland"];
+      
+      $.when( // When all the JSOn files are loaded...
+          getJSON('USA.json'),
+          getJSON('China.json'),
+          getJSON('Germany.json'),
+          getJSON('France.json'),
+          getJSON('Finland.json')
+        ).done(function (USA, China, Germany, France, Finland) {
+          // Start drawing the networks on the maps
+          topos["USA"] = USA[0];
+          topos["China"] = China[0];
+          topos["Germany"] = Germany[0];
+          topos["France"] = France[0];
+          topos["Finland"] = Finland[0];
+          
+          countries.map(function(country) {
+            polylines[country] = [];
+            polylinesShowingShortestPaths[country] = [];
+            drawTopology(country);
+          });
+          add_UI();
+        });
+
+      
+      // Definitions of all functions needed:
+      
+      function getJSON(JSON_file) {
+        return $.getJSON(JSON_file, function(topology) {
+          return topology;
+        });
+      }
+      
+      function drawTopology(topoId) {
+        var topo = topos[topoId];
+        nodes[topoId] = {};
+        for (var i = 0; i < topo.nodes.length; i++) {
+          var Lat = topo.nodes[i].Latitude;
+          var Lng = topo.nodes[i].Longitude;
+          var coordinates = {lat: Lat, lng: Lng};
+          var label = topo.nodes[i].id;
+          var country = topo.nodes[i].Country;
+
+          nodes[topoId][label] = coordinates;
+
+          var infowincontent = document.createElement('div');
+          var strong = document.createElement('strong');
+          strong.textContent = label + ", " + country;
+          infowincontent.appendChild(strong);     
+          addCircle(coordinates, map, infowincontent);
+        }
+
+        for (var i = 0; i < topo.links.length; i++) {
+          var source = topo.links[i].source;
+          var target = topo.links[i].target;
+          drawLink(source, target, topoId);
+        }
+      }
+
+      function drawLink(src, target, topoId) {       
+        var path = [nodes[topoId][src], nodes[topoId][target]];
+        
+        polyline = new google.maps.Polyline({
+          path: path,
+          strokeColor: '#FFFF99',
+          strokeOpacity: 1.0,
+          strokeWeight: 2
+        });
+        polyline.setMap(map);
+        polylines[topoId].push(polyline);
+      }
+
+      function addCircle(centerCoordinates, map, contentInfoWindow) {
+        if (map === undefined) {
+          map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function's signature
+        }
+        var circle = new google.maps.Circle({
+          strokeColor: '#FF0000',
+          strokeOpacity: 0.8,
+          strokeWeight: 2,
+          fillColor: '#FF0000',
+          fillOpacity: 0.35,
+          map: map,
+          center: centerCoordinates,
+          radius: 2.5*10000 // fixed size, in meters
+        });
+        
+        circle.setMap(map);
+        
+        if (contentInfoWindow) {
+          circle.addListener('click', function(){
+            addInfoWindow(centerCoordinates, contentInfoWindow, map);
+            var input1 = $(':input[name="fname"]');
+            var input2 = $(':input[name="fname2"]');
+            if ( input1.val() === '' ) input1.val( $(contentInfoWindow).text() );
+            else if (input2.val() === '') input2.val( $(contentInfoWindow).text() );
+          });
+        }
+      }
+        
+      function addInfoWindow(coords, content, map) {
+        var infoWindow = new google.maps.InfoWindow({
+          content: content,
+          position: coords
+        });
+        
+        infoWindow.open(map);
+      }
+      
+      function add_UI() {
+        var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
+        $('<label>For which country you want to display the paths that go across it?</label>').appendTo($user_dashboard);
+        var $countryId = $('<select>', { on: { blur: function() { updatemap(true); }, change: function() { updatemap(true); } } } );
+        
+        countries.map(function(country) {
+          $('<option>', { text: country } ).appendTo($countryId);
+        });
+        $countryId.appendTo($user_dashboard);
+        $('<input type="checkbox" name="all" value="all" onclick="updatemap();" checked>All<br>')
+                  .appendTo($user_dashboard);
+        
+        var $shortest_path_params = $('<div>', { html: '<p>Shortest path:</p>', id: 'shortest_path' } );
+        $shortest_path_params.appendTo($user_dashboard);
+        $input1 = $('<input>', { type: "text", name:"fname"});
+        $input2 = $('<input>', { type: "text", name:"fname2"});
+        $input1.appendTo($shortest_path_params);
+        $input2.appendTo($shortest_path_params);
+        $input1.before('<label for="fname">Source hop</label>');
+        $input2.before('<label for="fname2">Destination hop</label>');
+       
+        $req_button = $('<button>', { html: 'Request shortest path' }).click(senddata);
+        $reset_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_dijkstra);
+        $req_button.appendTo($shortest_path_params);
+        $reset_button.appendTo($shortest_path_params);
+      }
+    
+      function senddata() {
+        console.log('senddata() called');
+        var input1 = $(":input[name='fname']");
+        var input2 = $(":input[name='fname2']");
+        if (input1.val() === '' || input2.val() === '') {
+          $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
+          return;
+        }
+        countryId = input1.val().substr( input1.val().lastIndexOf(',') + 2 );
+        // Special cases
+        if (countryId == "United States") countryId = "USA";
+        if (countryId == "Switzerland") countryId = "France";
+        if (countryId == "Canada") countryId = "USA";
+        var topo = topos[countryId];
+        topo['src'] = input1.val().substring( 0, input1.val().lastIndexOf(',') );
+        topo['dst'] = input2.val().substring( 0, input2.val().lastIndexOf(',') );
+        // topo['cost'] = input3.val();
+        
+        $.ajax({
+          method: "POST",
+          url: "/senddata",
+          data: JSON.stringify(topos[countryId]),
+          dataType: 'json'
+        })
+        .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
+          console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
+          var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
+          $('#shortest_path').after($shortest_info);
+          highlightShortestPath(shortest_path, countryId);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown ) {
+          if (errorThrown == "") {
+            var errmsg = "Nothing received from the server: server down, or no Internet connection"; 
+            alert( errmsg );
+          } else {
+            alert(errorThrown);
+          }
+        });
+      }
+      
+      function reset_dijkstra() {
+        $('#shortest_path input').val('');
+      }
+      
+      function updatemap(userSelected) {
+        // First check if the "All" checkbox is checked, unless a pair of datacenters has been explicitly selected
+        if ( !userSelected && $("input:checkbox[value='all']").prop('checked') ) {
+          displayAllLinks();
+          return;
+        }
+        
+        // Unselect automatically the "All" checkbox
+        if (userSelected) {
+          $("input:checkbox[value='all']").prop('checked', false);
+        }
+        
+        var userSelection = $( 'select option:selected' ).text();
+        
+        removeAllLinks();
+        displayLinksFromCountry(userSelection);
+      }
+      window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
+      
+      function displayLinksFromCountry(countryId) {
+        polylines[countryId].map(function(polyline) {
+          polyline.setMap(map);
+        });
+      }
+      
+      function displayAllLinks() {
+        for (var country in polylines) {
+          polylines[country].map(function(polyline) {
+            polyline.setMap(map);
+          });
+        }
+      }
+      
+      function removeAllLinks() {
+        for (var country in polylines) {
+          polylines[country].map(function(polyline) {
+            polyline.setMap(null);
+          });
+        }
+      }
+      
+      function highlightShortestPath(path, countryId) {
+        var coords = [];
+        
+        path.map(function(nodeName) {
+          coords.push(nodes[countryId][nodeName]);
+        });
+        
+        var polyline = new google.maps.Polyline({
+          path: coords,
+          strokeColor: randomColor(),
+          strokeOpacity: 1.0,
+          strokeWeight: 2,
+          zIndex: 10
+        });
+        polyline.setMap(map);
+        polylinesShowingShortestPaths[countryId].push(polyline);
+      }
+      
+      function randomColor() {
+        rc = "#";
+        for(i=0;i<6;i++){
+          rc += Math.floor(Math.random()*16).toString(16);
+        }
+        return rc;
+      }
+      
     </script>
     <script async defer
     src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
     </script>
-  </body>
+  </body> 
 </html>

@@ -28,7 +28,7 @@ public class App {
 
     // launching the function to find the point of intersection between
     // a circle and a curve
-    SphericalGeometry.printIntersectionPoints();
+    //SphericalGeometry.printIntersectionPoints();
     
     /*
     JSONParser parser = new JSONParser();
@@ -51,7 +51,8 @@ public class App {
       try {
         Object obj = parser.parse(request.body());
         JSONObject jsonObject = (JSONObject) obj;
-        Graph g = graphFromJSONTopology(jsonObject, Integer.valueOf(jsonObject.get("countryId").toString()));
+        //Graph g = graphFromJSONTopologies(jsonObject, Integer.valueOf(jsonObject.get("countryId").toString()));
+        Graph g = graphFromJSONTopology(jsonObject);
         g.dijkstra(jsonObject.get("src").toString());
         shortestPath = g.printPath(jsonObject.get("dst").toString());
       } catch (ParseException e) {
@@ -60,13 +61,46 @@ public class App {
       return shortestPath;
     });
   }
+  
+  private static Graph graphFromJSONTopology(JSONObject jsonObject) {
+    List<Graph.Edge> GRAPH = new ArrayList<Graph.Edge>();
+    JSONArray nodes_list = new JSONArray();
+    JSONArray links_list = new JSONArray();
+    Map<String, JSONObject> mappedNodes = new HashMap<String, JSONObject>();
+    
+    nodes_list = (JSONArray) jsonObject.get("nodes");
+    links_list = (JSONArray) jsonObject.get("links");
+
+    for (Object tmpNode : nodes_list) {
+      JSONObject tmpNode1 = (JSONObject) tmpNode;
+      mappedNodes.put(tmpNode1.get("id").toString(), tmpNode1);
+    }
+
+    int j = 0;
+    for (Object linkObj : links_list) {
+      JSONObject link = (JSONObject) linkObj;
+      JSONObject source = mappedNodes.get(link.get("source").toString());
+      JSONObject target = mappedNodes.get(link.get("target").toString());
+      double srcLatitude = Double.parseDouble(source.get("Latitude").toString());
+      double srcLongitude = Double.parseDouble(source.get("Longitude").toString());
+      double dstLatitude = Double.parseDouble(target.get("Latitude").toString());
+      double dstLongitude = Double.parseDouble(target.get("Longitude").toString());
+      int distance = SphericalGeometry.getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
+
+      GRAPH.add( j, new Graph.Edge(source.get("id").toString(), target.get("id").toString(), distance) );
+      j++;
+    }
+
+    Graph g = new Graph(GRAPH);
+    return g;
+  }
 
   /*
    * Takes this topology as a JSON object:
    * https://gits-15.sys.kth.se/iaq/WANCom/blob/master/wan_server/src/main/resources/public/All_countries.js
-   * And return a Graph object for running Dijkstra against it
+   * And return a Graph object for running Dijkstra against itw
    */
-  private static Graph graphFromJSONTopology(JSONObject jsonObject, int graphId) {
+  private static Graph graphFromJSONTopologies(JSONObject jsonObject, int graphId) {
     int topology_length = 5;
     List<List<Graph.Edge>> GRAPHS = new ArrayList<List<Graph.Edge>>();
     JSONArray[] nodes_lists = new JSONArray[topology_length];
