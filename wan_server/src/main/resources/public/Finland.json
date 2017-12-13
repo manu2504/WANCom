@@ -1,0 +1,357 @@
+{
+    "nodes": [
+        {
+            "Country": "Finland", 
+            "Longitude": 22.26869, 
+            "Internal": 1, 
+            "Latitude": 60.45148, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Turku"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 25.71667, 
+            "Internal": 1, 
+            "Latitude": 66.5, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Rovaniemi"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 24.6522, 
+            "Internal": 1, 
+            "Latitude": 60.2052, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Espoo"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 23.78712, 
+            "Internal": 1, 
+            "Latitude": 61.49911, 
+            "type": "Fiber network connection sites", 
+            "id": "Tampere"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 21.51127, 
+            "Internal": 1, 
+            "Latitude": 61.12724, 
+            "type": "Fiber network connection sites", 
+            "id": "Rauma"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 26.7, 
+            "Internal": 1, 
+            "Latitude": 60.86667, 
+            "type": "Fiber network connection sites", 
+            "id": "Kouvola"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 22.83333, 
+            "Internal": 1, 
+            "Latitude": 62.8, 
+            "type": "Fiber network connection sites", 
+            "id": "Seinajoki"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 28.21667, 
+            "Internal": 1, 
+            "Latitude": 64.5, 
+            "type": "Fiber network connection sites", 
+            "id": "Ristijavi"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 23.13066, 
+            "Internal": 1, 
+            "Latitude": 63.83847, 
+            "type": "Fiber network connection sites", 
+            "id": "Kokkola"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 29.76667, 
+            "Internal": 1, 
+            "Latitude": 62.6, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Joensuu"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 25.73333, 
+            "Internal": 1, 
+            "Latitude": 62.23333, 
+            "type": "Fiber network connection sites", 
+            "id": "Jyvaskyla"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 23.13333, 
+            "Internal": 1, 
+            "Latitude": 60.38333, 
+            "type": "Fiber network connection sites", 
+            "id": "Salo"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 26.91667, 
+            "Internal": 1, 
+            "Latitude": 60.46667, 
+            "type": "Fiber network connection sites", 
+            "id": "Kotka"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 24.93545, 
+            "Internal": 1, 
+            "Latitude": 60.16952, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Helsinki"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 25.35233, 
+            "Internal": 1, 
+            "Latitude": 65.17654, 
+            "type": "Fiber network connection sites", 
+            "id": "Haukipudas"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 27.67703, 
+            "Internal": 1, 
+            "Latitude": 62.89238, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Koupio"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 25.46816, 
+            "Internal": 1, 
+            "Latitude": 65.01236, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Oulu"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 27.27227, 
+            "Internal": 1, 
+            "Latitude": 61.68857, 
+            "type": "Fiber network connection sites", 
+            "id": "Mikkeli"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 21.78333, 
+            "Internal": 1, 
+            "Latitude": 61.48333, 
+            "type": "Fiber network connection sites", 
+            "id": "Pori"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 28.18871, 
+            "Internal": 1, 
+            "Latitude": 61.05871, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Lappeenranta"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 21.61577, 
+            "Internal": 1, 
+            "Latitude": 63.096, 
+            "type": "IP and fiber network connection sites", 
+            "id": "Vaasa"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 25.66151, 
+            "Internal": 1, 
+            "Latitude": 60.98267, 
+            "type": "Fiber network connection sites", 
+            "id": "Lahti"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 24.46434, 
+            "Internal": 1, 
+            "Latitude": 60.99596, 
+            "type": "Fiber network connection sites", 
+            "id": "Hameenlinna"
+        }, 
+        {
+            "Country": "Finland", 
+            "Longitude": 26.6, 
+            "Internal": 1, 
+            "Latitude": 67.41667, 
+            "type": "Fiber network connection sites", 
+            "id": "Sodankyla"
+        }
+    ], 
+    "links": [
+        {
+            "LinkType": "Fiber", 
+            "source": "Turku", 
+            "LinkLabel": "fiber", 
+            "target": "Rauma"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Turku", 
+            "LinkLabel": "fiber", 
+            "target": "Salo"
+        }, 
+        {
+            "source": "Rovaniemi", 
+            "LinkLabel": "Transmission", 
+            "target": "Ristijavi"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Rovaniemi", 
+            "LinkLabel": "fiber", 
+            "target": "Sodankyla"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Rovaniemi", 
+            "LinkLabel": "fiber", 
+            "target": "Haukipudas"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Espoo", 
+            "LinkLabel": "fiber", 
+            "target": "Salo"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Espoo", 
+            "LinkLabel": "fiber", 
+            "target": "Hameenlinna"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Espoo", 
+            "LinkLabel": "fiber", 
+            "target": "Helsinki"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Tampere", 
+            "LinkLabel": "fiber", 
+            "target": "Jyvaskyla"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Tampere", 
+            "LinkLabel": "fiber", 
+            "target": "Hameenlinna"
+        }, 
+        {
+            "source": "Rauma", 
+            "id": "e22", 
+            "target": "Pori"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kouvola", 
+            "LinkLabel": "fiber", 
+            "target": "Lappeenranta"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kouvola", 
+            "LinkLabel": "fiber", 
+            "target": "Mikkeli"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kouvola", 
+            "LinkLabel": "fiber", 
+            "target": "Kotka"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kouvola", 
+            "LinkLabel": "fiber", 
+            "target": "Lahti"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Seinajoki", 
+            "LinkLabel": "fiber", 
+            "target": "Pori"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Seinajoki", 
+            "LinkLabel": "fiber", 
+            "target": "Vaasa"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Ristijavi", 
+            "LinkLabel": "fiber", 
+            "target": "Koupio"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Ristijavi", 
+            "LinkLabel": "fiber", 
+            "target": "Oulu"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kokkola", 
+            "LinkLabel": "fiber", 
+            "target": "Oulu"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Kokkola", 
+            "LinkLabel": "fiber", 
+            "target": "Vaasa"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Joensuu", 
+            "LinkLabel": "fiber", 
+            "target": "Koupio"
+        }, 
+        {
+            "source": "Joensuu", 
+            "LinkLabel": "transmission", 
+            "target": "Lappeenranta"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Jyvaskyla", 
+            "LinkLabel": "fiber", 
+            "target": "Mikkeli"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Helsinki", 
+            "LinkLabel": "fiber", 
+            "target": "Lahti"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Haukipudas", 
+            "LinkLabel": "fiber", 
+            "target": "Oulu"
+        }, 
+        {
+            "LinkType": "Fiber", 
+            "source": "Koupio", 
+            "LinkLabel": "fiber", 
+            "target": "Mikkeli"
+        }
+    ]
+}
