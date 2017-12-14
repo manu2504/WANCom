@@ -1,4 +1,4 @@
-package net.wancom.fhb.wan_server;
+package net.wancom.graph;
 
 import java.util.HashMap;
 import java.util.LinkedList;
