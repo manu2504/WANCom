@@ -1,361 +1,361 @@
 {
     "nodes": [
         {
-            "Latitude": 48.13743, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 48.13743, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "FHM", 
-            "Longitude": 11.57549
+            "longitude": 11.57549
         }, 
         {
-            "Latitude": 50.77664, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.77664, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "AAC", 
-            "Longitude": 6.08342
+            "longitude": 6.08342
         }, 
         {
-            "Latitude": 50.68333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.68333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ILM", 
-            "Longitude": 10.9
+            "longitude": 10.9
         }, 
         {
-            "Latitude": 49.94806, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.94806, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BAY", 
-            "Longitude": 11.57833
+            "longitude": 11.57833
         }, 
         {
-            "Latitude": 51.96236, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.96236, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "MUE", 
-            "Longitude": 7.62571
+            "longitude": 7.62571
         }, 
         {
-            "Latitude": 51.51667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.51667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "DOR", 
-            "Longitude": 7.45
+            "longitude": 7.45
         }, 
         {
-            "Latitude": 51.71905, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.71905, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "PAD", 
-            "Longitude": 8.75439
+            "longitude": 8.75439
         }, 
         {
-            "Latitude": 50.73333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.73333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BON", 
-            "Longitude": 7.1
+            "longitude": 7.1
         }, 
         {
-            "Latitude": 49.87056, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.87056, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "GSI", 
-            "Longitude": 8.64944
+            "longitude": 8.64944
         }, 
         {
-            "Latitude": 51.48333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.48333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BOC", 
-            "Longitude": 7.21667
+            "longitude": 7.21667
         }, 
         {
-            "Latitude": 51.05089, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.05089, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "DRE", 
-            "Longitude": 13.73832
+            "longitude": 13.73832
         }, 
         {
-            "Latitude": 49.015, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.015, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "REG", 
-            "Longitude": 12.09556
+            "longitude": 12.09556
         }, 
         {
-            "Latitude": 53.55, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 53.55, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "HAM", 
-            "Longitude": 10.0
+            "longitude": 10.0
         }, 
         {
-            "Latitude": 52.34714, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.34714, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "FFO", 
-            "Longitude": 14.55062
+            "longitude": 14.55062
         }, 
         {
-            "Latitude": 49.58972, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.58972, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ERL", 
-            "Longitude": 11.00389
+            "longitude": 11.00389
         }, 
         {
-            "Latitude": 52.37052, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.37052, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "HAN", 
-            "Longitude": 9.73322
+            "longitude": 9.73322
         }, 
         {
-            "Latitude": 52.52437, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.52437, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "HUB", 
-            "Longitude": 13.41053
+            "longitude": 13.41053
         }, 
         {
-            "Latitude": 49.78778, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.78778, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "WUE", 
-            "Longitude": 9.93611
+            "longitude": 9.93611
         }, 
         {
-            "Latitude": 49.23333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.23333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "SAA", 
-            "Longitude": 7.0
+            "longitude": 7.0
         }, 
         {
-            "Latitude": 52.03333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.03333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BIE", 
-            "Longitude": 8.53333
+            "longitude": 8.53333
         }, 
         {
-            "Latitude": 48.25, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 48.25, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "GAR", 
-            "Longitude": 11.65
+            "longitude": 11.65
         }, 
         {
-            "Latitude": 54.0887, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 54.0887, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ROS", 
-            "Longitude": 12.14049
+            "longitude": 12.14049
         }, 
         {
-            "Latitude": 50.93333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.93333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BIR", 
-            "Longitude": 6.95
+            "longitude": 6.95
         }, 
         {
-            "Latitude": 51.45, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.45, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "DUI", 
-            "Longitude": 7.01667
+            "longitude": 7.01667
         }, 
         {
-            "Latitude": 50.11667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.11667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "FRA", 
-            "Longitude": 8.68333
+            "longitude": 8.68333
         }, 
         {
-            "Latitude": 53.55, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 53.55, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "DES", 
-            "Longitude": 10.0
+            "longitude": 10.0
         }, 
         {
-            "Latitude": 50.83333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.83333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "CHE", 
-            "Longitude": 12.91667
+            "longitude": 12.91667
         }, 
         {
-            "Latitude": 48.36667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 48.36667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "AUG", 
-            "Longitude": 10.88333
+            "longitude": 10.88333
         }, 
         {
-            "Latitude": 51.53333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.53333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "GOE", 
-            "Longitude": 9.93333
+            "longitude": 9.93333
         }, 
         {
-            "Latitude": 53.16667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 53.16667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "EWE", 
-            "Longitude": 8.2
+            "longitude": 8.2
         }, 
         {
-            "Latitude": 49.00472, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.00472, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "FZK", 
-            "Longitude": 8.38583
+            "longitude": 8.38583
         }, 
         {
-            "Latitude": 48.78232, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 48.78232, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "STU", 
-            "Longitude": 9.17702
+            "longitude": 9.17702
         }, 
         {
-            "Latitude": 50.58333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.58333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "GIE", 
-            "Longitude": 8.65
+            "longitude": 8.65
         }, 
         {
-            "Latitude": 51.26667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.26667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "WUP", 
-            "Longitude": 7.18333
+            "longitude": 7.18333
         }, 
         {
-            "Latitude": 52.52437, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.52437, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ZIB", 
-            "Longitude": 13.41053
+            "longitude": 13.41053
         }, 
         {
-            "Latitude": 50.93333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.93333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "JEN", 
-            "Longitude": 11.58333
+            "longitude": 11.58333
         }, 
         {
-            "Latitude": 49.40768, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.40768, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "HEI", 
-            "Longitude": 8.69079
+            "longitude": 8.69079
         }, 
         {
-            "Latitude": 52.52437, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.52437, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ADH", 
-            "Longitude": 13.41053
+            "longitude": 13.41053
         }, 
         {
-            "Latitude": 50.81667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.81667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "MAR", 
-            "Longitude": 8.76667
+            "longitude": 8.76667
         }, 
         {
-            "Latitude": 50.93333, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 50.93333, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "FZJ", 
-            "Longitude": 6.36667
+            "longitude": 6.36667
         }, 
         {
-            "Latitude": 51.33962, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.33962, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "LEI", 
-            "Longitude": 12.37129
+            "longitude": 12.37129
         }, 
         {
-            "Latitude": 49.45, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 49.45, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "KAI", 
-            "Longitude": 7.75
+            "longitude": 7.75
         }, 
         {
-            "Latitude": 52.52437, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.52437, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "TUB", 
-            "Longitude": 13.41053
+            "longitude": 13.41053
         }, 
         {
-            "Latitude": 51.31667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 51.31667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "KAS", 
-            "Longitude": 9.5
+            "longitude": 9.5
         }, 
         {
-            "Latitude": 54.1, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 54.1, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "GRE", 
-            "Longitude": 13.38333
+            "longitude": 13.38333
         }, 
         {
-            "Latitude": 52.26667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.26667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BRA", 
-            "Longitude": 10.53333
+            "longitude": 10.53333
         }, 
         {
-            "Latitude": 52.16667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.16667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "MAG", 
-            "Longitude": 11.66667
+            "longitude": 11.66667
         }, 
         {
-            "Latitude": 52.36667, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.36667, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "ZEU", 
-            "Longitude": 13.61667
+            "longitude": 13.61667
         }, 
         {
-            "Latitude": 53.07516, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 53.07516, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "BRE", 
-            "Longitude": 8.80777
+            "longitude": 8.80777
         }, 
         {
-            "Latitude": 52.39886, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 52.39886, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "POT", 
-            "Longitude": 13.06566
+            "longitude": 13.06566
         }, 
         {
-            "Latitude": 54.32133, 
-            "Country": "Germany", 
-            "Internal": 1, 
+            "latitude": 54.32133, 
+            "country": "Germany", 
+            "internal": 1, 
             "id": "KIE", 
-            "Longitude": 10.13489
+            "longitude": 10.13489
         }
     ], 
     "links": [
