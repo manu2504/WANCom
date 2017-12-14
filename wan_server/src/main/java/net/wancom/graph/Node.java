@@ -13,6 +13,8 @@ import java.util.Map;
 public class Node {
     // Name of the Node
     private String nodeName;
+    private double longtitude;
+    private double latitude;
 
     // The shortest path from the source Node (when we run Dijkstra algorith through a source)
     // to current Node - this (include all nodes between source and destination)
@@ -39,6 +41,22 @@ public class Node {
 
     public void setName(String name) {
         this.nodeName = name;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public List<Node> getShortestPath() {
