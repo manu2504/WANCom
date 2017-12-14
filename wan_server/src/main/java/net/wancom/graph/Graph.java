@@ -33,9 +33,16 @@ public class Graph {
     }
 
     public Node findNode(String nodeName){
-        if(!this.getNodes().contains(new Node(nodeName))){
+        if(!hasNode(nodeName)){
             return null;
         }
         return this.getNodes().stream().filter(node -> nodeName.equals(node.getNodeName())).findFirst().orElse(null);
+    }
+
+    public boolean hasNode(String nodeName){
+        if(nodeName==null || !this.getNodes().contains(new Node(nodeName))){
+            return false;
+        }
+        return true;
     }
 }
