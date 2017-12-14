@@ -1,4 +1,4 @@
-package net.wancom.fhb.wan_server;
+package net.wancom.graph;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -17,26 +17,26 @@ public class DijkstraTest {
     private Node nodeD;
     private Node nodeE;
     private Node nodeF;
-
+    
     private Graph graph;
-
+    
     //The following class runs before any test
     @Before
-    public void init() {
+    public void init(){
         this.graph = initiateGraph();
     }
-
-
+    
+    
     @Test
-    public void calculationTimeOfDijkstraAlgorithm() {
+    public void calculationTimeOfDijkstraAlgorithm(){
         long startTime = System.currentTimeMillis();
         Graph myGraph = getTracedGraphByDijkstra(nodeA);
         long stopTime = System.currentTimeMillis();
         long elapsedTime = stopTime - startTime;
         System.out.println("Elapsed time of running Dijkstra: " + elapsedTime + " miliseconds");
         assertNotNull(elapsedTime);
-
-    }
+        
+    }    
 
     @Test
     public void calculateShortestPathFromSource() {
@@ -46,10 +46,10 @@ public class DijkstraTest {
         //The following list has just one member nodeA
         List<Node> shortestPathForNodeB = Arrays.asList(nodeA);
         List<Node> shortestPathForNodeC = Arrays.asList(nodeA);
-
+        
         //The following list has two members nodeA & nodeB
         List<Node> shortestPathForNodeD = Arrays.asList(nodeA, nodeB);
-
+        
         //The following list has three members nodeA & nodeB & nodeD
         List<Node> shortestPathForNodeE = Arrays.asList(nodeA, nodeB, nodeD);
         List<Node> shortestPathForNodeF = Arrays.asList(nodeA, nodeB, nodeD);
@@ -80,7 +80,7 @@ public class DijkstraTest {
         return tracedGraph;
     }
 
-
+    
     //Method prepared for init method.
     private Graph initiateGraph() {
         initializeNodes();
