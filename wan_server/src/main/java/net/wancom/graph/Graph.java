@@ -31,4 +31,11 @@ public class Graph {
     public void setNodes(Set<Node> nodes) {
         this.nodes = nodes;
     }
+
+    public Node findNode(String nodeName){
+        if(!this.getNodes().contains(new Node(nodeName))){
+            return null;
+        }
+        return this.getNodes().stream().filter(node -> nodeName.equals(node.getNodeName())).findFirst().orElse(null);
+    }
 }
