@@ -8,9 +8,8 @@ import net.wancom.json.JSONLink;
 import net.wancom.json.JSONNode;
 import net.wancom.json.JSONUtil;
 
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Created by farzadha@kth.se on 2017-12-14.
@@ -47,32 +46,53 @@ public class AppGraphMain {
         Graph graph = Graph.initGraph();
         List<JSONNode> jsonNodes = country.getNodes();
         List<JSONLink> jsonLinks = country.getLinks();
-        Iterator<JSONNode> jsonNodeIterator = jsonNodes.iterator();
-        Iterator<JSONLink> jsonLinkIterator = jsonLinks.iterator();
-        if(jsonNodeIterator == null ){
+
+        if(jsonNodes == null || jsonNodes.isEmpty()){
             throw new WanComException("The system cannot fetch any node from json file. Please control " + country + ".json first and run the application again.");
         }
-        if(jsonLinkIterator == null ){
+        if(jsonLinks == null || jsonLinks.isEmpty()){
             throw new WanComException("The system cannot fetch any link from json file. Please control " + country + ".json first and run the application again.");
         }
-        
-        //Uncomplete method. Should complete it.
+
+        List<Node> nodes = initializeAllNodes(jsonNodes, jsonLinks);
+
+        return graph;
+    }
+
+    //TODO complete the method: we should fill all nodes that is the neighbor of current node.
+    //
+    private static List<Node> initializeAllNodes(List<JSONNode> jsonNodes, List<JSONLink> jsonLinks) {
+        List<Node> nodes = new ArrayList<>();
+        Iterator<JSONNode> jsonNodeIterator = jsonNodes.iterator();
+        //initialize all nodes with longtitude and latitude and name.
         while (jsonNodeIterator.hasNext()){
             JSONNode jsonNode = jsonNodeIterator.next();
             String jsonNodeId = jsonNode.getId();
             Node node = new Node(jsonNodeId);
-            jsonLinkIterator = jsonLinks.iterator();
-            //We have to find all nearest adjacency of above node via link list we have.
-            while (jsonLinkIterator.hasNext()){
-                JSONLink jsonLink = jsonLinkIterator.next();
-                String source = jsonLink.getSource();
-                //source in jsonLink is the same as jsonNode id.
-                if (source!=null && source.trim().equalsIgnoreCase(jsonNodeId.trim())){
-                    
-                }
+            node.setLatitude(jsonNode.getLatitude());
+            node.setLongtitude(jsonNode.getLongitude());
+            node.setName(jsonNodeId);
+            if(!nodes.contains(node)) {
+                nodes.add(node);
             }
         }
 
-        return graph;
+        //We have to find all nearest adjacency of above node via link list we have
+        // and fill immediateNeighborNodes
+        Map<String, List<JSONLink>> jsonLinkWithSameSource
+                = jsonLinks.stream().collect(Collectors.groupingBy(jl -> jl.getSource()));
+
+        Iterator<String> allSource = jsonLinkWithSameSource.keySet().iterator();
+        while(allSource.hasNext()){
+            String source = allSource.next();
+            List<JSONLink> jlinksWithJNodeIdAsSource = jsonLinkWithSameSource.get(source);
+            for (JSONLink jsonLink : jlinksWithJNodeIdAsSource) {
+                String target = jsonLink.getTarget();
+                //method is not complete yet.
+                //The though is to find the target node (nearest adjacency to source here) and put in the source node.
+            }
+        }
+
+        return null;
     }
 }
