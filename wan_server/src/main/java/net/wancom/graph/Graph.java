@@ -1,17 +1,19 @@
 package net.wancom.graph;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 /**
  * We have a Graph that is a set of nodes.
+ *
  * @see {@link Node}
  */
 public class Graph {
 
     private Set<Node> nodes;
 
-    private Graph(){
+    private Graph() {
         this.nodes = new HashSet<>();
     }
 
@@ -32,17 +34,11 @@ public class Graph {
         this.nodes = nodes;
     }
 
-    public Node findNode(String nodeName){
-        if(!hasNode(nodeName)){
-            return null;
-        }
-        return this.getNodes().stream().filter(node -> nodeName.equals(node.getNodeName())).findFirst().orElse(null);
+    public Node findNode(String nodeName) {
+        return this.nodes.stream().filter(n -> nodeName.equals(n.getNodeName())).findFirst().orElse(null);
     }
 
-    public boolean hasNode(String nodeName){
-        if(nodeName==null || !this.getNodes().contains(new Node(nodeName))){
-            return false;
-        }
-        return true;
+    public void addAllNodes(List<Node> nodes) {
+        this.nodes = new HashSet<>(nodes);
     }
 }
