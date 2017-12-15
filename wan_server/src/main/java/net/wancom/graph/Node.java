@@ -10,7 +10,7 @@ import java.util.Map;
  * Each Node in a graph will be an object of this class.
  */
 
-public class Node {
+public class Node{
     // Name of the Node
     private String nodeName;
     private double longtitude;
@@ -93,4 +93,13 @@ public class Node {
         return getNodeName().equals(node.getNodeName());
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "nodeName='" + nodeName + '\'' +
+                ", longtitude=" + longtitude +
+                ", latitude=" + latitude +
+                ", cost=" + cost +
+                '}';
+    }
 }
