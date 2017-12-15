@@ -9,7 +9,11 @@ import net.wancom.json.JSONLink;
 import net.wancom.json.JSONNode;
 import net.wancom.json.JSONUtil;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Scanner;
 import java.util.stream.Collectors;
 
 /**
@@ -27,24 +31,26 @@ public class AppGraphMain {
         try {
             JSONCountry country = JSONUtil.unmarshalJsonCountry(strCountry);
             Graph graph = createTheGraph(country);
-            if(!graph.hasNode(source)){
+            Node sourceNode = graph.findNode(source);
+            if (sourceNode == null) {
                 //TODO code should be better for UI :)
                 System.out.println("The source is not in the graph. Try another source next time.");
                 return;
             }
-            Node sourceNode = graph.findNode(source);
-            Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
+            graph = Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
 
             System.out.println("Please enter your target to find the shortest path and cost: ");
             String target = keyboard.nextLine();
-            if(!graph.hasNode(target)){
+            Node targetNode = graph.findNode(target);
+            if (targetNode == null) {
                 //TODO code should be better for UI :)
                 System.out.println("The target is not in the graph. Try another target next time.");
                 return;
             }
-            Node targetNode = graph.findNode(target);
             System.out.println("The shortest path's cost is " + targetNode.getCost());
-            System.out.println("The shortest path is " + targetNode.getShortestPath().toString());
+            List<Node> shortestPath = targetNode.getShortestPath();
+            String shortestPathAsString = shortestPath.stream ().map (node -> node.toString ()).collect (Collectors.joining ("-<<::>>-"));
+            System.out.println("The shortest path is " + shortestPathAsString);
         } catch (WanComException we) {
             System.out.println("There is a problem (finding the file or parsing the json) and graph cannot be created: " + we.getMessage());
             we.printStackTrace();
@@ -75,11 +81,8 @@ public class AppGraphMain {
         }
 
         List<Node> nodes = initializeAllNodes(jsonNodes, jsonLinks);
-        if(nodes!=null && !nodes.isEmpty()){
-            Iterator<Node> nodesIterator = nodes.iterator();
-            while (nodesIterator.hasNext()) {
-                graph.addNode(nodesIterator.next());
-            }
+        if (nodes != null && !nodes.isEmpty()) {
+            graph.addAllNodes(nodes);
         }
 
         return graph;
