@@ -16,7 +16,7 @@ import org.json.simple.parser.ParseException;
 
 
 /**
- * Hello world!
+ * Main class from which the server is run
  *
  */
 public class App {
@@ -25,6 +25,7 @@ public class App {
     staticFiles.location("/public"); // Static files
     get("/hello", (request, response) -> "Hello guys!");
     System.out.println("Server listening on port 4567");
+    
     post("/senddata", (request, response) -> {
       System.out.println("data received: " + request.body());
 
@@ -33,7 +34,6 @@ public class App {
       try {
         Object obj = parser.parse(request.body());
         JSONObject jsonObject = (JSONObject) obj;
-        //Graph g = graphFromJSONTopologies(jsonObject, Integer.valueOf(jsonObject.get("countryId").toString()));
         Graph g = graphFromJSONTopology(jsonObject);
         g.dijkstra(jsonObject.get("src").toString());
         shortestPath = g.printPath(jsonObject.get("dst").toString());
@@ -43,13 +43,7 @@ public class App {
       return shortestPath;
     });
   }
-
-
-  /*
-   * Takes one of these topologies as a JSON object:
-   * https://gits-15.sys.kth.se/iaq/WANCom/commit/b434726fa46919c409ea1a2f1304fcb1b6535e62
-   * And return a Graph object for running Dijkstra against it
-   */
+  
   private static Graph graphFromJSONTopology(JSONObject jsonObject) {
     List<Graph.Edge> GRAPH = new ArrayList<Graph.Edge>();
     JSONArray nodes_list = new JSONArray();

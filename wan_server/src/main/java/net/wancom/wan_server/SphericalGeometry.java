@@ -114,6 +114,11 @@ public class SphericalGeometry {
     }
   }
   
+  /*
+   * This function is very similar, unless it is not designed for testing,
+   * but instead returns the coordinates of the point(s) of intersection
+   * as a list of Coordinate objects (this list contains 0, 1 or 2 elements)
+   */
   public static List<Coordinates> intersectionPoint(Coordinates coords_center, Coordinates coords_second_point,
       Coordinates coords_third_point, double max_distance) {
     
