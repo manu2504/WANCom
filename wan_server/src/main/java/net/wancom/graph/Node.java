@@ -1,4 +1,4 @@
-package net.wancom.fhb.wan_server;
+package net.wancom.graph;
 
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -10,9 +10,11 @@ import java.util.Map;
  * Each Node in a graph will be an object of this class.
  */
 
-public class Node {
+public class Node{
     // Name of the Node
     private String nodeName;
+    private double longtitude;
+    private double latitude;
 
     // The shortest path from the source Node (when we run Dijkstra algorith through a source)
     // to current Node - this (include all nodes between source and destination)
@@ -39,6 +41,22 @@ public class Node {
 
     public void setName(String name) {
         this.nodeName = name;
+    }
+
+    public double getLongtitude() {
+        return longtitude;
+    }
+
+    public void setLongtitude(double longtitude) {
+        this.longtitude = longtitude;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
     }
 
     public List<Node> getShortestPath() {
@@ -75,4 +93,13 @@ public class Node {
         return getNodeName().equals(node.getNodeName());
     }
 
+    @Override
+    public String toString() {
+        return "Node{" +
+                "nodeName='" + nodeName + '\'' +
+                ", longtitude=" + longtitude +
+                ", latitude=" + latitude +
+                ", cost=" + cost +
+                '}';
+    }
 }

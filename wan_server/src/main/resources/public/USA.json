@@ -1,298 +1,298 @@
 {
     "nodes": [
         {
-            "Latitude": 36.17497, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 36.17497, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Las Vegas", 
-            "Longitude": -115.13722
+            "longitude": -115.13722
         }, 
         {
-            "Latitude": 39.95234, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 39.95234, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Philadelphia", 
-            "Longitude": -75.16379
+            "longitude": -75.16379
         }, 
         {
-            "Latitude": 39.73915, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 39.73915, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Denver", 
-            "Longitude": -104.9847
+            "longitude": -104.9847
         }, 
         {
-            "Latitude": 32.78306, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 32.78306, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Dallas", 
-            "Longitude": -96.80667
+            "longitude": -96.80667
         }, 
         {
-            "Latitude": 49.24966, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 49.24966, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Vancouver", 
-            "Longitude": -123.11934
+            "longitude": -123.11934
         }, 
         {
-            "Latitude": 51.05011, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 51.05011, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Calgary", 
-            "Longitude": -114.08529
+            "longitude": -114.08529
         }, 
         {
-            "Latitude": 37.77493, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 37.77493, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "San Francisco", 
-            "Longitude": -122.41942
+            "longitude": -122.41942
         }, 
         {
-            "Latitude": 29.95465, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 29.95465, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "New Orleans", 
-            "Longitude": -90.07507
+            "longitude": -90.07507
         }, 
         {
-            "Latitude": 38.62727, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 38.62727, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "St Louis", 
-            "Longitude": -90.19789
+            "longitude": -90.19789
         }, 
         {
-            "Latitude": 39.76838, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 39.76838, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Indianapolis", 
-            "Longitude": -86.15804
+            "longitude": -86.15804
         }, 
         {
-            "Latitude": 42.33143, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 42.33143, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Detroit", 
-            "Longitude": -83.04575
+            "longitude": -83.04575
         }, 
         {
-            "Latitude": 33.44838, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 33.44838, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Phoenix", 
-            "Longitude": -112.07404
+            "longitude": -112.07404
         }, 
         {
-            "Latitude": 40.44062, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 40.44062, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Pittsburgh", 
-            "Longitude": -79.99589
+            "longitude": -79.99589
         }, 
         {
-            "Latitude": 30.26715, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 30.26715, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Austin", 
-            "Longitude": -97.74306
+            "longitude": -97.74306
         }, 
         {
-            "Latitude": 32.71533, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 32.71533, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "San Diego", 
-            "Longitude": -117.15726
+            "longitude": -117.15726
         }, 
         {
-            "Latitude": 38.89511, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 38.89511, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Washington, DC", 
-            "Longitude": -77.03637
+            "longitude": -77.03637
         }, 
         {
-            "Latitude": 41.76371, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 41.76371, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Hartford", 
-            "Longitude": -72.68509
+            "longitude": -72.68509
         }, 
         {
-            "Latitude": 45.50884, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 45.50884, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Montreal", 
-            "Longitude": -73.58781
+            "longitude": -73.58781
         }, 
         {
-            "Latitude": 34.05223, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 34.05223, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Los Angeles", 
-            "Longitude": -118.24368
+            "longitude": -118.24368
         }, 
         {
-            "Latitude": 42.98339, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 42.98339, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "London", 
-            "Longitude": -81.23304
+            "longitude": -81.23304
         }, 
         {
-            "Latitude": 33.749, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 33.749, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Atlanta", 
-            "Longitude": -84.38798
+            "longitude": -84.38798
         }, 
         {
-            "Latitude": 30.33218, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 30.33218, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Jacksonville", 
-            "Longitude": -81.65565
+            "longitude": -81.65565
         }, 
         {
-            "Latitude": 43.70011, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 43.70011, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Toronto", 
-            "Longitude": -79.4163
+            "longitude": -79.4163
         }, 
         {
-            "Latitude": 41.85003, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 41.85003, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Chicago", 
-            "Longitude": -87.65005
+            "longitude": -87.65005
         }, 
         {
-            "Latitude": 25.77427, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 25.77427, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Miami", 
-            "Longitude": -80.19366
+            "longitude": -80.19366
         }, 
         {
-            "Latitude": 28.53834, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 28.53834, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Orlando", 
-            "Longitude": -81.37924
+            "longitude": -81.37924
         }, 
         {
-            "Latitude": 39.11417, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 39.11417, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Kansas City", 
-            "Longitude": -94.62746
+            "longitude": -94.62746
         }, 
         {
-            "Latitude": 45.41117, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 45.41117, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Ottawa", 
-            "Longitude": -75.69812
+            "longitude": -75.69812
         }, 
         {
-            "Latitude": 35.7721, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 35.7721, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Raleigh", 
-            "Longitude": -78.63861
+            "longitude": -78.63861
         }, 
         {
-            "Latitude": 43.4501, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 43.4501, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Kitchener", 
-            "Longitude": -80.48299
+            "longitude": -80.48299
         }, 
         {
-            "Latitude": 44.646, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 44.646, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Halifax", 
-            "Longitude": -63.57333
+            "longitude": -63.57333
         }, 
         {
-            "Latitude": 39.29038, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 39.29038, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Baltimore", 
-            "Longitude": -76.61219
+            "longitude": -76.61219
         }, 
         {
-            "Latitude": 29.76328, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 29.76328, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Houston", 
-            "Longitude": -95.36327
+            "longitude": -95.36327
         }, 
         {
-            "Latitude": 42.35843, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 42.35843, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Boston", 
-            "Longitude": -71.05977
+            "longitude": -71.05977
         }, 
         {
-            "Latitude": 53.55014, 
-            "Country": "Canada", 
-            "Internal": 1, 
+            "latitude": 53.55014, 
+            "country": "Canada", 
+            "internal": 1, 
             "id": "Edmonton", 
-            "Longitude": -113.46871
+            "longitude": -113.46871
         }, 
         {
-            "Latitude": 42.88645, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 42.88645, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Buffalo", 
-            "Longitude": -78.87837
+            "longitude": -78.87837
         }, 
         {
-            "Latitude": 44.97997, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 44.97997, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Minneapolis", 
-            "Longitude": -93.26384
+            "longitude": -93.26384
         }, 
         {
-            "Latitude": 40.71427, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 40.71427, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "New York", 
-            "Longitude": -74.00597
+            "longitude": -74.00597
         }, 
         {
-            "Latitude": 40.76078, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 40.76078, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Salt Lake City", 
-            "Longitude": -111.89105
+            "longitude": -111.89105
         }, 
         {
-            "Latitude": 41.4995, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 41.4995, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Cleveland", 
-            "Longitude": -81.69541
+            "longitude": -81.69541
         }, 
         {
-            "Latitude": 45.52345, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 45.52345, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Portland", 
-            "Longitude": -122.67621
+            "longitude": -122.67621
         }, 
         {
-            "Latitude": 47.60621, 
-            "Country": "United States", 
-            "Internal": 1, 
+            "latitude": 47.60621, 
+            "country": "United States", 
+            "internal": 1, 
             "id": "Seattle", 
-            "Longitude": -122.33207
+            "longitude": -122.33207
         }
     ], 
     "links": [
