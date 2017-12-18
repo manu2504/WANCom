@@ -21,8 +21,7 @@ import static spark.Spark.*;
 
 
 /**
- * Hello world!
- *
+ * Main class from which the server is run
  */
 public class App {
  
