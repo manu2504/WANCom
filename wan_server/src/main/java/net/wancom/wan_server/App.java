@@ -16,8 +16,7 @@ import org.json.simple.parser.ParseException;
 
 
 /**
- * Hello world!
- *
+ * Main class from which the server is run
  */
 public class App {
  
@@ -55,7 +54,7 @@ public class App {
     JSONArray nodes_list = new JSONArray();
     JSONArray links_list = new JSONArray();
     Map<String, JSONObject> mappedNodes = new HashMap<String, JSONObject>();
-    
+
     nodes_list = (JSONArray) jsonObject.get("nodes");
     links_list = (JSONArray) jsonObject.get("links");
 

@@ -83,7 +83,7 @@
 		  
       var countries = ["USA", "China", "Germany", "France", "Finland"];
       
-      $.when( // When all the JSOn files are loaded...
+      $.when( // When all the JSON files are loaded...
           getJSON('USA.json'),
           getJSON('China.json'),
           getJSON('Germany.json'),
@@ -118,11 +118,11 @@
         var topo = topos[topoId];
         nodes[topoId] = {};
         for (var i = 0; i < topo.nodes.length; i++) {
-          var Lat = topo.nodes[i].Latitude;
-          var Lng = topo.nodes[i].Longitude;
+          var Lat = topo.nodes[i].latitude;
+          var Lng = topo.nodes[i].longitude;
           var coordinates = {lat: Lat, lng: Lng};
           var label = topo.nodes[i].id;
-          var country = topo.nodes[i].Country;
+          var country = topo.nodes[i].country;
 
           nodes[topoId][label] = coordinates;
 
