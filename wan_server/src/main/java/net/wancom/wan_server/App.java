@@ -68,10 +68,10 @@ public class App {
       JSONObject link = (JSONObject) linkObj;
       JSONObject source = mappedNodes.get(link.get("source").toString());
       JSONObject target = mappedNodes.get(link.get("target").toString());
-      double srcLatitude = Double.parseDouble(source.get("Latitude").toString());
-      double srcLongitude = Double.parseDouble(source.get("Longitude").toString());
-      double dstLatitude = Double.parseDouble(target.get("Latitude").toString());
-      double dstLongitude = Double.parseDouble(target.get("Longitude").toString());
+      double srcLatitude = Double.parseDouble(source.get("latitude").toString());
+      double srcLongitude = Double.parseDouble(source.get("longitude").toString());
+      double dstLatitude = Double.parseDouble(target.get("latitude").toString());
+      double dstLongitude = Double.parseDouble(target.get("longitude").toString());
       int distance = SphericalGeometry.getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
 
       GRAPH.add( j, new Graph.Edge(source.get("id").toString(), target.get("id").toString(), distance) );
