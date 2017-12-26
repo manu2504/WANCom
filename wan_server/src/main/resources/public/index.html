@@ -222,8 +222,10 @@
         var input1 = $(":input[name='fname']");
         var input2 = $(":input[name='fname2']");
         if (input1.val() === '' || input2.val() === '') {
-          $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
-          return;
+          input1.val('Paris, France');
+          input2.val('Marseille, France');
+          //$('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
+          //return;
         }
         countryId = input1.val().substr( input1.val().lastIndexOf(',') + 2 );
         // Special cases

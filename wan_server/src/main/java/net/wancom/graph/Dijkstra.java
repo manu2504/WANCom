@@ -65,7 +65,10 @@ public class Dijkstra {
         if (sourceCost + edgeCost < evaluationNode.getCost()) {
             evaluationNode.setCost(sourceCost + edgeCost);
             LinkedList<Node> shortestPath = new LinkedList<>(sourceNode.getShortestPath());
-            shortestPath.add(sourceNode);
+            if (shortestPath.isEmpty()) {
+              shortestPath.add(sourceNode);
+            }
+            shortestPath.add(evaluationNode);
             evaluationNode.setShortestPath(shortestPath);
         }
     }

@@ -7,6 +7,7 @@ import java.util.Map;
 
 public class SphericalGeometry {
 
+  // distance is in km
   public static int getDistance(double lat1, double lon1, double lat2, double lon2) {
     double theta = lon1 - lon2;
     double dist = Math.sin(degreeToRadiens(lat1)) * Math.sin(degreeToRadiens(lat2))

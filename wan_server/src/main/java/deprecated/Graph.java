@@ -1,4 +1,4 @@
-package net.wancom.wan_server;
+package deprecated;
 
 import java.util.HashMap;
 import java.util.List;
@@ -119,8 +119,10 @@ public class Graph {
     public Vertex previous = null;
     public final Map<Vertex, Integer> neighbours = new HashMap<Vertex, Integer>();
 
-    public Vertex(String name) {
+    public Vertex(String name/*, double lat, double lng*/) {
       this.name = name;
+      //this.latitude = lat;
+      //this.longitude = lng;
     }
 
     @SuppressWarnings("unchecked")

@@ -5,6 +5,8 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.json.simple.JSONArray;
+
 
 /**
  * Each Node in a graph will be an object of this class.
@@ -16,9 +18,11 @@ public class Node{
     private double longtitude;
     private double latitude;
 
-    // The shortest path from the source Node (when we run Dijkstra algorith through a source)
+    // The shortest path from the source Node (when we run Dijkstra algorithm through a source)
     // to current Node - this (include all nodes between source and destination)
     private List<Node> shortestPath = new LinkedList<>();
+    
+    private JSONArray shortestPathAsJSONArray;
 
     //Distance between the node and source node, default value is the MAX_VALUE until we calcualte the real cost
     private Integer cost = Integer.MAX_VALUE;
@@ -43,11 +47,11 @@ public class Node{
         this.nodeName = name;
     }
 
-    public double getLongtitude() {
+    public double getLongitude() {
         return longtitude;
     }
 
-    public void setLongtitude(double longtitude) {
+    public void setLongitude(double longtitude) {
         this.longtitude = longtitude;
     }
 
@@ -62,11 +66,20 @@ public class Node{
     public List<Node> getShortestPath() {
         return shortestPath;
     }
+    
+    @SuppressWarnings("unchecked")
+    public JSONArray getShortestPathAsJSONArray() {
+      shortestPathAsJSONArray = new JSONArray();
+      for (Node elt : shortestPath) {
+        shortestPathAsJSONArray.add(elt.getNodeName());
+      }
+      return shortestPathAsJSONArray;
+    }
 
     public void setShortestPath(List<Node> shortestPath) {
         this.shortestPath = shortestPath;
     }
-
+    
     public Integer getCost() {
         return cost;
     }
