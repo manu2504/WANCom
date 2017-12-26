@@ -40,7 +40,6 @@ public class App {
         Object obj = parser.parse(request.body());
         JSONObject jsonObject = (JSONObject) obj;
         Graph graph = graphFromJSONTopology(jsonObject);
-        System.out.println("Hey 1!");
         Node sourceNode = graph.findNode(jsonObject.get("src").toString());
         if (sourceNode == null) {
           //How should application handle when user inserts a source not available!
@@ -73,7 +72,6 @@ public class App {
     JSONArray linksList;
     List<Node> nodes;
     Map<String, Node> mapNodes = new HashMap<>();
-    System.out.println("hi!");
     Graph graph = Graph.initGraph();
 
     nodesList = (JSONArray) jsonObject.get("nodes");
@@ -112,12 +110,11 @@ public class App {
     // END: add all the links to the graph
     
     nodes = new ArrayList<>(mapNodes.values());
-    System.out.println(nodes.get(1).getImmediateNeighborNodes().toString());
     
     graph.addAllNodes(nodes);
     return graph;
   }
-  /*
+  /* Implementation used for Ibra's implementation (deprecated.Graph)
   private static Graph graphFromJSONTopology(JSONObject jsonObject) {
     List<Graph.Edge> GRAPH = new ArrayList<Graph.Edge>();
     JSONArray nodes_list;
