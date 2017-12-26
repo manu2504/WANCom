@@ -119,10 +119,8 @@ public class Graph {
     public Vertex previous = null;
     public final Map<Vertex, Integer> neighbours = new HashMap<Vertex, Integer>();
 
-    public Vertex(String name/*, double lat, double lng*/) {
+    public Vertex(String name) {
       this.name = name;
-      //this.latitude = lat;
-      //this.longitude = lng;
     }
 
     @SuppressWarnings("unchecked")
