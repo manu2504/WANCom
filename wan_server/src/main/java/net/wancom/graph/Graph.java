@@ -3,7 +3,6 @@ package net.wancom.graph;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
-
 /**
  * We have a Graph that is a set of nodes.
  *

@@ -1,4 +1,4 @@
-package net.wancom.wan_server;
+package deprecated.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashMap;

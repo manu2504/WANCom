@@ -1,4 +1,4 @@
-package deprecated;
+package deprecated.dijsktra;
 
 import java.util.HashMap;
 import java.util.List;
@@ -145,4 +145,38 @@ public class Graph {
       return Integer.compare(distance, other.distance);
     }
   }
+
+  /* Implementation used for Ibra's implementation (deprecated.Graph)
+  public static Graph graphFromJSONTopology(JSONObject jsonObject) {
+    List<Graph.Edge> GRAPH = new ArrayList<Graph.Edge>();
+    JSONArray nodes_list;
+    JSONArray links_list;
+    Map<String, JSONObject> mappedNodes = new HashMap<String, JSONObject>();
+
+    nodes_list = (JSONArray) jsonObject.get("nodes");
+    links_list = (JSONArray) jsonObject.get("links");
+
+    for (Object tmpNode : nodes_list) {
+      JSONObject tmpNode1 = (JSONObject) tmpNode;
+      mappedNodes.put(tmpNode1.get("id").toString(), tmpNode1);
+    }
+
+    int j = 0;
+    for (Object linkObj : links_list) {
+      JSONObject link = (JSONObject) linkObj;
+      JSONObject source = mappedNodes.get(link.get("source").toString());
+      JSONObject target = mappedNodes.get(link.get("target").toString());
+      double srcLatitude = Double.parseDouble(source.get("latitude").toString());
+      double srcLongitude = Double.parseDouble(source.get("longitude").toString());
+      double dstLatitude = Double.parseDouble(target.get("latitude").toString());
+      double dstLongitude = Double.parseDouble(target.get("longitude").toString());
+      int distance = SphericalGeometry.getDistance(srcLatitude, srcLongitude, dstLatitude, dstLongitude);
+
+      GRAPH.add( j, new Graph.Edge(source.get("id").toString(), target.get("id").toString(), distance) );
+      j++;
+    }
+
+    Graph g = new Graph(GRAPH);
+    return g;
+  }*/
 }

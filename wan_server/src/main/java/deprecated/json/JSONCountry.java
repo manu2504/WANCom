@@ -1,4 +1,4 @@
-package net.wancom.json;
+package deprecated.json;
 
 import java.util.List;
 
