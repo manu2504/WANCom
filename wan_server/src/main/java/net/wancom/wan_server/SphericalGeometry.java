@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import deprecated.algorithm.Coordinates;
+
 public class SphericalGeometry {
 
   // distance is in km
