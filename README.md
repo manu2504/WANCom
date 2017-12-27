@@ -1,10 +1,10 @@
-The purpose of this project is to build and Interactive tool able to suggest topology improvements in Wide Area Networks. The goal is to improve end-to-end latency between any pair of nodes in the network.
+The **purpose of this project** is to build and **interactive tool** able to suggest topology improvements in Wide Area Networks. The goal is to improve average end-to-end latency between any pair of nodes in the network.
 
 During the first phase of this project, we analyzed data retrieved from measurements (produced by traceroute) performed among multiple geo-distributed datacenters of Amazon EC2.
 
 What we could analyze, is that the network latency is closely related to the geographical distance.
 
-Our goal has thus been to design an Expert Change Infrastructure System (EICS) that suggests network topology improvements by suggesting new nodes to add to the network.
+Our goal has thus been to design an **Expert Change Infrastructure System (EICS)** that suggests network topology improvements by suggesting new nodes to add to the network.
 
 To achieve it, we collected data from open-source GML datasets containing the national network topologies for five countries (USA, Finland, China, Germany, France).
 
@@ -23,17 +23,19 @@ The EICS is based on the following algorithm:
 4. Repeat steps 2 and 3 for how many new nodes have been requested.
 5. The network is returned to the user with network improvements highlighted on the map (and distances' improvements given to the user)
 
-To get set up with git and the code review tool we used, cf. "GIT & CR setups.md"
 # Running the server
 Our client-side visualization tool is served by the server, whereas the EICS is run on the server side. The server is written in Java. You thus need to have Java 8 installed on your machine.
 ## Open the wan_server Java project
 Open from your favorite Java IDE the project whose root is wan_server (at the root of the folder).
 The server should be running at localhost:4567
 
-You can now use the Visualisation tool as follows:
+You can now use the visualisation tool as follows:
 1. From there, you can zoom on one network topology, eg. USA, and select two nodes.
 2. Then, behind the world map, the dashboard allows you to request the shortest path between these two nodes.
 3. You can see the result of Dijkstra's algorithm displayed on the map.
 4. Now comes into play the EICS. You can request an improved graph, after having selected how many new nodes can be added to this new graph, and selected what is the maximum distance allowed for new links added to the network.
 
 An other feature could be how precise is the step between two potential locations, in order to be able to make more accurate choices for the new nodes.
+
+# Help
+To get set up with git and the code review tool we used, cf. "GIT & CR setups.md"
