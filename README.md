@@ -13,6 +13,7 @@ We then converted this GML data to JSON and displayed it onto a world map (using
 Our expert system has several entry parameters:
 1. the number of new nodes that can be added into the network
 2. the maximal distance of the new links that can be added into the network
+
 The EICS is based on the following algorithm:
 0. Compute the current total latency between all pair of nodes in the studied network topology, by running Dijkstra's algorithm for each pair of nodes.
 1. Generate a list of locations where a new node could be added in the national network topology. This list is generated based on a fixed distance between each location.
