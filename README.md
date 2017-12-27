@@ -29,9 +29,11 @@ Our client-side visualization tool is served by the server, whereas the EICS is 
 ## Open the wan_server Java project
 Open from your favorite Java IDE the project whose root is wan_server (at the root of the folder).
 The server should be running at localhost:4567
-From there, you can zoom on one network topology, eg. USA, and select two nodes. Then, behind the world map, the dashboard allows you to request the shortest path between two nodes.
-You can see the result of Dijkstra's algorithm displayed on the map.
 
-Now comes into play the EICS. You can request an improved graph, after having selected how many new nodes can be added to this new graph, and selected what is the maximum distance allowed for new links added to the network.
+You can now use the Visualisation tool as follows:
+1. From there, you can zoom on one network topology, eg. USA, and select two nodes.
+2. Then, behind the world map, the dashboard allows you to request the shortest path between these two nodes.
+3. You can see the result of Dijkstra's algorithm displayed on the map.
+4. Now comes into play the EICS. You can request an improved graph, after having selected how many new nodes can be added to this new graph, and selected what is the maximum distance allowed for new links added to the network.
 
 An other feature could be how precise is the step between two potential locations, in order to be able to make more accurate choices for the new nodes.
