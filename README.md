@@ -17,11 +17,10 @@ Our expert system has several entry parameters:
 **The EICS is based on the following algorithm:**
 1. Compute the current total latency between all pair of nodes in the studied network topology, by running Dijkstra's algorithm for each pair of nodes.
 2. Generate a list of locations where a new node could be added in the national network topology. This list is generated based on a fixed distance between each location.
-3. For each potential candidate location, add a node to the network with this location, and,
-3.1 for any two nodes in the graph, create a link to this new node if it respects the constraint (ie. the maximum distance allowed for new links - the distance already used for previous new nodes added to the network), then compute the new total distance for any pair of nodes in the graph, by running the Dijkstra's algorithm for each of them. Store this value if it is better than the previously-computed ones, along with the new node's location and the total distances of new links added.
-4. At the end of step 3, we have the best new potential location for a new node; the EICS adds it to the network.
-5. Repeat steps 2 and 3 for how many new nodes have been requested.
-6. The network is returned to the user with network improvements highlighted on the map (and distances' improvements given to the user)
+3. For each potential candidate location, add a node to the network with this location, and for any two nodes in the graph, create a link to this new node if it respects the constraint (ie. the maximum distance allowed for new links - the distance already used for previous new nodes added to the network), then compute the new total distance for any pair of nodes in the graph, by running the Dijkstra's algorithm for each of them. Store this value if it is better than the previously-computed ones, along with the new node's location and the total distances of new links added.
+5. At the end of step 3, we have the best new potential location for a new node; the EICS adds it to the network.
+6. Repeat steps 2 and 3 for how many new nodes have been requested.
+7. The network is returned to the user with network improvements highlighted on the map (and distances' improvements given to the user)
 
 # Running the server
 Our client-side visualization tool is served by the server, whereas the EICS is run on the server side. The server is written in Java. You thus need to have Java 8 installed on your machine.
