@@ -25,7 +25,7 @@ public class NewGraph {
   public Graph addBestNewNode(Graph graph, String country, int constraint) throws FileNotFoundException, IOException {
     JSONObject jsonObject = JSONUtils.JSONObjectFromJSONFile(country);
     JSONArray nodesList = (JSONArray) jsonObject.get("nodes");
-    Map<String, Node> mapNodes = new HashMap<>();
+    Map<String, Node> mapNodes = new HashMap<>();//not necessary 
     for (int i=0; i<nodesList.size();i++){
       JSONObject nodeObject = (JSONObject) nodesList.get(i);
       Node node = new Node("this node"+i);
