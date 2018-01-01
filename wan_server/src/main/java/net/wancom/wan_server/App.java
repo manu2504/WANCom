@@ -2,6 +2,7 @@ package net.wancom.wan_server;
 
 import static spark.Spark.*;
 
+import net.wancom.eics.NewGraph;
 import org.json.simple.JSONObject;
 import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
@@ -33,7 +34,11 @@ public class App {
       try {
         Object obj = parser.parse(request.body());
         JSONObject jsonObject = (JSONObject) obj;
-        Graph graph = JSONUtils.graphFromJSONTopology(jsonObject);
+        String countryName= jsonObject.get("country").toString();
+        String filename = JSONUtils.NewLocationJSONFileName(countryName);
+        JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(filename);
+
+        Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
         String sourceNodeName = jsonObject.get("src").toString();
         Node sourceNode = graph.findNode(sourceNodeName);
         if (sourceNode == null) {
@@ -49,6 +54,11 @@ public class App {
 
         shortestPath = targetNode.getShortestPathAsJSONArray();
         System.out.println("Shortest path: " + ((JSONArray) shortestPath).toString());
+
+        Graph newGraph = NewGraph.addBestNewNode(graph,filename,500);
+        Dijkstra.calculateShortestPathFromSource(newGraph, sourceNode);
+
+
       } catch (ParseException e) {
         System.err.println("Parsing error");
       } catch (WanComException e) {
