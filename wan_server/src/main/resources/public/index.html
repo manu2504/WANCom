@@ -230,15 +230,16 @@
         if (countryId == "United States") countryId = "USA";
         if (countryId == "Switzerland") countryId = "France";
         if (countryId == "Canada") countryId = "USA";
-        var topo = topos[countryId];
-        topo['src'] = input1.val().substring( 0, input1.val().lastIndexOf(',') );
-        topo['dst'] = input2.val().substring( 0, input2.val().lastIndexOf(',') );
+        var request = {};
+        request['country'] = countryId;
+        request['src'] = input1.val().substring( 0, input1.val().lastIndexOf(',') );
+        request['dst'] = input2.val().substring( 0, input2.val().lastIndexOf(',') );
         // topo['cost'] = input3.val();
         
         $.ajax({
           method: "POST",
           url: "/senddata",
-          data: JSON.stringify(topos[countryId]),
+          data: JSON.stringify(request),
           dataType: 'json'
         })
         .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
