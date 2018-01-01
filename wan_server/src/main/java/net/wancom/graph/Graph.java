@@ -19,9 +19,13 @@ public class Graph {
     public static Graph initGraph() {
         return new Graph();
     }
-
+    //add node to graph
     public void addNode(Node node) {
         nodes.add(node);
+    }
+    //remove node from graph
+    public void removeNode(Node node){
+        nodes.remove(node);
     }
 
     // getters and setters
