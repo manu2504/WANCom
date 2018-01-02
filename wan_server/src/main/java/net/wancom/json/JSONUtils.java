@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -99,5 +100,43 @@ public class JSONUtils {
     
     graph.addAllNodes(nodes);
     return graph;
+  }
+  
+  /*
+   * Takes one of these topologies as a JSON object:
+   * https://gits-15.sys.kth.se/iaq/WANCom/commit/b434726fa46919c409ea1a2f1304fcb1b6535e62
+   * And return a Graph object for running Dijkstra against it
+   */
+  @SuppressWarnings("unchecked")
+  public static JSONObject JSONTopologyFromGraph(Graph graph) {
+    JSONObject jsonTopology = new JSONObject();
+    JSONArray nodesList = new JSONArray();
+    JSONArray linksList = new JSONArray();
+    JSONObject node = new JSONObject();
+    JSONObject link = new JSONObject();
+    Set<Node> nodesSet;
+    nodesSet = graph.getNodes();
+    List<Node> nodes = new ArrayList<>(nodesSet);
+    for (int i = 0; i < nodes.size(); i++) {
+      double lat = nodes.get(i).getLatitude();
+      double lng = nodes.get(i).getLongitude();
+      String nodeName = nodes.get(i).getNodeName();
+      Map<Node, Integer> immediateNeighborNodes = nodes.get(i).getImmediateNeighborNodes();
+      
+      for (Map.Entry<Node, Integer> entry : immediateNeighborNodes.entrySet()) {
+        link.put("source", nodeName);
+        link.put("target", entry.getKey().getNodeName());
+        linksList.add(link);
+        link.clear();
+      }
+      node.put("latitude", lat);
+      node.put("longitude", lng);
+      node.put("id", nodeName);
+      nodesList.add(node);
+    }
+    jsonTopology.put("nodes", nodesList);
+    jsonTopology.put("links", linksList);
+    
+    return jsonTopology;
   }
 }
