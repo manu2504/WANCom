@@ -42,7 +42,13 @@ public class JSONUtils {
     String path = classLoader.getResource("public/" + filename + ".json").getFile();
     return path;
   }
-  
+
+  public static String NewLocationJSONFileName(String filename){
+    ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+    String path = classLoader.getResource("public/new_locations/" + filename + ".json").getFile();
+    return path;
+  }
+
   public static File getJSONFile(String filename) {
     String path = getJSONFullFileName(filename);
     File jsonFile = new File(path);
