@@ -21,7 +21,7 @@ import net.wancom.json.JSONUtils;
 public class App {
  
   public static void main(String[] args) {
-    staticFiles.location("/public"); // Static files
+   staticFiles.location("/public"); // Static files
     get("/hello", (request, response) -> "Hello guys!");
     System.out.println("Server listening on port 4567");
     
@@ -29,17 +29,20 @@ public class App {
       System.out.println("data received: " + request.body());
 
       JSONParser parser = new JSONParser();
-      JSONArray shortestPath = null;
+      //JSONArray shortestPath = null;
+      JSONObject jsonResponse = null;
 
       try {
         Object obj = parser.parse(request.body());
         JSONObject jsonObject = (JSONObject) obj;
-        String countryName= jsonObject.get("country").toString();
-        String filename = JSONUtils.NewLocationJSONFileName(countryName);
-        JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(filename);
+        String countryName = jsonObject.get("country").toString();
+        /*String filename = JSONUtils.getJSONFileFullName(countryName);
+        System.out.println("filename " + filename);*/
+        JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
+        System.out.println(jsonTopology.toString());
 
         Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
-        String sourceNodeName = jsonObject.get("src").toString();
+        /*String sourceNodeName = jsonObject.get("src").toString();
         Node sourceNode = graph.findNode(sourceNodeName);
         if (sourceNode == null) {
           //How should application handle when user inserts a source not available!
@@ -54,10 +57,11 @@ public class App {
 
         shortestPath = targetNode.getShortestPathAsJSONArray();
         System.out.println("Shortest path: " + ((JSONArray) shortestPath).toString());
-
-        Graph newGraph = NewGraph.addBestNewNode(graph,filename,500);
-        Dijkstra.calculateShortestPathFromSource(newGraph, sourceNode);
-
+*/
+        Graph newGraph = NewGraph.addBestNewNode(graph, countryName, 700);
+        jsonResponse = JSONUtils.JSONTopologyFromGraph(newGraph);
+        System.out.println("newGraph " + jsonResponse);
+        //Dijkstra.calculateShortestPathFromSource(newGraph, sourceNode);
 
       } catch (ParseException e) {
         System.err.println("Parsing error");
@@ -65,7 +69,10 @@ public class App {
         System.err.println(e.getMessage());
       }
       
-      return shortestPath;
+      return jsonResponse;
     });
+    
+    /*post("/new_graph", (request, response) -> {
+    }*/
   }
 }

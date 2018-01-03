@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta charset="utf-8"/>
     <style>
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -46,8 +47,8 @@
       var map;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 2,
-          center: new google.maps.LatLng(2.8,-187.3),
+          zoom: 4, // (World : 2)
+          center: new google.maps.LatLng(63.330054, 26.493659), // World: new google.maps.LatLng(2.8,-187.3),
           mapTypeId: 'terrain'
         });
       }
@@ -70,6 +71,7 @@
 		      ...
 		    }
 		  */
+      
 		  var nodes = {};
       
 		  /* polylines =(same format as)= polylinesShowingShortestPaths = {
@@ -97,9 +99,11 @@
           topos["France"] = France[0];
           topos["Finland"] = Finland[0];
           
+          console.log(Finland[0]);
+          
           countries.map(function(country) {
             polylines[country] = [];
-            polylinesShowingShortestPaths[country] = [];
+            polylinesShowingShortestPaths[country] = []; 
             drawTopology(country);
           });
           add_UI();
@@ -139,10 +143,51 @@
           drawLink(source, target, topoId);
         }
       }
+      
+      function drawNewTopology(new_topo, countryName) {
+        console.log("calling drawNewTopology()");
+                  nodes["New_Topo"] = {};
+        for (var i = 0; i < new_topo.nodes.length; i++) {
+          console.log(new_topo.nodes[i].latitude);
+          console.log(new_topo.nodes[i].longitude);
+          var Lat = new_topo.nodes[i].latitude;
+          var Lng = new_topo.nodes[i].longitude;
+          var coordinates = {lat: Lat, lng: Lng};
+          var label = new_topo.nodes[i].id;
+          console.log("id"+new_topo.nodes[i].id);
+          
+          console.log("label"+label);
 
-      function drawLink(src, target, topoId) {       
-        var path = [nodes[topoId][src], nodes[topoId][target]];
+          nodes["New_Topo"][label] = coordinates;
+
+          var infowincontent = document.createElement('div');
+          var strong = document.createElement('strong');
+          strong.textContent = label + ", " + countryName;
+          infowincontent.appendChild(strong);     
+          addCircle(coordinates, map, infowincontent);
+        }
+
+        console.log(nodes);
+        for (var i = 0; i < new_topo.links.length; i++) {
+          var source = new_topo.links[i].source;
+          var target = new_topo.links[i].target;
+          drawLink(source, target, "New_Topo");
+        }
+      }
+      
+      function drawLink(src, target, topoId) {
+        if (topoId =="New_Topo") {
+          //console.log("src&target:", nodes[topoId][src], nodes[topoId][target]);
+        }
+        var path = new Array(2);
+        path[0] = nodes[topoId][src];
+        path[1] = nodes[topoId][target];
+
+        //var path = [nodes[topoId][src], nodes[topoId][target]];
         
+        console.log("path: "+path);
+        console.log("src&dst: "+src+ ","+target);
+
         polyline = new google.maps.Polyline({
           path: path,
           strokeColor: '#FFFF99',
@@ -242,11 +287,16 @@
           data: JSON.stringify(request),
           dataType: 'json'
         })
-        .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
-          console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
-          var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
+        .done(function( /*shortest_path*/ new_topology ) { // shortest_path is an array of nodes constituting the shortest path
+          console.log("JSON received successfully from the server:", JSON.stringify(new_topology));
+          /*var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
           $('#shortest_path').after($shortest_info);
-          highlightShortestPath(shortest_path, countryId);
+          highlightShortestPath(shortest_path, countryId);*/
+          topos["New_Topo"] = new_topology;
+          console.log("test")
+          polylines["New_Topo"] = [];
+          console.log("going to draw topology!");
+          drawNewTopology(new_topology, countryId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
