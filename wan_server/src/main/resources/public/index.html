@@ -43,16 +43,14 @@
   </head>
   <body>
     <div id="map"></div>
+
     
     <!-- Use of jQuery, a popular Javascript framework, is made in order to soften manipulation of HTML elements -->
     <script src="jquery-3.2.1.min.js"></script>
-
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
-    </script>
-
+    
     <script>
       var map;
+      var google;
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4, // (World : 2)
@@ -299,23 +297,27 @@
       }
     
       function request_shortest_path() {
+        // We remove errors previously displayed
+        $('#short_path_iface .error').remove();
+        
         console.log('shortestpath() called');
         var source_shortest_path = $(":input[name='src']").val();
         var dest_shortest_path = $(":input[name='dest']").val();
         if (source_shortest_path === '' || dest_shortest_path === '') {
-          $('<div>', { html: 'Please provide a source and a destination', class: 'error' }).after('#short_path_iface');
+          $('<div>', { html: 'Please provide a source and a destination', 'class': 'error' }).appendTo('#short_path_iface');
           return;
         }
         var countrySrcId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
-        var countryDstId = dest_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
+        var countryDstId = dest_shortest_path.substr( dest_shortest_path.lastIndexOf(',') + 2 );
         // Special cases
         var countries_input = [countrySrcId, countryDstId].map(function(country) {
           if (country == "United States") return "USA";
           if (country == "Canada") return "USA";
           if (country == "Switzerland") return "France";
+          return country;
         });
         if (countries_input[0] !== countries_input[1]) {
-          $('<div>', { html: 'Please choose a source and a destination in the same country', class: 'error' }).after('#short_path_iface');
+          $('<div>', { html: 'Please choose a source and a destination in the same country', class: 'error' }).appendTo('#short_path_iface');
           return;          
         }
         
@@ -335,7 +337,7 @@
           console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
           var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
           $('#shortest_path').after('#short_path_iface');
-          highlightShortestPath(shortest_path, countryId);
+          highlightShortestPath(shortest_path, countrySrcId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
@@ -475,6 +477,10 @@
         return rc;
       }
       
+    </script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
     </script>
   </body> 
 </html>
