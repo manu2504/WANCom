@@ -71,12 +71,19 @@ public class App {
                 Object obj = parser.parse(request.body());
                 JSONObject jsonObject = (JSONObject) obj;
                 String countryName = jsonObject.get("country").toString();
+                Integer maxCost = Integer.parseInt(jsonObject.get("max_cost").toString());
+                System.out.println("maxCost.getClass().getName()="+maxCost.getClass().getName());
+                if (countryName == "" ) {
+                    throw new WanComException("Missing input: countryName");
+                } else if (!(maxCost > 0)) {
+                    throw new WanComException("Missing input: cost");
+                }
 
                 JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
                 System.out.println(jsonTopology.toString());
 
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
-                Graph newGraph = NewGraph.addBestNewNode(graph, countryName, 700);
+                Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
                 jsonResponse = JSONUtils.JSONTopologyFromGraph(newGraph);
                 System.out.println("newGraph " + jsonResponse);
 

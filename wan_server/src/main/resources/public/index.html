@@ -22,10 +22,14 @@
         font-weight: bold;
         margin-bottom: auto;
       }
-      #header + div {
+      .iface + div {
         font-weight: bold;
         margin-top: 0.8em;
         margin-bottom: 0.5em;
+      }
+      .error {
+        font-weight: bold;
+        color: red;
       }
       select {
         margin-right: 0.5em;
@@ -124,7 +128,7 @@
         });
       }
       
-      function drawTopology(topo_Id, linksColor) {
+      function drawTopology(topo_Id) {
         var topo = topos[topo_Id];
         nodes[topo_Id] = {};
         for (var i = 0; i < topo.nodes.length; i++) {
@@ -133,6 +137,7 @@
           var coordinates = {lat: Lat, lng: Lng};
           var label = topo.nodes[i].id;
           var country = topo.nodes[i].country;
+          var isNewNode = topo.nodes[i].new || false;
 
           nodes[topo_Id][label] = coordinates;
 
@@ -140,13 +145,14 @@
           var strong = document.createElement('strong');
           strong.textContent = label + ", " + country;
           infowincontent.appendChild(strong);     
-          addCircle(coordinates, map, infowincontent);
+          addCircle(coordinates, map, infowincontent, isNewNode);
         }
 
         for (var i = 0; i < topo.links.length; i++) {
           var source = topo.links[i].source;
           var target = topo.links[i].target;
-          drawLink(source, target, topo_Id, linksColor);
+          var isNewLink = topo.links[i].new;
+          drawLink(source, target, topo_Id, isNewLink);
         }
       }
       
@@ -177,13 +183,16 @@
         }
       }*/
       
-      function drawLink(source, target, topoId, color) {
-        if (!color) {
-          color = '#FFFF99';
-        }
+      function drawLink(source, target, topoId, isNewLink) {
         var path = new Array(2);
         path[0] = nodes[topoId][source];
         path[1] = nodes[topoId][target];
+        
+        if (isNewLink) {
+          color = '#00e000';
+        } else {
+          color = '#FFFF99';
+        }
 
         polyline = new google.maps.Polyline({
           path: path,
@@ -195,15 +204,19 @@
         polylines[topoId].push(polyline);
       }
 
-      function addCircle(centerCoordinates, map, contentInfoWindow) {
+      function addCircle(centerCoordinates, map, contentInfoWindow, isNewNode) {
         if (map === undefined) {
           map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function's signature
         }
+        var color = '#FF0000';
+        if (isNewNode) {
+          color = 'black';
+        }
         var circle = new google.maps.Circle({
-          strokeColor: '#FF0000',
+          strokeColor: color,
           strokeOpacity: 0.8,
           strokeWeight: 2,
-          fillColor: '#FF0000',
+          fillColor: color,
           fillOpacity: 0.35,
           map: map,
           center: centerCoordinates,
@@ -236,41 +249,46 @@
         // Add a user dashboard below the map
         var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
         $('<label>Which country you want to highlight?</label>').appendTo($user_dashboard);
-        var $countryId = $('<select>', { id:'zoom_input', on: { blur: function() { zoom(); }, change: function() { zoom(); } } } );
+        var $countryId = $('<select>', { id:'zoom_input', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } } );
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($countryId);
         });
         $countryId.appendTo($user_dashboard);
-        $('<input type="checkbox" name="all" value="all" onclick="zoom(true);" checked>World<br>')
+        $('<input type="checkbox" name="all" value="all" onclick="zoom(null, true);" checked>World<br>')
                   .appendTo($user_dashboard);
         
         // Add input fields for requesting Shortest path
-        var $shortest_path_interface = $('<div>', { id: 'short_path_iface' }).appendTo($user_dashboard);
-        var $shortest_path_header = $('<div>', { html: '<p>Shortest path:</p>', id: 'header' } );
-        $shortest_path_header.appendTo($shortest_path_interface);
-        $source_node_label = $('<label for="src">Source node:</label>');
-        $dest_node_label = $('<label for="dest">Destination node:</label>');
-        $input_src = $('<input>', { type: "text", placeholder: "Click a red circle", name:"src" });
-        $input_dst = $('<input>', { type: "text", placeholder: "Click a red circle", name:"dest" });
-        $source_node_label .appendTo($shortest_path_interface);
-        $input_src         .appendTo($shortest_path_interface);
-        $dest_node_label   .appendTo($shortest_path_interface);
-        $input_dst         .appendTo($shortest_path_interface);
+        var $shortest_path_interface = $('<div>', { id: 'short_path_iface', class: 'iface' })
+                               .appendTo($user_dashboard);
+        var $shortest_path_header    = $('<div>', { html: '<p>Shortest path:</p>', id: 'header' } );
+        var $source_node_label       = $('<label for="src">Source node:</label>');
+        var $dest_node_label         = $('<label for="dest">Destination node:</label>');
+        var $src_input               = $('<input>', { type: "text", placeholder: "Click a red circle", name:"src" });
+        var $dst_input               = $('<input>', { type: "text", placeholder: "Click a red circle", name:"dest" });
+        $shortest_path_header  .appendTo($shortest_path_interface);
+        $source_node_label     .appendTo($shortest_path_interface);
+        $src_input             .appendTo($shortest_path_interface);
+        $dest_node_label       .appendTo($shortest_path_interface);
+        $dst_input             .appendTo($shortest_path_interface);
        
-        $req_sp_button = $('<button>', { html: 'Request shortest path' }).click(request_shortest_path);
-        $reset_sp_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_shortest_path_fields);
+        var $req_sp_button = $('<button>', { html: 'Request shortest path' }).click(request_shortest_path);
+        var $reset_sp_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_shortest_path_fields);
         $req_sp_button.appendTo($shortest_path_interface);
         $reset_sp_button.appendTo($shortest_path_interface);
         
         // Add input fields for requesting new graph
-        var $new_graph_interface = $('<div>', { id: 'new_graph_iface' }).appendTo($user_dashboard);
+        var $new_graph_interface = $('<div>', { id: 'new_graph_iface', class: 'iface' }).appendTo($user_dashboard);
         var $new_graph_header = $('<div>', { html: '<p>New graph (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
         $new_graph_header.appendTo($new_graph_interface);
-        $country_new_graph = $('<select>', { name: "newgraph"});
+        $country_new_graph = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } });
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($country_new_graph);
         });
         $country_new_graph.appendTo($new_graph_interface);
+        var $cost_label = $('<label for="src">Maximum cost:</label>');
+        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 700, name:"cost"/*, size:"4"*/});
+        $cost_label.appendTo($new_graph_interface);
+        $cost_input.appendTo($new_graph_interface);
        
         $req_button = $('<button>', { html: 'Request new graph' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);
@@ -281,7 +299,7 @@
         var source_shortest_path = $(":input[name='src']").val();
         var dest_shortest_path = $(":input[name='dest']").val();
         if (source_shortest_path === '' || dest_shortest_path === '') {
-          $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
+          $('<div>', { html: 'Please provide a source and a destination', class: 'error' }).after('#short_path_iface');
           return;
         }
         var countryId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
@@ -305,7 +323,7 @@
         .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
           console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
           var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
-          $('#shortest_path').after($shortest_info);
+          $('#shortest_path').after('#short_path_iface');
           highlightShortestPath(shortest_path, countryId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
@@ -321,9 +339,16 @@
       function request_new_graph() {
         console.log('newgraph() called');
         var country_name = $(":input[name='newgraph']").val();
+        var max_cost = $(":input[name='cost']").val();
+        
+        if (!max_cost) {
+          $('<div>', { html: 'Please specify a maximum cost (ie. maximum length of new links that can be built)', class: 'error' }).appendTo('#dashboard');
+          return;
+        }
         
         var request = {};
         request['country'] = country_name;
+        request['max_cost'] = max_cost;
         
         $.ajax({
           method: "POST",
@@ -336,20 +361,20 @@
           topos["New_Topo"] = new_topology;
           polylines["New_Topo"] = [];
           console.log("going to draw topology!");
-          drawTopology("New_Topo", "#00e000");
+          drawTopology("New_Topo");
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
             var errmsg = "Nothing received from the server: server down, or no Internet connection"; 
             alert( errmsg );
           } else {
-            alert( errorThrown ); console.log("errorThrown: ", errorThrown);
+            alert( errorThrown );
           }
         });
       }
       
       function reset_shortest_path_fields() {
-        $('#shortest_path input').val('');
+        $('#short_path_iface input').val('');
       }
       
       /*
@@ -372,12 +397,13 @@
       }
       window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
       */
-      function zoom(onWorld) {
+      function zoom(select, onWorld) {
         var country_selected;
         if (onWorld === true) {
           country_selected = 'World';
         } else {
-          country_selected = $( '#zoom_input option:selected' ).text();
+          country_selected = $(select).find( 'option:selected' ).text();
+          console.log('country_selected=' + country_selected);
         }
         map.setCenter(zoom_info[country_selected].center); // center on country selected
         map.setZoom(zoom_info[country_selected].zoom); // center with the level of zoom pre-defined for this country

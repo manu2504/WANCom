@@ -18,6 +18,7 @@ public class Node{
     private double longtitude;
     private double latitude;
     private String country;
+    private Boolean isNewNode = false;
 
     // The shortest path from the source Node (when we run Dijkstra algorithm through a source)
     // to current Node - this (include all nodes between source and destination)
@@ -34,6 +35,10 @@ public class Node{
 
     public void addImmediateNeighborsDestination(Node destination, int cost) {
         immediateNeighborNodes.put(destination, cost);
+    }
+    
+    public void removeImmediateNeighborsDestination(Node destination) {
+        immediateNeighborNodes.remove(destination);
     }
 
     public Node(String nodeName) {
@@ -71,6 +76,14 @@ public class Node{
 
     public void setCountry(String country) {
         this.country = country;
+    }
+
+    public Boolean getIsNewNode() {
+        return isNewNode;
+    }
+
+    public void setIsNewNode(Boolean isNewNode) {
+        this.isNewNode = isNewNode;
     }
 
     public List<Node> getShortestPath() {

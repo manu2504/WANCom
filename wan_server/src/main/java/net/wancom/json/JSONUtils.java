@@ -147,6 +147,7 @@ public class JSONUtils {
             double lng = node.getLongitude();
             String nodeName = node.getNodeName();
             String countryName = node.getCountry();
+            Boolean isNewnode = node.getIsNewNode();
             Map<Node, Integer> immediateNeighborNodes = node.getImmediateNeighborNodes();
             System.out.println("nodename = "+nodeName);
             for (Map.Entry<Node, Integer> entry : immediateNeighborNodes.entrySet()) {
@@ -154,6 +155,9 @@ public class JSONUtils {
                 JSONObject jsonLink = new JSONObject();
                 jsonLink.put("source", nodeName);
                 jsonLink.put("target", entry.getKey().getNodeName());
+                if (isNewnode || entry.getKey().getIsNewNode()) {
+                    jsonLink.put("new", true);
+                }
                 //System.out.println("neighbour for " + nodeName + ": "+ entry.getKey().getNodeName());
                 linksList.add(jsonLink);
             }
@@ -162,6 +166,7 @@ public class JSONUtils {
             jsonNode.put("longitude", lng);
             jsonNode.put("id", nodeName);
             jsonNode.put("country", countryName);
+            jsonNode.put("new", isNewnode);
             nodesList.add(jsonNode);
         }
         jsonTopology.put("nodes", nodesList);

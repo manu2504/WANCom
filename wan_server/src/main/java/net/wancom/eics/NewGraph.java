@@ -42,40 +42,44 @@ public class NewGraph {
             newNode.setLatitude(nodeLat);
             newNode.setLongitude(nodeLong);
             newNode.setCountry(country);
+            newNode.setIsNewNode(true);
             //mapNodes.put("newNode" +i,newNode); //this might not be necessary
             graph.addNode(newNode);
             
             // Adding links to the new node (test pair-by-pair)
             for (Node oldNode1 : oldNodes) {
                 //System.out.println("iteration oldNode1: "+oldNode1.getNodeName());
-                int cost = SphericalGeometry.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
+                int cost1 = SphericalGeometry.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
                         newNode.getLatitude(), newNode.getLongitude());
-                oldNode1.addImmediateNeighborsDestination(newNode, cost);
-                newNode.addImmediateNeighborsDestination(oldNode1, cost);
+                if (cost1 > constraint) continue;
+                oldNode1.addImmediateNeighborsDestination(newNode, cost1);
+                newNode.addImmediateNeighborsDestination(oldNode1, cost1);
                 for (Node oldNode2 : oldNodes) {
                     //System.out.println("iteration oldNode2 "+oldNode2.getNodeName());
                     if (oldNode2.equals(oldNode1)) continue;
-                    int newCost = SphericalGeometry.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
+                    int cost2 = SphericalGeometry.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
                             newNode.getLatitude(), newNode.getLongitude());
-                    int totalCost = cost + newCost;
+                    int totalCost = cost1 + cost2;
                     if (totalCost > constraint) {
                             continue;
                     }
                    
-                    oldNode2.addImmediateNeighborsDestination(newNode, newCost);
-                    newNode.addImmediateNeighborsDestination(oldNode2, newCost);
+                    oldNode2.addImmediateNeighborsDestination(newNode, cost2);
+                    newNode.addImmediateNeighborsDestination(oldNode2, cost2);
 
-                   for (int y = 0; y < oldNodes.size(); y++) {
-                       Dijkstra.calculateShortestPathFromSource(graph, oldNode1);
-                       //computeTotalDistance
-                   }
+                    for (int y = 0; y < oldNodes.size(); y++) {
+                        Dijkstra.calculateShortestPathFromSource(graph, oldNode1);
+                        //computeTotalDistance
+                    }
                    //returning the graph here will give us single link from the new node to specific nodes that meet the constraint
                    return graph;
                 }
                 //returning the graph here will give us multiple links from the new node to all other nodes
                 //return graph
-
+                oldNode1.removeImmediateNeighborsDestination(newNode);
+                newNode.removeImmediateNeighborsDestination(oldNode1);
             }
+            graph.removeNode(newNode);
         }
         return null;
     }
