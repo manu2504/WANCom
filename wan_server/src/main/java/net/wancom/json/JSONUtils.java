@@ -38,7 +38,7 @@ public class JSONUtils {
     public static JSONObject NewJSONTopologyFromJSONFile(String filename) throws FileNotFoundException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
-        String path = NewLocationJSONFileFullName(filename);
+        String path = getNewLocationsJSONFileFullName(filename);
         try {
             Object obj = parser.parse(new FileReader(path));
             jsonObject = (JSONObject) obj;
@@ -56,7 +56,7 @@ public class JSONUtils {
         return path;
     }
 
-    public static String NewLocationJSONFileFullName(String filename) {
+    public static String getNewLocationsJSONFileFullName(String filename) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         String path = classLoader.getResource("public/new_locations/" + filename + ".json").getFile();
         return path;
@@ -91,8 +91,10 @@ public class JSONUtils {
             Node node = new Node(nodeName);
             double lat = Double.parseDouble(jsonTmpNode.get("latitude").toString());
             double lng = Double.parseDouble(jsonTmpNode.get("longitude").toString());
+            String country = jsonTmpNode.get("country").toString();
             node.setLatitude(lat);
             node.setLongitude(lng);
+            node.setCountry(country);
             mapNodes.put(nodeName, node);
         }
         // END: add all the nodes to the graph
@@ -144,6 +146,7 @@ public class JSONUtils {
             double lat = node.getLatitude();
             double lng = node.getLongitude();
             String nodeName = node.getNodeName();
+            String countryName = node.getCountry();
             Map<Node, Integer> immediateNeighborNodes = node.getImmediateNeighborNodes();
             System.out.println("nodename = "+nodeName);
             for (Map.Entry<Node, Integer> entry : immediateNeighborNodes.entrySet()) {
@@ -158,6 +161,7 @@ public class JSONUtils {
             jsonNode.put("latitude", lat);
             jsonNode.put("longitude", lng);
             jsonNode.put("id", nodeName);
+            jsonNode.put("country", countryName);
             nodesList.add(jsonNode);
         }
         jsonTopology.put("nodes", nodesList);

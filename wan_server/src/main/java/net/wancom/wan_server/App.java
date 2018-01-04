@@ -14,65 +14,76 @@ import net.wancom.graph.Graph;
 import net.wancom.graph.Node;
 import net.wancom.json.JSONUtils;
 
-
 /**
  * Main class from which the server is run
  */
 public class App {
- 
-  public static void main(String[] args) {
-   staticFiles.location("/public"); // Static files
-    get("/hello", (request, response) -> "Hello guys!");
-    System.out.println("Server listening on port 4567");
-    
-    post("/senddata", (request, response) -> {
-      System.out.println("data received: " + request.body());
 
-      JSONParser parser = new JSONParser();
-      //JSONArray shortestPath = null;
-      JSONObject jsonResponse = null;
+    public static void main(String[] args) {
+        staticFiles.location("/public"); // Static files
+        get("/hello", (request, response) -> "Hello guys!");
+        System.out.println("Server listening on port 4567");
 
-      try {
-        Object obj = parser.parse(request.body());
-        JSONObject jsonObject = (JSONObject) obj;
-        String countryName = jsonObject.get("country").toString();
-        /*String filename = JSONUtils.getJSONFileFullName(countryName);
-        System.out.println("filename " + filename);*/
-        JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
-        System.out.println(jsonTopology.toString());
+        post("/shortestpath", (request, response) -> {
+            System.out.println("data received: " + request.body());
 
-        Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
-        /*String sourceNodeName = jsonObject.get("src").toString();
-        Node sourceNode = graph.findNode(sourceNodeName);
-        if (sourceNode == null) {
-          //How should application handle when user inserts a source not available!
-          throw new WanComException("Source is not in the graph!");
-        }
-        graph = Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
-        Node targetNode = graph.findNode(jsonObject.get("dst").toString());
-        if (targetNode == null) {
-          //How should application handle when user inserts a target not available!
-          throw new WanComException("Target is not in the graph!");
-        }
+            JSONParser parser = new JSONParser();
+            JSONArray shortestPath = null;
 
-        shortestPath = targetNode.getShortestPathAsJSONArray();
-        System.out.println("Shortest path: " + ((JSONArray) shortestPath).toString());
-*/
-        Graph newGraph = NewGraph.addBestNewNode(graph, countryName, 700);
-        jsonResponse = JSONUtils.JSONTopologyFromGraph(newGraph);
-        System.out.println("newGraph " + jsonResponse);
-        //Dijkstra.calculateShortestPathFromSource(newGraph, sourceNode);
+            try {
+                Object obj = parser.parse(request.body());
+                JSONObject jsonObject = (JSONObject) obj;
+                Graph graph = JSONUtils.graphFromJSONTopology(jsonObject);
+                String sourceNodeName = jsonObject.get("src").toString();
+                Node sourceNode = graph.findNode(sourceNodeName);
+                if (sourceNode == null) {
+                    // How should application handle when user inserts a source not available!
+                    throw new WanComException("Source is not in the graph!");
+                }
+                graph = Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
+                Node targetNode = graph.findNode(jsonObject.get("dst").toString());
+                if (targetNode == null) {
+                    // How should application handle when user inserts a target not available!
+                    throw new WanComException("Target is not in the graph!");
+                }
 
-      } catch (ParseException e) {
-        System.err.println("Parsing error");
-      } catch (WanComException e) {
-        System.err.println(e.getMessage());
-      }
-      
-      return jsonResponse;
-    });
-    
-    /*post("/new_graph", (request, response) -> {
-    }*/
-  }
+                shortestPath = targetNode.getShortestPathAsJSONArray();
+                System.out.println("Shortest path: " + ((JSONArray) shortestPath).toString());
+            } catch (ParseException e) {
+                System.err.println("Parsing error");
+            } catch (WanComException e) {
+                System.err.println(e.getMessage());
+            }
+
+            return shortestPath;
+        });
+
+        post("/newgraph", (request, response) -> {
+            System.out.println("data received: " + request.body());
+
+            JSONParser parser = new JSONParser();
+            JSONObject jsonResponse = null;
+
+            try {
+                Object obj = parser.parse(request.body());
+                JSONObject jsonObject = (JSONObject) obj;
+                String countryName = jsonObject.get("country").toString();
+
+                JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
+                System.out.println(jsonTopology.toString());
+
+                Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
+                Graph newGraph = NewGraph.addBestNewNode(graph, countryName, 700);
+                jsonResponse = JSONUtils.JSONTopologyFromGraph(newGraph);
+                System.out.println("newGraph " + jsonResponse);
+
+            } catch (ParseException e) {
+                System.err.println("Parsing error");
+            } catch (WanComException e) {
+                System.err.println(e.getMessage());
+            }
+
+            return jsonResponse;
+        });
+    }
 }

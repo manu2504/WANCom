@@ -17,11 +17,13 @@ public class Node{
     private String nodeName;
     private double longtitude;
     private double latitude;
+    private String country;
 
     // The shortest path from the source Node (when we run Dijkstra algorithm through a source)
     // to current Node - this (include all nodes between source and destination)
     private List<Node> shortestPath = new LinkedList<>();
     
+    // The javascript client expects a json response, so let's serve it json
     private JSONArray shortestPathAsJSONArray;
 
     //Distance between the node and source node, default value is the MAX_VALUE until we calcualte the real cost
@@ -61,6 +63,14 @@ public class Node{
 
     public void setLatitude(double latitude) {
         this.latitude = latitude;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 
     public List<Node> getShortestPath() {
