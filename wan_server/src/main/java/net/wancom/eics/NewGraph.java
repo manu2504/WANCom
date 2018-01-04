@@ -30,7 +30,6 @@ public class NewGraph {
         JSONObject jsonObject = JSONUtils.NewJSONTopologyFromJSONFile(country);
         Set<Node> oldNodes = new HashSet<>();
         JSONArray nodesList = (JSONArray) jsonObject.get("nodes");
-        //Map<String, Node> mapNodes = new HashMap<>();//not necessary
         oldNodes.addAll(graph.getNodes());
 
         // Add new nodes to the graph (try one-by-one)
@@ -43,7 +42,6 @@ public class NewGraph {
             newNode.setLongitude(nodeLong);
             newNode.setCountry(country);
             newNode.setIsNewNode(true);
-            //mapNodes.put("newNode" +i,newNode); //this might not be necessary
             graph.addNode(newNode);
             
             // Adding links to the new node (test pair-by-pair)

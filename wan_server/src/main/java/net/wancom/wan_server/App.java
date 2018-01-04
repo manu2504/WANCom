@@ -72,7 +72,6 @@ public class App {
                 JSONObject jsonObject = (JSONObject) obj;
                 String countryName = jsonObject.get("country").toString();
                 Integer maxCost = Integer.parseInt(jsonObject.get("max_cost").toString());
-                System.out.println("maxCost.getClass().getName()="+maxCost.getClass().getName());
                 if (countryName == "" ) {
                     throw new WanComException("Missing input: countryName");
                 } else if (!(maxCost > 0)) {

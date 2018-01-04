@@ -149,9 +149,9 @@ public class JSONUtils {
             String countryName = node.getCountry();
             Boolean isNewnode = node.getIsNewNode();
             Map<Node, Integer> immediateNeighborNodes = node.getImmediateNeighborNodes();
-            System.out.println("nodename = "+nodeName);
+            //System.out.println("nodename = "+nodeName);
             for (Map.Entry<Node, Integer> entry : immediateNeighborNodes.entrySet()) {
-                System.out.println("neighbour nodename = "+entry.getKey().getNodeName());
+                // System.out.println("neighbour nodename = "+entry.getKey().getNodeName());
                 JSONObject jsonLink = new JSONObject();
                 jsonLink.put("source", nodeName);
                 jsonLink.put("target", entry.getKey().getNodeName());
