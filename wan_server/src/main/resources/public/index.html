@@ -289,8 +289,8 @@
         }
         var countrySrcId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
         var countryDstId = dest_shortest_path.substr( dest_shortest_path.lastIndexOf(',') + 2 );
-        // Special cases
         var countries_input = [countrySrcId, countryDstId].map(function(country) {
+          // Special cases
           if (country == "United States") return "USA";
           if (country == "Canada") return "USA";
           if (country == "Switzerland") return "France";
