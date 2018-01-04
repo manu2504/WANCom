@@ -22,7 +22,7 @@ public class App {
     public static void main(String[] args) {
         staticFiles.location("/public"); // Static files
         get("/hello", (request, response) -> "Hello guys!");
-        System.out.println("Server listening on port 4567");
+        System.out.println("Server listening on port 4567 (type 'localhost:4567' in the address bar of your browser)");
 
         post("/shortestpath", (request, response) -> {
             System.out.println("data received: " + request.body());
