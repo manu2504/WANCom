@@ -11,7 +11,6 @@ import java.util.Set;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
-import deprecated.algorithm.SphericalGeometry;
 import net.wancom.graph.*;
 import net.wancom.json.JSONUtils;
 
@@ -49,7 +48,7 @@ public class NewGraph {
             // Adding links to the new node (test pair-by-pair)
             for (Node oldNode1 : oldNodes) {
                 //System.out.println("iteration oldNode1: "+oldNode1.getNodeName());
-                int cost1 = SphericalGeometry.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
+                int cost1 = Distance.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
                         newNode.getLatitude(), newNode.getLongitude());
                 if (cost1 > constraint) continue;
                 oldNode1.addImmediateNeighborsDestination(newNode, cost1);
@@ -57,7 +56,7 @@ public class NewGraph {
                 for (Node oldNode2 : oldNodes) {
                     //System.out.println("iteration oldNode2 "+oldNode2.getNodeName());
                     if (oldNode2.equals(oldNode1)) continue;
-                    int cost2 = SphericalGeometry.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
+                    int cost2 = Distance.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
                             newNode.getLatitude(), newNode.getLongitude());
                     int totalCost = cost1 + cost2;
                     if (totalCost > constraint) {
