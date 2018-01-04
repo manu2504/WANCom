@@ -38,6 +38,8 @@ public class App {
                 JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);                
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 String sourceNodeName = jsonObject.get("src").toString();
+                System.out.println("graph.getNodes()"+graph.getNodes().toString());
+                System.out.println("graph.getNodes()"+graph.getNodes().toString());
                 Node sourceNode = graph.findNode(sourceNodeName);
                 if (sourceNode == null) {
                     // How should application handle when user inserts a source not available!

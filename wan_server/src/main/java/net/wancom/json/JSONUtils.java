@@ -15,10 +15,10 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
+import net.wancom.eics.Distance;
 import net.wancom.exceptions.WanComException;
 import net.wancom.graph.Graph;
 import net.wancom.graph.Node;
-import net.wancom.wan_server.SphericalGeometry;
 
 public class JSONUtils {
 
@@ -109,7 +109,7 @@ public class JSONUtils {
             if (sourceNode == null || destNode == null) {
                 throw new WanComException("Node not found!");
             }
-            int cost = SphericalGeometry.getDistance(sourceNode.getLatitude(), sourceNode.getLongitude(),
+            int cost = Distance.getDistance(sourceNode.getLatitude(), sourceNode.getLongitude(),
                     destNode.getLatitude(), destNode.getLongitude());
             sourceNode.addImmediateNeighborsDestination(destNode, cost);
             destNode.addImmediateNeighborsDestination(sourceNode, cost);

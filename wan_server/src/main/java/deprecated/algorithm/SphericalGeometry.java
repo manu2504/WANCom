@@ -1,11 +1,9 @@
-package net.wancom.wan_server;
+package deprecated.algorithm;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import deprecated.algorithm.Coordinates;
 
 public class SphericalGeometry {
 

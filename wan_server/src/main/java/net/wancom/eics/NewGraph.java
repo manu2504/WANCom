@@ -8,22 +8,24 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import net.wancom.wan_server.SphericalGeometry;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import deprecated.algorithm.SphericalGeometry;
 import net.wancom.graph.*;
 import net.wancom.json.JSONUtils;
 
 public class NewGraph {
   
   /*
-   * TODO: finish to write the function addBestNewNode(). This function requires:
-   * (TODO) a function which evaluates the current total latency of a graph
-   * (TODO) a function that adds a new node in a graph ( needs to use Graph.addNode() )
+   * TODO: finish to write the function addBestNewNode().
+   * This function adds a new node in a graph ( needs to use Graph.addNode() )
    * and after, a loop that iterates for all potential new nodes, and compute for each of them
    * the new total distance for the modified graph. This performance should be stored in a variable
    * that stores the best performance, and be replaced every time a better performance is found.
+   * 
+   * 
+   * (TODO) a function which evaluates the current total latency of a graph, needed by addBestNewNode (see below)
    */
 
     public static Graph addBestNewNode(Graph graph, String country, int constraint) throws FileNotFoundException, IOException {
@@ -64,10 +66,13 @@ public class NewGraph {
                    
                     oldNode2.addImmediateNeighborsDestination(newNode, cost2);
                     newNode.addImmediateNeighborsDestination(oldNode2, cost2);
+                    
+                    Map<Node, Integer> totalDistancePerSourceNode = new HashMap<>();
 
-                    for (int y = 0; y < oldNodes.size(); y++) {
-                        Dijkstra.calculateShortestPathFromSource(graph, oldNode1);
-                        //computeTotalDistance
+                    for (Node sourceNode : oldNodes) {
+                        // TODO:
+                        //int totalDistance = computeTotalDistance(graph, sourceNode);
+                        //totalDistancePerSourceNode.put(sourceNode, totalDistance);
                     }
                    //returning the graph here will give us single link from the new node to specific nodes that meet the constraint
                    return graph;
@@ -81,5 +86,24 @@ public class NewGraph {
         }
         return null;
     }
+    
+    /*private static int computeTotalDistance(Graph graph, Node sourceNode) {
+        Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
+
+                    
+                    /*
+                     *  TODO (manu):
+                     *  - create a list of nodes from the set oldNodes
+                     *  - int res;
+                     *  - temp variable Map<Set<Node, Node>, dist> map
+                     *  - for i = 0 till i = list.size(): launch getDistToOtherNodes
+                     *  
+                     *  - write the function  getDistToOtherNodes(int i, list):
+                     *    for (j = i+1; j < list.size() - 1; j++) {
+                     *      map.put(new Hashmap(i, j), dist(i, j))
+                     *    }
+                     *    return res
+                     */
+    //}
 
 }

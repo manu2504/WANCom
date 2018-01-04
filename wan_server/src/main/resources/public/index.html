@@ -18,12 +18,12 @@
       #dashboard {
         margin: 1em;
       }
-      #header > p {
+      #header {
         font-weight: bold;
         margin-bottom: auto;
+        margin-right: 0.5em
       }
       .iface + div {
-        font-weight: bold;
         margin-top: 0.8em;
         margin-bottom: 0.5em;
       }
@@ -44,13 +44,16 @@
   <body>
     <div id="map"></div>
 
-    
     <!-- Use of jQuery, a popular Javascript framework, is made in order to soften manipulation of HTML elements -->
     <script src="jquery-3.2.1.min.js"></script>
+
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
+    </script>
     
     <script>
       var map;
-      var google;
+      
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4, // (World : 2)
@@ -158,33 +161,6 @@
         }
       }
       
-      /*
-      function drawNewTopology(new_topo, countryName) {
-        console.log("calling drawNewTopology()");
-        nodes["New_Topo"] = {};
-        for (var i = 0; i < new_topo.nodes.length; i++) {
-          var Lat = new_topo.nodes[i].latitude;
-          var Lng = new_topo.nodes[i].longitude;
-          var coordinates = {lat: Lat, lng: Lng};
-          var label = new_topo.nodes[i].id;
-
-          nodes["New_Topo"][label] = coordinates;
-
-          var infowincontent = document.createElement('div');
-          var strong = document.createElement('strong');
-          strong.textContent = label + ", " + countryName;
-          infowincontent.appendChild(strong);     
-          addCircle(coordinates, map, infowincontent);
-        }
-
-        console.log(nodes);
-        for (var i = 0; i < new_topo.links.length; i++) {
-          var source = new_topo.links[i].source;
-          var target = new_topo.links[i].target;
-          drawLink(source, target, "New_Topo", "#00e000");
-        }
-      }*/
-      
       function drawLink(source, target, topoId, isNewLink) {
         var path = new Array(2);
         path[0] = nodes[topoId][source];
@@ -261,17 +237,17 @@
         
         // Add input fields for requesting Shortest path
         var $shortest_path_interface = $('<div>', { id: 'short_path_iface', class: 'iface' })
-                               .appendTo($user_dashboard);
+                                .appendTo($user_dashboard);
         var $shortest_path_header    = $('<div>', { html: '<p>Shortest path:</p>', id: 'header' } );
         var $source_node_label       = $('<label for="src">Source node:</label>');
         var $dest_node_label         = $('<label for="dest">Destination node:</label>');
         var $src_input               = $('<input>', { type: "text", placeholder: "Click a red circle", name:"src" });
         var $dst_input               = $('<input>', { type: "text", placeholder: "Click a red circle", name:"dest" });
-        $shortest_path_header  .appendTo($shortest_path_interface);
-        $source_node_label     .appendTo($shortest_path_interface);
-        $src_input             .appendTo($shortest_path_interface);
-        $dest_node_label       .appendTo($shortest_path_interface);
-        $dst_input             .appendTo($shortest_path_interface);
+        $shortest_path_header   .appendTo($shortest_path_interface);
+        $source_node_label      .appendTo($shortest_path_interface);
+        $src_input              .appendTo($shortest_path_interface);
+        $dest_node_label        .appendTo($shortest_path_interface);
+        $dst_input              .appendTo($shortest_path_interface);
        
         var $req_sp_button = $('<button>', { html: 'Request shortest path' }).click(request_shortest_path);
         var $reset_sp_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_shortest_path_fields);
@@ -279,18 +255,22 @@
         $reset_sp_button.appendTo($shortest_path_interface);
         
         // Add input fields for requesting new graph
-        var $new_graph_interface = $('<div>', { id: 'new_graph_iface', class: 'iface' }).appendTo($user_dashboard);
-        var $new_graph_header = $('<div>', { html: '<p>New graph (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
-        $new_graph_header.appendTo($new_graph_interface);
-        $country_new_graph = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } });
+        var $new_graph_interface  = $('<div>', { id: 'new_graph_iface', class: 'iface' })
+                                .appendTo($user_dashboard);
+        var $new_graph_header     = $('<div>', { html: '<p>New node (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
+        var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
+        var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } });
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($country_new_graph);
         });
-        $country_new_graph.appendTo($new_graph_interface);
-        var $cost_label = $('<label for="src">Maximum cost:</label>');
-        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 700, name:"cost"/*, size:"4"*/});
-        $cost_label.appendTo($new_graph_interface);
-        $cost_input.appendTo($new_graph_interface);
+        var $cost_label = $('<label for="cost">Maximum cost:</label>');
+        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 700, name:"cost", size:"5"});
+                
+        $new_graph_header   .appendTo($new_graph_interface);
+        $choose_graph_label .appendTo($new_graph_interface);
+        $country_new_graph  .appendTo($new_graph_interface);
+        $cost_label         .appendTo($new_graph_interface);
+        $cost_input         .appendTo($new_graph_interface);
        
         $req_button = $('<button>', { html: 'Request new graph' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);
@@ -390,26 +370,6 @@
         $('#short_path_iface input').val('');
       }
       
-      /*
-      function updatemap(userSelected) {
-        // First check if the "All" checkbox is checked, unless a pair of datacenters has been explicitly selected
-        if ( !userSelected && $("input:checkbox[value='all']").prop('checked') ) {
-          displayAllLinks();
-          return;
-        }
-        
-        // Unselect automatically the "All" checkbox
-        if (userSelected) {
-          $("input:checkbox[value='all']").prop('checked', false);
-        }
-        
-        var userSelection = $( 'select option:selected' ).text();
-        
-        removeAllLinks();
-        displayLinksFromCountry(userSelection);
-      }
-      window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
-      */
       function zoom(select) {
         var country_selected;
         if (!select) {
@@ -477,10 +437,6 @@
         return rc;
       }
       
-    </script>
-
-    <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
     </script>
   </body> 
 </html>
