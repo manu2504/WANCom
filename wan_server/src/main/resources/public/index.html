@@ -254,7 +254,7 @@
           $('<option>', { text: country } ).appendTo($countryId);
         });
         $countryId.appendTo($user_dashboard);
-        $('<input type="checkbox" name="all" value="all" onclick="zoom(null, true);" checked>World<br>')
+        $('<input type="checkbox" name="all" value="all" onclick="zoom(null);" checked>World<br>')
                   .appendTo($user_dashboard);
         
         // Add input fields for requesting Shortest path
@@ -397,13 +397,19 @@
       }
       window.updatemap = updatemap; // export in global namespace, so the function can be accessed from the "onchange" event
       */
-      function zoom(select, onWorld) {
+      function zoom(select) {
         var country_selected;
-        if (onWorld === true) {
-          country_selected = 'World';
+        if (!select) {
+          if ( !$("input:checkbox[value='all']").prop('checked') ) {
+            country_selected = $('#zoom_input').find( 'option:selected' ).text();
+          } else {
+            country_selected = 'World';
+          }
         } else {
           country_selected = $(select).find( 'option:selected' ).text();
-          console.log('country_selected=' + country_selected);
+          if ( $("input:checkbox[value='all']").prop('checked') ) {
+            $("input:checkbox[value='all']").prop('checked', false);
+          }
         }
         map.setCenter(zoom_info[country_selected].center); // center on country selected
         map.setZoom(zoom_info[country_selected].zoom); // center with the level of zoom pre-defined for this country
