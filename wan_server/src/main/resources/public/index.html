@@ -48,7 +48,7 @@
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 4, // (World : 2)
-          center: new google.maps.LatLng(63.330054, 26.493659), // World: new google.maps.LatLng(2.8,-187.3),
+          center: new google.maps.LatLng(64.868175, 24.812939), // World: new google.maps.LatLng(2.8,-187.3),
           mapTypeId: 'terrain'
         });
       }
@@ -90,7 +90,7 @@
         China: { center: {lat: 35.197462, lng: 105.955927}, zoom: 4 },
         France: { center: {lat: 46.562695, lng: 3.355229}, zoom: 5 },
         Germany: { center: {lat: 50.951823, lng: 10.684529}, zoom: 5 },
-        Finland: { center: {lat: 63.330054, lng: 26.493659}, zoom: 4 }
+        Finland: { center: {lat: 64.868175, lng: 24.812939}, zoom: 4 }
       };
       
       $.when( // When all the JSON files are loaded...
@@ -236,15 +236,10 @@
         // Add a user dashboard below the map
         var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
         $('<label>Which country you want to highlight?</label>').appendTo($user_dashboard);
-        console.log('label jqeuery'+$('<label>Which country you want to highlight?</label>'));
-        // TODO: LOST MORE THAN TWO HOURS TRYING TO FIX THE STATEMENT BELOW, PLEASE HEEEEEEEEEEEELP!!!!!
-        // 
-        var $countryId = $('<select>', { /*on: { blur: function() { zoom(); }, change: function() { zoom(); } }*/ } );
-        console.log('countryId: ' + $countryId);
+        var $countryId = $('<select>', { id:'zoom_input', on: { blur: function() { zoom(); }, change: function() { zoom(); } } } );
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($countryId);
         });
-        console.log('countryId: ' + JSON.stringify($countryId));
         $countryId.appendTo($user_dashboard);
         $('<input type="checkbox" name="all" value="all" onclick="zoom(true);" checked>World<br>')
                   .appendTo($user_dashboard);
@@ -271,11 +266,11 @@
         var $new_graph_interface = $('<div>', { id: 'new_graph_iface' }).appendTo($user_dashboard);
         var $new_graph_header = $('<div>', { html: '<p>New graph (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
         $new_graph_header.appendTo($new_graph_interface);
-        $country_new_graph = $('<select>', { type: "text", name: "newgraph"});
+        $country_new_graph = $('<select>', { name: "newgraph"});
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($country_new_graph);
         });
-        $countryId.appendTo($new_graph_interface);
+        $country_new_graph.appendTo($new_graph_interface);
        
         $req_button = $('<button>', { html: 'Request new graph' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);
@@ -289,7 +284,7 @@
           $('<div>', { html: 'Please provide a source and a destination' }).css({'color': 'red'}).appendTo('#dashboard');
           return;
         }
-        countryId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
+        var countryId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
         // Special cases
         if (countryId == "United States") countryId = "USA";
         if (countryId == "Canada") countryId = "USA";
@@ -348,7 +343,7 @@
             var errmsg = "Nothing received from the server: server down, or no Internet connection"; 
             alert( errmsg );
           } else {
-            alert( errorThrown ); console.log("errorThrown: " + errorThrown);
+            alert( errorThrown ); console.log("errorThrown: ", errorThrown);
           }
         });
       }

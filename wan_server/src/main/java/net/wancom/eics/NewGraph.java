@@ -41,6 +41,7 @@ public class NewGraph {
             double nodeLong= Double.parseDouble(nodeObject.get("Longitude").toString());
             newNode.setLatitude(nodeLat);
             newNode.setLongitude(nodeLong);
+            newNode.setCountry(country);
             //mapNodes.put("newNode" +i,newNode); //this might not be necessary
             graph.addNode(newNode);
             
@@ -68,11 +69,11 @@ public class NewGraph {
                        Dijkstra.calculateShortestPathFromSource(graph, oldNode1);
                        //computeTotalDistance
                    }
-                 //moving the graph here will give us single link from the new node to specific nodes that meet the constraint
-                   //return graph;
+                   //returning the graph here will give us single link from the new node to specific nodes that meet the constraint
+                   return graph;
                 }
-                //moving the graph here will give us multiple links from the new node to all other nodes
-              
+                //returning the graph here will give us multiple links from the new node to all other nodes
+                //return graph
 
             }
         }

@@ -33,7 +33,10 @@ public class App {
             try {
                 Object obj = parser.parse(request.body());
                 JSONObject jsonObject = (JSONObject) obj;
-                Graph graph = JSONUtils.graphFromJSONTopology(jsonObject);
+                String countryName = jsonObject.get("country").toString();
+
+                JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);                
+                Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 String sourceNodeName = jsonObject.get("src").toString();
                 Node sourceNode = graph.findNode(sourceNodeName);
                 if (sourceNode == null) {
