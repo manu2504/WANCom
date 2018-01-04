@@ -302,15 +302,22 @@
           $('<div>', { html: 'Please provide a source and a destination', class: 'error' }).after('#short_path_iface');
           return;
         }
-        var countryId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
+        var countrySrcId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
+        var countryDstId = dest_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
         // Special cases
-        if (countryId == "United States") countryId = "USA";
-        if (countryId == "Canada") countryId = "USA";
-        if (countryId == "Switzerland") countryId = "France";
+        var countries_input = [countrySrcId, countryDstId].map(function(country) {
+          if (country == "United States") return "USA";
+          if (country == "Canada") return "USA";
+          if (country == "Switzerland") return "France";
+        });
+        if (countries_input[0] !== countries_input[1]) {
+          $('<div>', { html: 'Please choose a source and a destination in the same country', class: 'error' }).after('#short_path_iface');
+          return;          
+        }
         
         // We build the request object to send to the server
         var request = {};
-        request['country'] = countryId;
+        request['country'] = countrySrcId;
         request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
         request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
         
