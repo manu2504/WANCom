@@ -80,6 +80,15 @@ public class App {
                     throw new WanComException("Missing input: cost");
                 }
 
+                /*
+                 *  TODO: since adding the best new node may take many hours (5-10) to run,
+                 *  take the code from here and run it in standalone mode
+                 *  and output the result to a text file
+                 *  
+                 *  Biwen's suggestion: We can use concurrent computing to make the code faster,
+                 *  using a thread of pools, each pool trying to add one new node to the graph
+                 *  (with all different combinations of links) and writing the result to a file
+                 */
                 JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
                 System.out.println(jsonTopology.toString());
 

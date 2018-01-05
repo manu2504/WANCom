@@ -3,14 +3,15 @@ package net.wancom.eics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
-import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import net.wancom.exceptions.WanComException;
 import net.wancom.graph.*;
 import net.wancom.json.JSONUtils;
 
@@ -26,12 +27,29 @@ public class NewGraph {
    * 
    * (TODO) a function which evaluates the current total latency of a graph, needed by addBestNewNode (see below)
    */
+    
 
     public static Graph addBestNewNode(Graph graph, String country, int constraint) throws FileNotFoundException, IOException {
-        JSONObject jsonObject = JSONUtils.NewJSONTopologyFromJSONFile(country);
-        Set<Node> oldNodes = new HashSet<>();
-        JSONArray nodesList = (JSONArray) jsonObject.get("nodes");
+
+        // For performance evaluation
+        int numberOfGraphsChecked = 0;
+        int numberOfGraphsReallyEvaluated = 0;
+        final String ANSI_GREEN = "\u001B[32m";
+        final String ANSI_RESET = "\u001B[0m";
+        long startTimestamp = System.currentTimeMillis();
+        long intermediateTimestamp; 
+        
+        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
+        List<Node> oldNodes = new ArrayList<>();
+        JSONArray nodesList = (JSONArray) newTopology.get("nodes");
+        System.out.println("No. of nodes in the initial graph: " + graph.getNodes().size());
+        System.out.println("No. of new nodes: " + nodesList.size());
+        int numberOfGraphsToBeEvaluated = nodesList.size() * ( (graph.getNodes().size() * (graph.getNodes().size() + 1) ) /2 );
+        System.out.println("Estimated number of graphs to be evaluated: " + Integer.toString( numberOfGraphsToBeEvaluated ) );
         oldNodes.addAll(graph.getNodes());
+        
+        //List<Record> graphsPerformances = new ArrayList<>();
+        Record bestRecord = new Record(null, null, Integer.MAX_VALUE);
 
         // Add new nodes to the graph (try one-by-one)
         for (int i = 0; i < nodesList.size(); i++) {
@@ -45,64 +63,150 @@ public class NewGraph {
             newNode.setIsNewNode(true);
             graph.addNode(newNode);
             
-            // Adding links to the new node (test pair-by-pair)
-            for (Node oldNode1 : oldNodes) {
-                //System.out.println("iteration oldNode1: "+oldNode1.getNodeName());
+            // Adding links to ONE new node (test pair-by-pair)
+            for (int x = 0; x < oldNodes.size() - 1; x++) {
+                Node oldNode1 = oldNodes.get(x);
+                //System.out.println("oldNode1: " + oldNode1.getNodeName());
                 int cost1 = Distance.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
                         newNode.getLatitude(), newNode.getLongitude());
                 if (cost1 > constraint) continue;
                 oldNode1.addImmediateNeighborsDestination(newNode, cost1);
                 newNode.addImmediateNeighborsDestination(oldNode1, cost1);
-                for (Node oldNode2 : oldNodes) {
-                    //System.out.println("iteration oldNode2 "+oldNode2.getNodeName());
+                for (int y = x + 1; y < oldNodes.size(); y++) {
+                    Node oldNode2 = oldNodes.get(y);
                     if (oldNode2.equals(oldNode1)) continue;
+                    //System.out.println("      oldNode2: " + oldNode2.getNodeName());
+                    numberOfGraphsChecked++;
+                    if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/1000) == 0 ) {
+                        intermediateTimestamp = System.currentTimeMillis();
+                        long elapsedTime = intermediateTimestamp - startTimestamp;
+                        float percentage;
+                        percentage = (float) ((float) numberOfGraphsChecked*100.0f / (float) numberOfGraphsToBeEvaluated);
+                        percentage = (float) (Math.round(percentage*100.0f)/100.0f);
+                        System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs evaluated (" + Float.toString(percentage) + "%) - " + elapsedTime/(1000*60) + "min");
+                    }
                     int cost2 = Distance.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
                             newNode.getLatitude(), newNode.getLongitude());
                     int totalCost = cost1 + cost2;
                     if (totalCost > constraint) {
                             continue;
                     }
+                    numberOfGraphsReallyEvaluated++;
                    
                     oldNode2.addImmediateNeighborsDestination(newNode, cost2);
                     newNode.addImmediateNeighborsDestination(oldNode2, cost2);
                     
-                    Map<Node, Integer> totalDistancePerSourceNode = new HashMap<>();
-
-                    for (Node sourceNode : oldNodes) {
-                        // TODO:
-                        //int totalDistance = computeTotalDistance(graph, sourceNode);
-                        //totalDistancePerSourceNode.put(sourceNode, totalDistance);
+                    int totalDistance = computeTotalDistance(graph, oldNodes);
+                    
+                    // Building a set of neighbours (Node, cost) to add to the record
+                    Map<Node, Integer> neighbours = new HashMap<>();
+                    neighbours.put(oldNode1, cost1);
+                    neighbours.put(oldNode2, cost2);
+                    
+                    
+                    Record record = new Record(newNode, neighbours, totalDistance);
+                    if (record.compareTo(bestRecord) < 0) {
+                        //System.out.println("better distance found: " + Integer.toString(record.getTotalDistance()));
+                        bestRecord = record;
                     }
-                   //returning the graph here will give us single link from the new node to specific nodes that meet the constraint
-                   return graph;
+                    //System.out.println("Added " + record.toString());
+                    //graphsPerformances.add(record);
+                    
+                    oldNode2.removeImmediateNeighborsDestination(newNode);
+                    newNode.removeImmediateNeighborsDestination(oldNode2);
+
+                   //return graph;
                 }
-                //returning the graph here will give us multiple links from the new node to all other nodes
-                //return graph
                 oldNode1.removeImmediateNeighborsDestination(newNode);
                 newNode.removeImmediateNeighborsDestination(oldNode1);
             }
             graph.removeNode(newNode);
         }
-        return null;
+        
+        //Record bestRecord = graphsPerformances.get(graphsPerformances.indexOf(Collections.min(graphsPerformances)));
+        Node newNode = bestRecord.getNewNode();
+        graph.addNode(newNode);
+        for (Node neighbour : bestRecord.getNeighbours().keySet()) {
+            newNode.addImmediateNeighborsDestination(neighbour, bestRecord.getNeighbours().get(neighbour));
+        }
+        System.out.println("Number of graphs checked (including not meeting the constraint): " + Integer.toString(numberOfGraphsChecked));
+        System.out.println("Number of graphs really evaluated: " + Integer.toString(numberOfGraphsReallyEvaluated));
+        return graph;
     }
     
-    /*private static int computeTotalDistance(Graph graph, Node sourceNode) {
-        Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
-
-                    
-                    /*
-                     *  TODO (manu):
-                     *  - create a list of nodes from the set oldNodes
-                     *  - int res;
-                     *  - temp variable Map<Set<Node, Node>, dist> map
-                     *  - for i = 0 till i = list.size(): launch getDistToOtherNodes
-                     *  
-                     *  - write the function  getDistToOtherNodes(int i, list):
-                     *    for (j = i+1; j < list.size() - 1; j++) {
-                     *      map.put(new Hashmap(i, j), dist(i, j))
-                     *    }
-                     *    return res
-                     */
-    //}
+    /*
+     * Compute the sum of the distances between all pairs of nodes in the graph (we ignore the new nodes added when forming a pair)
+     */
+    private static int computeTotalDistance(Graph graph, List<Node> oldNodes) {
+        int res = 0;
+        for (int i = 0; i < oldNodes.size() - 1; i++) {
+            Dijkstra.calculateShortestPathFromSource(graph, oldNodes.get(i));
+            for (int j = i+1; j < oldNodes.size(); j++) {
+                res += oldNodes.get(j).getCost();
+            }
+            graph.resetCosts(); // Needed to avoid that Dijsktra compare cost that correspond to a different source node and that are thus inaccurate
+        }
+        return res;
+    }
+    
+    /*
+     * for each graph: total distance. Store total distance in a hashMap <New node(s), new link(s), distance>
+     * 
+     */
+    
+    static class Record implements Comparable<Record> {
+        private Node newNode;
+        private Map<Node, Integer> neighbours;
+        private int totalDistance;
+        
+        public Record(Node node, Map<Node, Integer> neighbours, int totalDistance) {
+            this.newNode = node;
+            this.neighbours = neighbours;
+            this.totalDistance = totalDistance;
+        }
+        
+        public Node getNewNode() {
+            return newNode;
+        }
+        public void setNewNode(Node newNode) {
+            this.newNode = newNode;
+        }
+        public Map<Node, Integer> getNeighbours() {
+            return neighbours;
+        }
+        public void setNeighbours(Map<Node, Integer> neighbours) {
+            this.neighbours = neighbours;
+        }
+        public int getTotalDistance() {
+            return totalDistance;
+        }
+        public void setTotalDistance(int totalDistance) {
+            this.totalDistance = totalDistance;
+        }
+        
+        @Override
+        public int compareTo(Record other) {
+            int res = -10;
+            if (other.getTotalDistance() > this.getTotalDistance()) res = -1;
+            if (other.getTotalDistance() == this.getTotalDistance()) res = 0;
+            if (other.getTotalDistance() < this.getTotalDistance()) res = 1;
+            if (res == -10) new WanComException("Damn! Records couldn't be compared to each other.");
+            return res;
+        }
+        
+        @Override
+        public String toString() {
+            String neighboursNames = "";
+            for (Node neighbour : this.neighbours.keySet()) {
+                if (neighboursNames != "") neighboursNames += ", ";
+                neighboursNames += neighbour.getNodeName();
+            }
+            return "Record { sourceNode = " +
+                    this.newNode.getNodeName() +
+                    ", neighbours= " + neighboursNames +
+                    ", totalDistance= " + totalDistance +
+                    " }";
+        }
+    }
 
 }

@@ -44,4 +44,10 @@ public class Graph {
     public void addAllNodes(List<Node> nodes) {
         this.nodes = new HashSet<>(nodes);
     }
+    
+    public void resetCosts( ) {
+        for (Node node : nodes) {
+            node.setCost(Integer.MAX_VALUE);
+        }
+    }
 }
