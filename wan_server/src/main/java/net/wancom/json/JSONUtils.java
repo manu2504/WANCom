@@ -137,10 +137,7 @@ public class JSONUtils {
         JSONArray linksList = new JSONArray();
         Set<Node> nodesSet;
         nodesSet = graph.getNodes();
-        /*for (Node s : nodesSet) {
-            System.out.println("node from new graph: " + s.toString());
-        }*/
-        // List<Node> nodes = new ArrayList<>(nodesSet);
+
         for (Node node : nodesSet) {
             JSONObject jsonNode = new JSONObject();
             double lat = node.getLatitude();

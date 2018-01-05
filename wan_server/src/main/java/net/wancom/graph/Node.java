@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 
 /**
@@ -23,9 +24,6 @@ public class Node{
     // The shortest path from the source Node (when we run Dijkstra algorithm through a source)
     // to current Node - this (include all nodes between source and destination)
     private List<Node> shortestPath = new LinkedList<>();
-    
-    // The javascript client expects a json response, so let's serve it json
-    private JSONArray shortestPathAsJSONArray;
 
     //Distance between the node and source node, default value is the MAX_VALUE until we calcualte the real cost
     private Integer cost = Integer.MAX_VALUE;
@@ -92,11 +90,28 @@ public class Node{
     
     @SuppressWarnings("unchecked")
     public JSONArray getShortestPathAsJSONArray() {
-      shortestPathAsJSONArray = new JSONArray();
+      JSONArray shortestPathAsJSONArray = new JSONArray();
       for (Node elt : shortestPath) {
         shortestPathAsJSONArray.add(elt.getNodeName());
       }
       return shortestPathAsJSONArray;
+    }
+    
+    @SuppressWarnings("unchecked")
+    public JSONObject getShortestPathAsWithTotalDistance() {
+      JSONObject shortestPathWithTotalDistance = new JSONObject();
+      JSONArray shortestPathJSON = new JSONArray();
+      int totalDistance;
+
+      for (Node elt : shortestPath) {
+          shortestPathJSON.add(elt.getNodeName());
+      }
+      totalDistance = shortestPath.get(shortestPath.size()-1).getCost();
+      
+      shortestPathWithTotalDistance.put("path", shortestPathJSON);
+      shortestPathWithTotalDistance.put("distance", totalDistance);
+      
+      return shortestPathWithTotalDistance;
     }
 
     public void setShortestPath(List<Node> shortestPath) {

@@ -35,7 +35,12 @@
         margin: auto;
         margin-bottom: 0.15em;
       }
-      .iface + .error {
+      .info {
+        color: green;
+        margin: auto;
+        margin-bottom: 0.15em;
+      }
+      .iface + .error, .iface + .info {
         font-weight: bold;
       }
       select {
@@ -106,7 +111,8 @@
         China: { center: {lat: 35.197462, lng: 105.955927}, zoom: 4 },
         France: { center: {lat: 46.562695, lng: 3.355229}, zoom: 5 },
         Germany: { center: {lat: 50.951823, lng: 10.684529}, zoom: 5 },
-        Finland: { center: {lat: 64.868175, lng: 24.812939}, zoom: 4 }
+        //Finland: { center: {lat: 64.868175, lng: 24.812939}, zoom: 5 }
+        Finland: { center: {lat: 64.112879, lng: 26.413532}, zoom: 5 }
       };
       
       $.when( // When all the JSON files are loaded...
@@ -143,6 +149,7 @@
       function drawTopology(topo_Id) {
         var topo = topos[topo_Id];
         nodes[topo_Id] = {};
+        var new_node_info = null; // to allow to zoom on a new node after adding it on the graph
         for (var i = 0; i < topo.nodes.length; i++) {
           var Lat = topo.nodes[i].latitude;
           var Lng = topo.nodes[i].longitude;
@@ -150,6 +157,10 @@
           var label = topo.nodes[i].id;
           var country = topo.nodes[i].country;
           var isNewNode = topo.nodes[i].new || false;
+          
+          if (isNewNode) {
+            new_node_info = {coords: coordinates};
+          }
 
           nodes[topo_Id][label] = coordinates;
 
@@ -166,24 +177,28 @@
           var isNewLink = topo.links[i].new;
           drawLink(source, target, topo_Id, isNewLink);
         }
+        return new_node_info;
       }
       
       function drawLink(source, target, topoId, isNewLink) {
         var path = new Array(2);
         path[0] = nodes[topoId][source];
         path[1] = nodes[topoId][target];
+        var color, weight;
         
         if (isNewLink) {
           color = '#00e000';
+          weight = 4;
         } else {
           color = '#FFFF99';
+          weight = 2;
         }
 
         polyline = new google.maps.Polyline({
           path: path,
           strokeColor: color,
           strokeOpacity: 1.0,
-          strokeWeight: 2
+          strokeWeight: weight
         });
         polyline.setMap(map);
         polylines[topoId].push(polyline);
@@ -279,7 +294,7 @@
         $cost_label         .appendTo($new_graph_interface);
         $cost_input         .appendTo($new_graph_interface);
        
-        $req_button = $('<button>', { html: 'Request new graph' }).click( request_new_graph );
+        $req_button = $('<button>', { html: 'Improve topology' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);
       }
     
@@ -310,7 +325,8 @@
         
         // We build the request object to send to the server
         var request = {};
-        request['country'] = countrySrcId;
+        //request['country'] = countrySrcId; // HERE
+        request['topo'] = topos[countrySrcId];
         request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
         request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
         
@@ -322,9 +338,10 @@
         })
         .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
           console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
-          var $shortest_info = $('<div>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'});
-          $('#shortest_path').after('#short_path_iface');
-          highlightShortestPath(shortest_path, countrySrcId);
+          var msg = 'Shortest path found is: ' + shortest_path["path"].join(' -> ');
+          msg += " (" + shortest_path["distance"] + "km)";
+          $('#short_path_iface').after($('<div>', { html: msg, 'class': 'info' }));
+          highlightShortestPath(shortest_path.path, countrySrcId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
@@ -362,11 +379,18 @@
             $('#new_graph_iface').after($('<p>', { html: 'No link can be added given the constraint', class: 'error' }));
             return;
           }
-          topos["New_Topo"] = new_topology;
-          polylines["New_Topo"] = [];
+          //topos["New_Topo"] = new_topology;
+          //polylines["New_Topo"] = [];
+          topos[country_name] = new_topology;
+          polylines[country_name] = [];
           console.log("going to draw topology!");
-          drawTopology("New_Topo");
-          $('#new_graph_iface').after($('<p>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'}));
+          //var info_new_node = drawTopology("New_Topo");
+          var info_new_node = drawTopology(country_name);
+          if (info_new_node) {
+            map.setCenter(info_new_node.coords);
+            map.setZoom(6);
+          }
+          $('#new_graph_iface').after($('<p>', { html: 'A new node has successfully been added to the graph', 'class': 'info' }));
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {

@@ -28,18 +28,18 @@ public class App {
             System.out.println("data received: " + request.body());
 
             JSONParser parser = new JSONParser();
-            JSONArray shortestPath = null;
+            JSONObject shortestPath = null;
 
             try {
                 Object obj = parser.parse(request.body());
                 JSONObject jsonObject = (JSONObject) obj;
-                String countryName = jsonObject.get("country").toString();
+                /*String countryName = jsonObject.get("country").toString();
 
-                JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);                
+                JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName); */
+                JSONObject jsonTopology = (JSONObject) jsonObject.get("topo");
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 String sourceNodeName = jsonObject.get("src").toString();
-                System.out.println("graph.getNodes()"+graph.getNodes().toString());
-                System.out.println("graph.getNodes()"+graph.getNodes().toString());
+                //System.out.println("graph.getNodes()" + graph.getNodes().toString());
                 Node sourceNode = graph.findNode(sourceNodeName);
                 if (sourceNode == null) {
                     // How should application handle when user inserts a source not available!
@@ -52,8 +52,9 @@ public class App {
                     throw new WanComException("Target is not in the graph!");
                 }
 
-                shortestPath = targetNode.getShortestPathAsJSONArray();
-                System.out.println("Shortest path: " + ((JSONArray) shortestPath).toString());
+                shortestPath = targetNode.getShortestPathAsWithTotalDistance();
+                System.out.println("Shortest path: " + shortestPath.get("path").toString() +
+                                    ", distance = " + shortestPath.get("distance").toString());
             } catch (ParseException e) {
                 System.err.println("Parsing error");
             } catch (WanComException e) {
