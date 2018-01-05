@@ -94,6 +94,11 @@ public class App {
 
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
+                if (newGraph == null) {
+                    jsonResponse = new JSONObject();
+                    jsonResponse.put("no_change", true);
+                    return jsonResponse;
+                }
                 jsonResponse = JSONUtils.JSONTopologyFromGraph(newGraph);
                 System.out.println("newGraph " + jsonResponse);
 

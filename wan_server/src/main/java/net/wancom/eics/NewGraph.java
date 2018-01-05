@@ -132,6 +132,10 @@ public class NewGraph {
         }
         
         //Record bestRecord = graphsPerformances.get(graphsPerformances.indexOf(Collections.min(graphsPerformances)));
+        if (bestRecord.getNewNode() == null) {
+            System.out.println("No improvement made to the graph");
+            return null; // no improvement
+        }
         Node newNode = bestRecord.getNewNode();
         graph.addNode(newNode);
         for (Node neighbour : bestRecord.getNeighbours().keySet()) {

@@ -18,18 +18,25 @@
       #dashboard {
         margin: 1em;
       }
-      #header {
+      #header p {
         font-weight: bold;
         margin-bottom: auto;
         margin-right: 0.5em
+      }
+      .iface {
+        margin-bottom: 0.3em;
       }
       .iface + div {
         margin-top: 0.8em;
         margin-bottom: 0.5em;
       }
       .error {
-        font-weight: bold;
         color: red;
+        margin: auto;
+        margin-bottom: 0.15em;
+      }
+      .iface + .error {
+        font-weight: bold;
       }
       select {
         margin-right: 0.5em;
@@ -284,7 +291,7 @@
         var source_shortest_path = $(":input[name='src']").val();
         var dest_shortest_path = $(":input[name='dest']").val();
         if (source_shortest_path === '' || dest_shortest_path === '') {
-          $('<div>', { html: 'Please provide a source and a destination', 'class': 'error' }).appendTo('#short_path_iface');
+          $('#short_path_iface').after($('<p>', { html: 'Please provide a source and a destination', 'class': 'error' }));
           return;
         }
         var countrySrcId = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
@@ -297,7 +304,7 @@
           return country;
         });
         if (countries_input[0] !== countries_input[1]) {
-          $('<div>', { html: 'Please choose a source and a destination in the same country', class: 'error' }).appendTo('#short_path_iface');
+          $('#short_path_iface').after($('<p>', { html: 'Please choose a source and a destination in the same country', class: 'error' }));
           return;          
         }
         
@@ -335,7 +342,7 @@
         var max_cost = $(":input[name='cost']").val();
         
         if (!max_cost) {
-          $('<div>', { html: 'Please specify a maximum cost (ie. maximum length of new links that can be built)', class: 'error' }).appendTo('#dashboard');
+          $('#new_graph_iface').after($('<p>', { html: 'Please specify a maximum cost (ie. maximum length of new links that can be built)', class: 'error' }));
           return;
         }
         
@@ -349,12 +356,17 @@
           data: JSON.stringify(request),
           dataType: 'json'
         })
-        .done(function( new_topology ) { // new_graph is an object containing the fields 
+        .done(function( new_topology ) { // new_graph is an object containing the fields
           console.log("JSON received successfully from the server:", JSON.stringify(new_topology));
+          if (new_topology["no_change"] === true) {
+            $('#new_graph_iface').after($('<p>', { html: 'No link can be added given the constraint', class: 'error' }));
+            return;
+          }
           topos["New_Topo"] = new_topology;
           polylines["New_Topo"] = [];
           console.log("going to draw topology!");
           drawTopology("New_Topo");
+          $('#new_graph_iface').after($('<p>', { html: 'Shortest path found is: ' + shortest_path.join(' -> ') }).css({'color': 'green'}));
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
