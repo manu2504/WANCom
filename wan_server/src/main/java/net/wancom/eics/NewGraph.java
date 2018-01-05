@@ -32,11 +32,15 @@ public class NewGraph {
     public static Graph addBestNewNode(Graph graph, String country, int constraint) throws FileNotFoundException, IOException {
 
         // For performance evaluation
-        int numberOfGraphsChecked = 0;
-        int numberOfGraphsReallyEvaluated = 0;
         long startTimestamp = System.currentTimeMillis();
         long intermediateTimestamp; 
+        long elapsedTime;
         
+        // For notifying the user of the progress on the standard output
+        int numberOfGraphsChecked = 0;
+        int numberOfGraphsReallyEvaluated = 0;
+        float percentage;
+
         JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
         List<Node> oldNodes = new ArrayList<>();
         JSONArray nodesList = (JSONArray) newTopology.get("nodes");
@@ -48,6 +52,7 @@ public class NewGraph {
         
         //List<Record> graphsPerformances = new ArrayList<>();
         Record bestRecord = new Record(null, null, Integer.MAX_VALUE);
+        
 
         // Add new nodes to the graph (try one-by-one)
         for (int i = 0; i < nodesList.size(); i++) {
@@ -83,8 +88,7 @@ public class NewGraph {
                     numberOfGraphsChecked++;
                     if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/1000) == 0 ) {
                         intermediateTimestamp = System.currentTimeMillis();
-                        long elapsedTime = intermediateTimestamp - startTimestamp;
-                        float percentage;
+                        elapsedTime = intermediateTimestamp - startTimestamp;
                         percentage = (float) ((float) numberOfGraphsChecked*100.0f / (float) numberOfGraphsToBeEvaluated);
                         percentage = (float) (Math.round(percentage*100.0f)/100.0f);
                         System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs evaluated (" + Float.toString(percentage) + "%) - " + elapsedTime/(1000*60) + "min");
