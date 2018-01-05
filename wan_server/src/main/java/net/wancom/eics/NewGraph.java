@@ -3,7 +3,7 @@ package net.wancom.eics;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Collections;
+//import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,8 +34,6 @@ public class NewGraph {
         // For performance evaluation
         int numberOfGraphsChecked = 0;
         int numberOfGraphsReallyEvaluated = 0;
-        final String ANSI_GREEN = "\u001B[32m";
-        final String ANSI_RESET = "\u001B[0m";
         long startTimestamp = System.currentTimeMillis();
         long intermediateTimestamp; 
         
@@ -69,12 +67,18 @@ public class NewGraph {
                 //System.out.println("oldNode1: " + oldNode1.getNodeName());
                 int cost1 = Distance.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
                         newNode.getLatitude(), newNode.getLongitude());
-                if (cost1 > constraint) continue;
+                if (cost1 > constraint) {
+                    numberOfGraphsChecked += oldNodes.size() - x;
+                    continue;
+                }
                 oldNode1.addImmediateNeighborsDestination(newNode, cost1);
                 newNode.addImmediateNeighborsDestination(oldNode1, cost1);
                 for (int y = x + 1; y < oldNodes.size(); y++) {
                     Node oldNode2 = oldNodes.get(y);
-                    if (oldNode2.equals(oldNode1)) continue;
+                    if (oldNode2.equals(oldNode1)) {
+                        System.err.println("Weird! There is a redundancy!");
+                        continue;
+                    }
                     //System.out.println("      oldNode2: " + oldNode2.getNodeName());
                     numberOfGraphsChecked++;
                     if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/1000) == 0 ) {
