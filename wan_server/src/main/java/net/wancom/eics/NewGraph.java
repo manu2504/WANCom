@@ -49,15 +49,15 @@ public class NewGraph {
         int numberOfGraphsToBeEvaluated = nodesList.size() * ( (graph.getNodes().size() * (graph.getNodes().size() + 1) ) /2 );
         System.out.println("Estimated number of graphs to be evaluated: " + Integer.toString( numberOfGraphsToBeEvaluated ) );
         oldNodes.addAll(graph.getNodes());
-        
-        //List<Record> graphsPerformances = new ArrayList<>();
-        Record bestRecord = new Record(null, null, Integer.MAX_VALUE);
-        
 
+        // Sum of lengths of all paths in the graph (the graph with the shortest length will be kept)
+        int currentTotalDistance = computeTotalDistance(graph, oldNodes);
+        Record bestRecord = new Record(null, null, currentTotalDistance);
+        
         // Add new nodes to the graph (try one-by-one)
         for (int i = 0; i < nodesList.size(); i++) {
             JSONObject nodeObject = (JSONObject) nodesList.get(i);
-            Node newNode = new Node("newNode"+i);
+            Node newNode = new Node("New Node " + i);
             double nodeLat = Double.parseDouble(nodeObject.get("Latitude").toString());
             double nodeLong= Double.parseDouble(nodeObject.get("Longitude").toString());
             newNode.setLatitude(nodeLat);
@@ -118,7 +118,6 @@ public class NewGraph {
                         bestRecord = record;
                     }
                     //System.out.println("Added " + record.toString());
-                    //graphsPerformances.add(record);
                     
                     oldNode2.removeImmediateNeighborsDestination(newNode);
                     newNode.removeImmediateNeighborsDestination(oldNode2);
@@ -131,7 +130,6 @@ public class NewGraph {
             graph.removeNode(newNode);
         }
         
-        //Record bestRecord = graphsPerformances.get(graphsPerformances.indexOf(Collections.min(graphsPerformances)));
         if (bestRecord.getNewNode() == null) {
             System.out.println("No improvement made to the graph");
             return null; // no improvement

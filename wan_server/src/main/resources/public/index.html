@@ -47,7 +47,7 @@
         margin-right: 0.5em;
         margin-left: 0.5em;
       }
-      input {
+      input:not([type="radio"]) {
         margin-right: 0.5em;
         margin-left: 0.5em;
       }
@@ -68,8 +68,8 @@
       
       function initMap() {
         map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 4, // (World : 2)
-          center: new google.maps.LatLng(64.868175, 24.812939), // World: new google.maps.LatLng(2.8,-187.3),
+          zoom: 2,
+          center: new google.maps.LatLng(47.044448, 13.983138),
           mapTypeId: 'terrain'
         });
       }
@@ -156,10 +156,6 @@
           var label = topo.nodes[i].id;
           var country = topo.nodes[i].country;
           var isNewNode = topo.nodes[i].new || false;
-          
-          if (isNewNode) {
-            new_node_info = {coords: coordinates};
-          }
 
           nodes[topo_Id][label] = coordinates;
 
@@ -176,7 +172,12 @@
           var isNewLink = topo.links[i].new;
           drawLink(source, target, topo_Id, isNewLink);
         }
-        return new_node_info;
+        
+        // For a new topology, let's zoom in the new node added
+        if (isNewNode) {
+          map.setCenter(coordinates);
+          map.setZoom(6);
+        }
       }
       
       function drawLink(source, target, topoId, isNewLink) {
@@ -247,14 +248,19 @@
       function add_UI() {
         // Add a user dashboard below the map
         var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
-        $('<label>Which country you want to highlight?</label>').appendTo($user_dashboard);
-        var $countryId = $('<select>', { id:'zoom_input', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } } );
+        
+        // Add "Zoom in" functionality
+        var form = '<form id="form"><span>Zoom in on:</span>';
+        form += '<input type="radio" name="zone" value="World" checked> World';
         countries.map(function(country) {
-          $('<option>', { text: country } ).appendTo($countryId);
+          form += ' <input type="radio" name="zone" value="' + country + '"> ' + country;
         });
-        $countryId.appendTo($user_dashboard);
-        $('<input type="checkbox" name="all" value="all" onclick="zoom(null);" checked>World<br>')
-                  .appendTo($user_dashboard);
+        form += '</form>';
+        $($.parseHTML(form)).appendTo($user_dashboard);
+        $('#form input').on('change', function() {
+          zoom($('input[name=zone]:checked', '#form').val());
+          console.log($('input[name=zone]:checked', '#form').val());
+        });
         
         // Add input fields for requesting Shortest path
         var $shortest_path_interface = $('<div>', { id: 'short_path_iface', class: 'iface' })
@@ -280,7 +286,7 @@
                                 .appendTo($user_dashboard);
         var $new_graph_header     = $('<div>', { html: '<p>New node (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
         var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
-        var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this); }, change: function() { zoom(this); } } });
+        var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this.value); }, change: function() { zoom(this.value); } } });
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($country_new_graph);
         });
@@ -324,7 +330,6 @@
         
         // We build the request object to send to the server
         var request = {};
-        //request['country'] = countrySrcId; // HERE
         request['topo'] = topos[countrySrcId];
         request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
         request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
@@ -338,7 +343,7 @@
         .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
           console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
           var msg = 'Shortest path found is: ' + shortest_path["path"].join(' -> ');
-          msg += " (" + shortest_path["distance"] + "km)";
+          msg += " (" + shortest_path["distance"] + "&nbsp;km)";
           $('#short_path_iface').after($('<div>', { html: msg, 'class': 'info' }));
           highlightShortestPath(shortest_path.path, countrySrcId);
         })
@@ -378,17 +383,10 @@
             $('#new_graph_iface').after($('<p>', { html: 'No link can be added given the constraint', class: 'error' }));
             return;
           }
-          //topos["New_Topo"] = new_topology;
-          //polylines["New_Topo"] = [];
           topos[country_name] = new_topology;
           polylines[country_name] = [];
-          console.log("going to draw topology!");
-          //var info_new_node = drawTopology("New_Topo");
-          var info_new_node = drawTopology(country_name);
-          if (info_new_node) {
-            map.setCenter(info_new_node.coords);
-            map.setZoom(6);
-          }
+          console.log("Going to draw new topology for " + country_name + "!");
+          drawTopology(country_name);
           $('#new_graph_iface').after($('<p>', { html: 'A new node has successfully been added to the graph', 'class': 'info' }));
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
@@ -405,22 +403,9 @@
         $('#short_path_iface input').val('');
       }
       
-      function zoom(select) {
-        var country_selected;
-        if (!select) {
-          if ( !$("input:checkbox[value='all']").prop('checked') ) {
-            country_selected = $('#zoom_input').find( 'option:selected' ).text();
-          } else {
-            country_selected = 'World';
-          }
-        } else {
-          country_selected = $(select).find( 'option:selected' ).text();
-          if ( $("input:checkbox[value='all']").prop('checked') ) {
-            $("input:checkbox[value='all']").prop('checked', false);
-          }
-        }
-        map.setCenter(zoom_info[country_selected].center); // center on country selected
-        map.setZoom(zoom_info[country_selected].zoom); // center with the level of zoom pre-defined for this country
+      function zoom(zone) {
+        map.setCenter(zoom_info[zone].center); // center on country selected
+        map.setZoom(zoom_info[zone].zoom); // center with the level of zoom pre-defined for this country
       }
       window.zoom = zoom;
       
