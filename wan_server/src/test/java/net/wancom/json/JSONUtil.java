@@ -1,4 +1,4 @@
-package deprecated.json;
+package net.wancom.json;
 
 import net.wancom.exceptions.WanComException;
 import org.eclipse.persistence.jaxb.UnmarshallerProperties;

@@ -1,4 +1,4 @@
-package deprecated.json;
+package net.wancom.json;
 
 /**
  * Created by farzadha@kth.se on 2017-12-14.
