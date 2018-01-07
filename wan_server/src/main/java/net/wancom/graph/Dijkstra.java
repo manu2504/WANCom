@@ -9,9 +9,12 @@ public class Dijkstra {
 
 
     /**
-     * Dijkstra algorithm:
+     * Dijkstra algorithm - deeply inspired by the implementation available at
+     * https://github.com/eugenp/tutorials/tree/master/algorithms/src/main/java/com/baeldung/algorithms/ga/dijkstra
+     * authored by https://github.com/yasin3061
+     * 
      * The following algorithm, get a source and calculate the shortest path to other nodes of graph.
-     * After running, the grap's Node get two parameters initiated: shortestPath from source
+     * After running, the graph's Node get two parameters initiated: shortestPath from source
      * and cost that is the lowest cost from source to the node. So to get the shortest path between two nodes,
      * we should run the following method and use one of the two nodes as source, and then from the other node
      * get shortestPath and cost.

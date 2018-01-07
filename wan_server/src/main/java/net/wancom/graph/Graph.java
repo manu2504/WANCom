@@ -7,6 +7,10 @@ import java.util.Set;
  * We have a Graph that is a set of nodes.
  *
  * @see {@link Node}
+ *
+ * Inspired by the implentation available at:
+ * https://github.com/eugenp/tutorials/blob/master/algorithms/src/main/java/com/baeldung/algorithms/ga/dijkstra/Graph.java
+ * authored by https://github.com/yasin3061
  */
 public class Graph {
 

@@ -11,6 +11,10 @@ import org.json.simple.JSONObject;
 
 /**
  * Each Node in a graph will be an object of this class.
+ *
+ * Deeply inspired by the implementation available at:
+ * https://github.com/eugenp/tutorials/blob/master/algorithms/src/main/java/com/baeldung/algorithms/ga/dijkstra/Node.java
+ * authored by https://github.com/yasin3061
  */
 
 public class Node{
