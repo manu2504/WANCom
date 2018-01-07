@@ -1,6 +1,7 @@
 package net.wancom.graph;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class DijkstraTest {
     
     
     @Test
+    @Ignore
     public void calculationTimeOfDijkstraAlgorithm(){
         long startTime = System.currentTimeMillis();
         Graph myGraph = getTracedGraphByDijkstra(nodeA);
@@ -39,6 +41,7 @@ public class DijkstraTest {
     }    
 
     @Test
+    @Ignore
     public void calculateShortestPathFromSource() {
         Graph myGraph = getTracedGraphByDijkstra(nodeA);
 
