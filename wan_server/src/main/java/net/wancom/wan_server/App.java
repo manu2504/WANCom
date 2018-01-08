@@ -52,7 +52,7 @@ public class App {
                     throw new WanComException("Target is not in the graph!");
                 }
 
-                shortestPath = targetNode.getShortestPathAsWithTotalDistance();
+                shortestPath = targetNode.getShortestPathAsJSONWithTotalDistance();
                 System.out.println("Shortest path: " + shortestPath.get("path").toString() +
                                     ", distance = " + shortestPath.get("distance").toString());
             } catch (ParseException e) {

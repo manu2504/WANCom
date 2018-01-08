@@ -60,7 +60,7 @@
     <script src="jquery-3.2.1.min.js"></script>
 
     <script async defer
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&callback=initMap">
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAJeWErAFIm-5ALCAYlHl61ylmgKDDWBps&language=en&callback=initMap">
     </script>
     
     <script>
@@ -259,7 +259,6 @@
         $($.parseHTML(form)).appendTo($user_dashboard);
         $('#form input').on('change', function() {
           zoom($('input[name=zone]:checked', '#form').val());
-          console.log($('input[name=zone]:checked', '#form').val());
         });
         
         // Add input fields for requesting Shortest path
@@ -284,7 +283,7 @@
         // Add input fields for requesting new graph
         var $new_graph_interface  = $('<div>', { id: 'new_graph_iface', class: 'iface' })
                                 .appendTo($user_dashboard);
-        var $new_graph_header     = $('<div>', { html: '<p>New node (beta!):</p>', id: 'header', css: { 'display': 'inline-block' } } );
+        var $new_graph_header     = $('<div>', { html: '<p>New topology:</p>', id: 'header', css: { 'display': 'inline-block' } } );
         var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
         var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this.value); }, change: function() { zoom(this.value); } } });
         countries.map(function(country) {
@@ -327,10 +326,11 @@
           $('#short_path_iface').after($('<p>', { html: 'Please choose a source and a destination in the same country', class: 'error' }));
           return;          
         }
+        var countryId = countries_input[0];
         
         // We build the request object to send to the server
         var request = {};
-        request['topo'] = topos[countrySrcId];
+        request['topo'] = topos[countryId];
         request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
         request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
         
@@ -345,7 +345,7 @@
           var msg = 'Shortest path found is: ' + shortest_path["path"].join(' -> ');
           msg += " (" + shortest_path["distance"] + "&nbsp;km)";
           $('#short_path_iface').after($('<div>', { html: msg, 'class': 'info' }));
-          highlightShortestPath(shortest_path.path, countrySrcId);
+          highlightShortestPath(shortest_path.path, countryId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {

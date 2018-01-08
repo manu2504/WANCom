@@ -29,7 +29,7 @@ public class Node{
     // to current Node - this (include all nodes between source and destination)
     private List<Node> shortestPath = new LinkedList<>();
 
-    //Distance between the node and source node, default value is the MAX_VALUE until we calcualte the real cost
+    //Distance between the node and source node, default value is the MAX_VALUE until we calculate the real cost
     private Integer cost = Integer.MAX_VALUE;
 
     //immediateNeighborNodes is all immediate neighbors with cost (cost) to this node.
@@ -91,6 +91,10 @@ public class Node{
     public List<Node> getShortestPath() {
         return shortestPath;
     }
+
+    public void setShortestPath(List<Node> shortestPath) {
+        this.shortestPath = shortestPath;
+    }
     
     @SuppressWarnings("unchecked")
     public JSONArray getShortestPathAsJSONArray() {
@@ -102,7 +106,7 @@ public class Node{
     }
     
     @SuppressWarnings("unchecked")
-    public JSONObject getShortestPathAsWithTotalDistance() {
+    public JSONObject getShortestPathAsJSONWithTotalDistance() {
       JSONObject shortestPathWithTotalDistance = new JSONObject();
       JSONArray shortestPathJSON = new JSONArray();
       int totalDistance;
@@ -116,10 +120,6 @@ public class Node{
       shortestPathWithTotalDistance.put("distance", totalDistance);
       
       return shortestPathWithTotalDistance;
-    }
-
-    public void setShortestPath(List<Node> shortestPath) {
-        this.shortestPath = shortestPath;
     }
     
     public Integer getCost() {

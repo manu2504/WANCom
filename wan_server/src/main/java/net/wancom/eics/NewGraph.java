@@ -39,6 +39,7 @@ public class NewGraph {
         // For notifying the user of the progress on the standard output
         int numberOfGraphsChecked = 0;
         int numberOfGraphsReallyEvaluated = 0;
+        int numberOfGraphsToBeEvaluated;
         float percentage;
 
         JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
@@ -46,7 +47,7 @@ public class NewGraph {
         JSONArray nodesList = (JSONArray) newTopology.get("nodes");
         System.out.println("No. of nodes in the initial graph: " + graph.getNodes().size());
         System.out.println("No. of new nodes: " + nodesList.size());
-        int numberOfGraphsToBeEvaluated = nodesList.size() * ( (graph.getNodes().size() * (graph.getNodes().size() + 1) ) /2 );
+        numberOfGraphsToBeEvaluated = nodesList.size() * ( ( (graph.getNodes().size() - 1) * graph.getNodes().size() ) /2);
         System.out.println("Estimated number of graphs to be evaluated: " + Integer.toString( numberOfGraphsToBeEvaluated ) );
         oldNodes.addAll(graph.getNodes());
 
@@ -73,7 +74,7 @@ public class NewGraph {
                 int cost1 = Distance.getDistance(oldNode1.getLatitude(), oldNode1.getLongitude(),
                         newNode.getLatitude(), newNode.getLongitude());
                 if (cost1 > constraint) {
-                    numberOfGraphsChecked += oldNodes.size() - x;
+                    numberOfGraphsChecked += oldNodes.size() - x - 1;
                     continue;
                 }
                 oldNode1.addImmediateNeighborsDestination(newNode, cost1);
@@ -86,12 +87,12 @@ public class NewGraph {
                     }
                     //System.out.println("      oldNode2: " + oldNode2.getNodeName());
                     numberOfGraphsChecked++;
-                    if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/1000) == 0 ) {
+                    if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/1000) == 0) {
                         intermediateTimestamp = System.currentTimeMillis();
                         elapsedTime = intermediateTimestamp - startTimestamp;
                         percentage = (float) ((float) numberOfGraphsChecked*100.0f / (float) numberOfGraphsToBeEvaluated);
                         percentage = (float) (Math.round(percentage*100.0f)/100.0f);
-                        System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs evaluated (" + Float.toString(percentage) + "%) - " + elapsedTime/(1000*60) + "min");
+                        System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs checked (" + Float.toString(percentage) + "%) - " + elapsedTime/(1000*60) + "min");
                     }
                     int cost2 = Distance.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
                             newNode.getLatitude(), newNode.getLongitude());
@@ -99,12 +100,16 @@ public class NewGraph {
                     if (totalCost > constraint) {
                             continue;
                     }
-                    numberOfGraphsReallyEvaluated++;
                    
                     oldNode2.addImmediateNeighborsDestination(newNode, cost2);
                     newNode.addImmediateNeighborsDestination(oldNode2, cost2);
                     
                     int totalDistance = computeTotalDistance(graph, oldNodes);
+                    
+                    numberOfGraphsReallyEvaluated++;
+                    if (numberOfGraphsReallyEvaluated % 10 == 0) {
+                        System.out.println(Integer.toString(numberOfGraphsReallyEvaluated) + " graphs fully evaluated");
+                    }
                     
                     // Building a set of neighbours (Node, cost) to add to the record
                     Map<Node, Integer> neighbours = new HashMap<>();
