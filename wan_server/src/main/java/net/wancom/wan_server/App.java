@@ -1,10 +1,10 @@
 package net.wancom.wan_server;
 
+// We use the framework Spark for the webserver. See sparkjava.com/documentation.html
 import static spark.Spark.*;
 
 import net.wancom.eics.NewGraph;
 import org.json.simple.JSONObject;
-import org.json.simple.JSONArray;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
 
@@ -28,7 +28,7 @@ public class App {
             System.out.println("data received: " + request.body());
 
             JSONParser parser = new JSONParser();
-            JSONObject shortestPath = null;
+            String res = "";
 
             try {
                 Object obj = parser.parse(request.body());
@@ -39,29 +39,28 @@ public class App {
                 JSONObject jsonTopology = (JSONObject) jsonObject.get("topo");
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 String sourceNodeName = jsonObject.get("src").toString();
-                //System.out.println("graph.getNodes()" + graph.getNodes().toString());
+                String targetNodeName = jsonObject.get("dst").toString();
                 Node sourceNode = graph.findNode(sourceNodeName);
+                Node targetNode = graph.findNode(targetNodeName);
                 if (sourceNode == null) {
-                    // How should application handle when user inserts a source not available!
-                    throw new WanComException("Source is not in the graph!");
+                    response.type("application/json");
+                    res = "{\"error\": \"The source selected does not belong to the topology\"}";
                 }
-                graph = Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
-                Node targetNode = graph.findNode(jsonObject.get("dst").toString());
                 if (targetNode == null) {
-                    // How should application handle when user inserts a target not available!
-                    throw new WanComException("Target is not in the graph!");
+                    response.type("application/json");
+                    res = "{\"error\": \"The destination selected does not belong to the topology\"}";
                 }
-
-                shortestPath = targetNode.getShortestPathAsJSONWithTotalDistance();
-                System.out.println("Shortest path: " + shortestPath.get("path").toString() +
-                                    ", distance = " + shortestPath.get("distance").toString());
+                
+                Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
+                res = targetNode.getShortestPathWithTotalDistanceAsJSONString();
+                System.out.println(res);
             } catch (ParseException e) {
                 System.err.println("Parsing error");
             } catch (WanComException e) {
                 System.err.println(e.getMessage());
             }
 
-            return shortestPath;
+            return res;
         });
 
         post("/newgraph", (request, response) -> {

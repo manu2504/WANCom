@@ -97,16 +97,7 @@ public class Node{
     }
     
     @SuppressWarnings("unchecked")
-    public JSONArray getShortestPathAsJSONArray() {
-      JSONArray shortestPathAsJSONArray = new JSONArray();
-      for (Node elt : shortestPath) {
-        shortestPathAsJSONArray.add(elt.getNodeName());
-      }
-      return shortestPathAsJSONArray;
-    }
-    
-    @SuppressWarnings("unchecked")
-    public JSONObject getShortestPathAsJSONWithTotalDistance() {
+    public String getShortestPathWithTotalDistanceAsJSONString() {
       JSONObject shortestPathWithTotalDistance = new JSONObject();
       JSONArray shortestPathJSON = new JSONArray();
       int totalDistance;
@@ -114,12 +105,12 @@ public class Node{
       for (Node elt : shortestPath) {
           shortestPathJSON.add(elt.getNodeName());
       }
-      totalDistance = shortestPath.get(shortestPath.size()-1).getCost();
+      totalDistance = this.getCost();
       
       shortestPathWithTotalDistance.put("path", shortestPathJSON);
       shortestPathWithTotalDistance.put("distance", totalDistance);
       
-      return shortestPathWithTotalDistance;
+      return shortestPathWithTotalDistance.toJSONString();
     }
     
     public Integer getCost() {

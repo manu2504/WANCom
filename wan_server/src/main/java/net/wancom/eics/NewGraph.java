@@ -18,14 +18,15 @@ import net.wancom.json.JSONUtils;
 public class NewGraph {
   
   /*
-   * TODO: finish to write the function addBestNewNode().
-   * This function adds a new node in a graph ( needs to use Graph.addNode() )
-   * and after, a loop that iterates for all potential new nodes, and compute for each of them
-   * the new total distance for the modified graph. This performance should be stored in a variable
-   * that stores the best performance, and be replaced every time a better performance is found.
+   * The function addBestNewNode adds a new node in a graph, such that the average distance
+   * between any two nodes in the graph is reduced.
    * 
-   * 
-   * (TODO) a function which evaluates the current total latency of a graph, needed by addBestNewNode (see below)
+   * To achieve this, it iterates through all potential new nodes, and for each of them it
+   * computes the new total distance for the modified graph.
+   * This total distance is stored along with the new node and its neighbors in a variable
+   * that stores the best performance. Every time a shorter total distance is found,
+   * the variable is updated. At the end of the loops, we have the best connection possible
+   * that uses one node among those suggested, and two links to existing nodes. 
    */
     
 
@@ -42,13 +43,19 @@ public class NewGraph {
         int numberOfGraphsToBeEvaluated;
         float percentage;
 
+        // We build a graph with the new topology
         JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
-        List<Node> oldNodes = new ArrayList<>();
-        JSONArray nodesList = (JSONArray) newTopology.get("nodes");
+        JSONArray newNodes = (JSONArray) newTopology.get("nodes");
+        
+        // Info to the standard output
         System.out.println("No. of nodes in the initial graph: " + graph.getNodes().size());
-        System.out.println("No. of new nodes: " + nodesList.size());
-        numberOfGraphsToBeEvaluated = nodesList.size() * ( ( (graph.getNodes().size() - 1) * graph.getNodes().size() ) /2);
+        System.out.println("No. of new nodes: " + newNodes.size());
+        numberOfGraphsToBeEvaluated = newNodes.size() * ( ( (graph.getNodes().size() - 1) * graph.getNodes().size() ) /2);
         System.out.println("Estimated number of graphs to be evaluated: " + Integer.toString( numberOfGraphsToBeEvaluated ) );
+        
+        // Copy of all nodes in the current graph, to allow to create links with them
+        // without being annoyed by new nodes added to the graph
+        List<Node> oldNodes = new ArrayList<>();
         oldNodes.addAll(graph.getNodes());
 
         // Sum of lengths of all paths in the graph (the graph with the shortest length will be kept)
@@ -56,8 +63,8 @@ public class NewGraph {
         Record bestRecord = new Record(null, null, currentTotalDistance);
         
         // Add new nodes to the graph (try one-by-one)
-        for (int i = 0; i < nodesList.size(); i++) {
-            JSONObject nodeObject = (JSONObject) nodesList.get(i);
+        for (int i = 0; i < newNodes.size(); i++) {
+            JSONObject nodeObject = (JSONObject) newNodes.get(i);
             Node newNode = new Node("New Node " + i);
             double nodeLat = Double.parseDouble(nodeObject.get("Latitude").toString());
             double nodeLong= Double.parseDouble(nodeObject.get("Longitude").toString());
