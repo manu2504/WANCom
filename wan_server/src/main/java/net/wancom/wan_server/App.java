@@ -4,6 +4,8 @@ package net.wancom.wan_server;
 import static spark.Spark.*;
 
 import net.wancom.eics.BetterGraph;
+import net.wancom.eics.Distance;
+
 //import net.wancom.eics.NewGraph;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -83,14 +85,12 @@ public class App {
                     throw new WanComException("Missing or incorrect input: cost: " + maxCost);
                 }
 
-                JSONObject jsonTopology = JSONUtils.JSONTopologyFromJSONFile(countryName);
+                JSONObject jsonTopology = JSONUtils.JSONTopology(countryName);
                 System.out.println(jsonTopology.toString());
 
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 //Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
-                System.out.println("mdr");
                 Graph newGraph = BetterGraph.addBestNewNode(graph, countryName, sourceNodeName, targetNodeName, maxCost, accuracy);
-                System.out.println("lol");
                 if (newGraph == null) {
                     jsonResponse = new JSONObject();
                     jsonResponse.put("no_change", true);

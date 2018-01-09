@@ -290,13 +290,20 @@
           $('<option>', { text: country } ).appendTo($country_new_graph);
         });*/
         var $cost_label = $('<label for="cost">Maximum cost:</label>');
-        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 250, name:"cost", size:"5"});
+        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 250, name:"cost" });
+        /*var $accuracy_label = $('<label for="accuracy">Maximum cost:</label>');
+        var $accuracy_inputs = [];
+        for (var accuracy in ['low', 'middle', 'high']) {
+          $accuracy_input.push( $('<input type="radio" name="accuracy" >' + accuracy + '</input>') );
+        }*/
                 
         $new_graph_header   .appendTo($new_graph_interface);
         //$choose_graph_label .appendTo($new_graph_interface);
         //$country_new_graph  .appendTo($new_graph_interface);
         $cost_label         .appendTo($new_graph_interface);
         $cost_input         .appendTo($new_graph_interface);
+        /*$accuracy_label     .appendTo($new_graph_interface);
+        $accuracy_inputs    .appendTo($new_graph_interface);*/
        
         $req_button = $('<button>', { html: 'Improve topology' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);

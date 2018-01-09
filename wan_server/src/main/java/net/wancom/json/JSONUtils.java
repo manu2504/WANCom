@@ -23,10 +23,10 @@ import net.wancom.graph.Node;
 
 public class JSONUtils {
 
-    public static JSONObject JSONTopologyFromJSONFile(String filename) throws FileNotFoundException, IOException {
+    public static JSONObject JSONTopology(String countryName) throws FileNotFoundException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
-        String path = getJSONFileFullName(filename);
+        String path = getJSONFileFullName(countryName);
         try {
             Object obj = parser.parse(new FileReader(path));
             jsonObject = (JSONObject) obj;
@@ -36,13 +36,11 @@ public class JSONUtils {
         return jsonObject;
     }
 
-    public static JSONObject NewJSONTopologyFromJSONFile(String countryName, Density density) throws FileNotFoundException, IOException {
+    public static JSONObject newJSONTopology(String countryName, Density density) throws FileNotFoundException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
-        System.out.println("mdr1");
         if (density == null) density = Density.MIDDLE;
         String path = getNewLocationsJSONFileFullName(countryName, density);
-        System.out.println("mdr2");
         try {
             Object obj = parser.parse(new FileReader(path));
             jsonObject = (JSONObject) obj;
@@ -52,11 +50,11 @@ public class JSONUtils {
         return jsonObject;
     }
 
-    public static String getJSONFileFullName(String filename) {
+    public static String getJSONFileFullName(String countryName) {
         // Class loader to find json files, there may exist another solution for this
         // part, the only goal is to find and read json files.
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        String path = classLoader.getResource("public/" + filename + ".json").getFile();
+        String path = classLoader.getResource("public/" + countryName + ".json").getFile();
         if (path == "") {
             throw new WanComException("The path for this filename has not been found");
         }
@@ -77,15 +75,12 @@ public class JSONUtils {
                 folder_name = "high_density/";
                 break;
         }
-        System.out.println("mdr3");
         String relativePath = "public/new_locations/" + folder_name + countryName + ".json";
         URL url = classLoader.getResource(relativePath);
-        System.out.println("mdr4");
         if (url == null) {
             throw new WanComException(relativePath + " has not been found");
         }
         String path = url.getFile();
-        System.out.println("mdr5");
         return path;
     }
 

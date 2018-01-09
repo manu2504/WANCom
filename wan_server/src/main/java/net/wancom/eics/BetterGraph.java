@@ -48,8 +48,10 @@ public class BetterGraph {
         case "high":
             density = Density.HIGH;
             break;
+        case "":
+            throw new WanComException("Please specify the density for the mesh of new nodes");
         }
-        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country, density);
+        JSONObject newTopology = JSONUtils.newJSONTopology(country, density);
         JSONArray newNodes = (JSONArray) newTopology.get("nodes");
         
         // Info to the standard output
@@ -66,9 +68,13 @@ public class BetterGraph {
         // We run Dijkstra on the current topology
         Node sourceNode = graph.findNode(sourceNodeName);
         Node targetNode = graph.findNode(targetNodeName);
-        if (sourceNode == null || targetNode == null) {
-            throw new WanComException("Source or target node not found in the graph!");
+        if (sourceNode == null ) {
+            throw new WanComException("Source node '" + sourceNodeName + "' not found in the graph!");
         }
+        if (targetNode == null) {
+            throw new WanComException("Target node '" + targetNodeName + "' not found in the graph!");
+        }
+
         Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
         
         // Here we keep a record of the length of the shortest path
@@ -105,8 +111,7 @@ public class BetterGraph {
                 for (int y = x + 1; y < oldNodes.size(); y++) {
                     Node oldNode2 = oldNodes.get(y);
                     if (oldNode2.equals(oldNode1)) {
-                        System.err.println("Weird! There is a redundancy!");
-                        continue;
+                        throw new WanComException("Weird! There is a redundancy!");
                     }
                     //System.out.println("      oldNode2: " + oldNode2.getNodeName());
                     numberOfGraphsChecked++;
@@ -146,15 +151,7 @@ public class BetterGraph {
                         bestDistanceOfShortestPath = currentTotalDistance;
                         bestRecord = new Record(newNode, neighbours);
                         System.out.println("Added " + bestRecord.toString());
-
                     }
-                    
-                    /*Record record = new Record(newNode, neighbours, totalDistance);
-                    if (record.compareTo(bestRecord) < 0) {
-                        //System.out.println("better distance found: " + Integer.toString(record.getTotalDistance()));
-                        bestRecord = record;
-                    }*/
-                    //System.out.println("Added " + record.toString());
                     
                     graph.resetCosts(); // so that it makes sense to run Dijkstra gain
                     oldNode2.removeImmediateNeighborsDestination(newNode);
@@ -185,15 +182,13 @@ public class BetterGraph {
      * 
      */
     
-    static class Record /*implements Comparable<Record>*/ {
+    static class Record {
         private Node newNode;
         private Map<Node, Integer> neighbours;
-        //private int totalDistance;
         
-        public Record(Node node, Map<Node, Integer> neighbours/*, int totalDistance*/) {
+        public Record(Node node, Map<Node, Integer> neighbours) {
             this.newNode = node;
             this.neighbours = neighbours;
-            //this.totalDistance = totalDistance;
         }
         
         public Node getNewNode() {
@@ -208,22 +203,6 @@ public class BetterGraph {
         public void setNeighbours(Map<Node, Integer> neighbours) {
             this.neighbours = neighbours;
         }
-        /*public int getTotalDistance() {
-            return totalDistance;
-        }
-        public void setTotalDistance(int totalDistance) {
-            this.totalDistance = totalDistance;
-        }
-        
-        @Override
-        public int compareTo(Record other) {
-            int res = -10;
-            if (other.getTotalDistance() > this.getTotalDistance()) res = -1;
-            if (other.getTotalDistance() == this.getTotalDistance()) res = 0;
-            if (other.getTotalDistance() < this.getTotalDistance()) res = 1;
-            if (res == -10) new WanComException("Damn! Records couldn't be compared to each other.");
-            return res;
-        }*/
         
         @Override
         public String toString() {
@@ -235,7 +214,6 @@ public class BetterGraph {
             return "Record { sourceNode = " +
                     this.newNode.getNodeName() +
                     ", neighbours= " + neighboursNames +
-                    //", totalDistance= " + totalDistance +
                     " }";
         }
     }

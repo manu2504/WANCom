@@ -46,7 +46,7 @@ public class NewGraph {
         float percentage;
 
         // We build a graph with the new topology
-        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country, Density.MIDDLE);
+        JSONObject newTopology = JSONUtils.newJSONTopology(country, Density.MIDDLE);
         JSONArray newNodes = (JSONArray) newTopology.get("nodes");
         
         // Info to the standard output
