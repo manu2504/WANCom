@@ -3,7 +3,8 @@ package net.wancom.wan_server;
 // We use the framework Spark for the webserver. See sparkjava.com/documentation.html
 import static spark.Spark.*;
 
-import net.wancom.eics.NewGraph;
+import net.wancom.eics.BetterGraph;
+//import net.wancom.eics.NewGraph;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
@@ -29,6 +30,7 @@ public class App {
 
             JSONParser parser = new JSONParser();
             String res = "";
+            response.type("application/json");
 
             try {
                 Object obj = parser.parse(request.body());
@@ -43,11 +45,9 @@ public class App {
                 Node sourceNode = graph.findNode(sourceNodeName);
                 Node targetNode = graph.findNode(targetNodeName);
                 if (sourceNode == null) {
-                    response.type("application/json");
                     res = "{\"error\": \"The source selected does not belong to the topology\"}";
                 }
                 if (targetNode == null) {
-                    response.type("application/json");
                     res = "{\"error\": \"The destination selected does not belong to the topology\"}";
                 }
                 
@@ -73,6 +73,8 @@ public class App {
                 Object obj = parser.parse(request.body());
                 JSONObject jsonObject = (JSONObject) obj;
                 String countryName = jsonObject.get("country").toString();
+                String sourceNodeName = jsonObject.get("src").toString();
+                String targetNodeName = jsonObject.get("dst").toString();
                 Integer maxCost = Integer.parseInt(jsonObject.get("max_cost").toString());
                 if (countryName == "" ) {
                     throw new WanComException("Missing input: countryName");
@@ -80,20 +82,14 @@ public class App {
                     throw new WanComException("Missing input: cost");
                 }
 
-                /*
-                 *  TODO: since adding the best new node may take many hours (5-10) to run,
-                 *  take the code from here and run it in standalone mode
-                 *  and output the result to a text file
-                 *  
-                 *  Biwen's suggestion: We can use concurrent computing to make the code faster,
-                 *  using a thread of pools, each pool trying to add one new node to the graph
-                 *  (with all different combinations of links) and writing the result to a file
-                 */
-                JSONObject jsonTopology = JSONUtils.JSONObjectFromJSONFile(countryName);
+                JSONObject jsonTopology = JSONUtils.JSONTopologyFromJSONFile(countryName);
                 System.out.println(jsonTopology.toString());
 
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
-                Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
+                //Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
+                System.out.println("mdr");
+                Graph newGraph = BetterGraph.addBestNewNode(graph, countryName, sourceNodeName, targetNodeName, maxCost);
+                System.out.println("lol");
                 if (newGraph == null) {
                     jsonResponse = new JSONObject();
                     jsonResponse.put("no_change", true);

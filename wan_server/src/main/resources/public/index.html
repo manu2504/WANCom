@@ -6,7 +6,7 @@
       /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
       #map {
-        height: 73%;
+        height: 65%;
         width: 100%;
       }
       /* Optional: Makes the sample page fill the window. */
@@ -70,7 +70,7 @@
         map = new google.maps.Map(document.getElementById('map'), {
           zoom: 2,
           center: new google.maps.LatLng(47.044448, 13.983138),
-          mapTypeId: 'terrain'
+          mapTypeId: 'satellite'
         });
       }
       
@@ -340,12 +340,17 @@
           data: JSON.stringify(request),
           dataType: 'json'
         })
-        .done(function( shortest_path ) { // shortest_path is an array of nodes constituting the shortest path
-          console.log("JSON received successfully from the server:", JSON.stringify(shortest_path));
-          var msg = 'Shortest path found is: ' + shortest_path["path"].join(' -> ');
-          msg += " (" + shortest_path["distance"] + "&nbsp;km)";
+        .done(function( response ) {
+        // response is an object containing two fields: "path", an array of node names, and "distance", the total length of the shortest path
+          console.log("JSON received successfully from the server:", JSON.stringify(response));
+          if (response["error"]) {
+            $('#short_path_iface').after($('<p>', { html: response["error"], class: 'error' }));
+            return;
+          }
+          var msg = 'Shortest path found is: ' + response.path.join(' -> ');
+          msg += " (" + response["distance"] + "&nbsp;km)";
           $('#short_path_iface').after($('<div>', { html: msg, 'class': 'info' }));
-          highlightShortestPath(shortest_path.path, countryId);
+          highlightShortestPath(response.path, countryId);
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {
@@ -361,14 +366,39 @@
         console.log('newgraph() called');
         var country_name = $(":input[name='newgraph']").val();
         var max_cost = $(":input[name='cost']").val();
+        var source_shortest_path = $(":input[name='src']").val();
+        var dest_shortest_path = $(":input[name='dest']").val();
         
         if (!max_cost) {
           $('#new_graph_iface').after($('<p>', { html: 'Please specify a maximum cost (ie. maximum length of new links that can be built)', class: 'error' }));
           return;
         }
+        if (source_shortest_path === '' || dest_shortest_path === '') {
+          $('#new_graph_iface').after($('<p>', { html: 'Please provide source and destination nodes', 'class': 'error' }));
+          return;
+        }
+        var countrySrcName = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );
+        var countryDstName = dest_shortest_path.substr( dest_shortest_path.lastIndexOf(',') + 2 );
+        var countries_input = [countrySrcName, countryDstName].map(function(country) {
+          // Special cases
+          if (country == "United States") return "USA";
+          if (country == "Canada") return "USA";
+          if (country == "Switzerland") return "France";
+          return country;
+        });
+        if (countries_input[0] !== countries_input[1]) {
+          $('#new_graph_iface').after($('<p>', { html: 'Please choose a source and a destination in the same country', class: 'error' }));
+          return;          
+        }
+        if (countries_input[0] !== country_name) {
+          $('#new_graph_iface').after($('<p>', { html: 'The source and destination do not belong to ' + country_name + '!', class: 'error' }));
+          return;          
+        }
         
         var request = {};
         request['country'] = country_name;
+        request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
+        request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
         request['max_cost'] = max_cost;
         
         $.ajax({
@@ -406,6 +436,8 @@
       function zoom(zone) {
         map.setCenter(zoom_info[zone].center); // center on country selected
         map.setZoom(zoom_info[zone].zoom); // center with the level of zoom pre-defined for this country
+        
+        $('#form input:radio[name=zone]').attr('checked',false);
       }
       window.zoom = zoom;
       

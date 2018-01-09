@@ -22,7 +22,7 @@ import net.wancom.graph.Node;
 
 public class JSONUtils {
 
-    public static JSONObject JSONObjectFromJSONFile(String filename) throws FileNotFoundException, IOException {
+    public static JSONObject JSONTopologyFromJSONFile(String filename) throws FileNotFoundException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
         String path = getJSONFileFullName(filename);
