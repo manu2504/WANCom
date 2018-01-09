@@ -76,10 +76,11 @@ public class App {
                 String sourceNodeName = jsonObject.get("src").toString();
                 String targetNodeName = jsonObject.get("dst").toString();
                 Integer maxCost = Integer.parseInt(jsonObject.get("max_cost").toString());
+                String accuracy = "high";
                 if (countryName == "" ) {
                     throw new WanComException("Missing input: countryName");
                 } else if (!(maxCost > 0)) {
-                    throw new WanComException("Missing input: cost");
+                    throw new WanComException("Missing or incorrect input: cost: " + maxCost);
                 }
 
                 JSONObject jsonTopology = JSONUtils.JSONTopologyFromJSONFile(countryName);
@@ -88,7 +89,7 @@ public class App {
                 Graph graph = JSONUtils.graphFromJSONTopology(jsonTopology);
                 //Graph newGraph = NewGraph.addBestNewNode(graph, countryName, maxCost);
                 System.out.println("mdr");
-                Graph newGraph = BetterGraph.addBestNewNode(graph, countryName, sourceNodeName, targetNodeName, maxCost);
+                Graph newGraph = BetterGraph.addBestNewNode(graph, countryName, sourceNodeName, targetNodeName, maxCost, accuracy);
                 System.out.println("lol");
                 if (newGraph == null) {
                     jsonResponse = new JSONObject();

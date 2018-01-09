@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -35,10 +36,13 @@ public class JSONUtils {
         return jsonObject;
     }
 
-    public static JSONObject NewJSONTopologyFromJSONFile(String filename) throws FileNotFoundException, IOException {
+    public static JSONObject NewJSONTopologyFromJSONFile(String countryName, Density density) throws FileNotFoundException, IOException {
         JSONParser parser = new JSONParser();
         JSONObject jsonObject = null;
-        String path = getNewLocationsJSONFileFullName(filename);
+        System.out.println("mdr1");
+        if (density == null) density = Density.MIDDLE;
+        String path = getNewLocationsJSONFileFullName(countryName, density);
+        System.out.println("mdr2");
         try {
             Object obj = parser.parse(new FileReader(path));
             jsonObject = (JSONObject) obj;
@@ -53,12 +57,35 @@ public class JSONUtils {
         // part, the only goal is to find and read json files.
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
         String path = classLoader.getResource("public/" + filename + ".json").getFile();
+        if (path == "") {
+            throw new WanComException("The path for this filename has not been found");
+        }
         return path;
     }
 
-    public static String getNewLocationsJSONFileFullName(String filename) {
+    public static String getNewLocationsJSONFileFullName(String countryName, Density density) {
         ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-        String path = classLoader.getResource("public/new_locations/" + filename + ".json").getFile();
+        String folder_name = ""; 
+        switch (density) {
+            case LOW:
+                folder_name = "low_density/";
+                break;
+            case MIDDLE:
+                folder_name = "middle_density/";
+                break;
+            case HIGH:
+                folder_name = "high_density/";
+                break;
+        }
+        System.out.println("mdr3");
+        String relativePath = "public/new_locations/" + folder_name + countryName + ".json";
+        URL url = classLoader.getResource(relativePath);
+        System.out.println("mdr4");
+        if (url == null) {
+            throw new WanComException(relativePath + " has not been found");
+        }
+        String path = url.getFile();
+        System.out.println("mdr5");
         return path;
     }
 

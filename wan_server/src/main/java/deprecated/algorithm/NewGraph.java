@@ -14,6 +14,7 @@ import org.json.simple.JSONObject;
 import net.wancom.eics.Distance;
 import net.wancom.exceptions.WanComException;
 import net.wancom.graph.*;
+import net.wancom.json.Density;
 import net.wancom.json.JSONUtils;
 
 public class NewGraph {
@@ -45,7 +46,7 @@ public class NewGraph {
         float percentage;
 
         // We build a graph with the new topology
-        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
+        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country, Density.MIDDLE);
         JSONArray newNodes = (JSONArray) newTopology.get("nodes");
         
         // Info to the standard output

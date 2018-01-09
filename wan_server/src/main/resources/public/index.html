@@ -250,7 +250,7 @@
         var $user_dashboard = $('<div>', { id: 'dashboard' }).appendTo('body');
         
         // Add "Zoom in" functionality
-        var form = '<form id="form"><span>Zoom in on:</span>';
+        var form = '<form id="form"><span>Select the topology to work with:</span>';
         form += '<input type="radio" name="zone" value="World" checked> World';
         countries.map(function(country) {
           form += ' <input type="radio" name="zone" value="' + country + '"> ' + country;
@@ -284,17 +284,17 @@
         var $new_graph_interface  = $('<div>', { id: 'new_graph_iface', class: 'iface' })
                                 .appendTo($user_dashboard);
         var $new_graph_header     = $('<div>', { html: '<p>New topology:</p>', id: 'header', css: { 'display': 'inline-block' } } );
-        var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
+        /*var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
         var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this.value); }, change: function() { zoom(this.value); } } });
         countries.map(function(country) {
           $('<option>', { text: country } ).appendTo($country_new_graph);
-        });
+        });*/
         var $cost_label = $('<label for="cost">Maximum cost:</label>');
-        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 700, name:"cost", size:"5"});
+        var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 250, name:"cost", size:"5"});
                 
         $new_graph_header   .appendTo($new_graph_interface);
-        $choose_graph_label .appendTo($new_graph_interface);
-        $country_new_graph  .appendTo($new_graph_interface);
+        //$choose_graph_label .appendTo($new_graph_interface);
+        //$country_new_graph  .appendTo($new_graph_interface);
         $cost_label         .appendTo($new_graph_interface);
         $cost_input         .appendTo($new_graph_interface);
        
@@ -364,7 +364,8 @@
       
       function request_new_graph() {
         console.log('newgraph() called');
-        var country_name = $(":input[name='newgraph']").val();
+        //var country_name = $(":input[name='newgraph']").val();
+        var country_name = $('input[name=zone]:checked', '#form').val();
         var max_cost = $(":input[name='cost']").val();
         var source_shortest_path = $(":input[name='src']").val();
         var dest_shortest_path = $(":input[name='dest']").val();
@@ -375,6 +376,10 @@
         }
         if (source_shortest_path === '' || dest_shortest_path === '') {
           $('#new_graph_iface').after($('<p>', { html: 'Please provide source and destination nodes', 'class': 'error' }));
+          return;
+        }
+        if (country_name == 'World') {
+          $('#new_graph_iface').after($('<p>', { html: 'Please select a topology to work with', 'class': 'error' }));
           return;
         }
         var countrySrcName = source_shortest_path.substr( source_shortest_path.lastIndexOf(',') + 2 );

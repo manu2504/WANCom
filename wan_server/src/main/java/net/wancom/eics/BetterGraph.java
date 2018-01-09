@@ -13,6 +13,7 @@ import org.json.simple.JSONObject;
 
 import net.wancom.exceptions.WanComException;
 import net.wancom.graph.*;
+import net.wancom.json.Density;
 import net.wancom.json.JSONUtils;
 
 public class BetterGraph {
@@ -22,7 +23,7 @@ public class BetterGraph {
    */
 
     public static Graph addBestNewNode(Graph graph, String country, String sourceNodeName,
-            String targetNodeName, int constraint) throws FileNotFoundException, IOException {
+            String targetNodeName, int constraint, String accuracy) throws FileNotFoundException, IOException {
 
         // For performance evaluation
         long startTimestamp = System.currentTimeMillis();
@@ -36,7 +37,19 @@ public class BetterGraph {
         float percentage;
 
         // We build a graph with the new topology
-        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country);
+        Density density = null;
+        switch (accuracy) {
+        case "low":
+            density = Density.LOW;
+            break;
+        case "middle":
+            density = Density.MIDDLE;
+            break;
+        case "high":
+            density = Density.HIGH;
+            break;
+        }
+        JSONObject newTopology = JSONUtils.NewJSONTopologyFromJSONFile(country, density);
         JSONArray newNodes = (JSONArray) newTopology.get("nodes");
         
         // Info to the standard output
@@ -102,7 +115,7 @@ public class BetterGraph {
                         elapsedTime = intermediateTimestamp - startTimestamp;
                         percentage = (float) ((float) numberOfGraphsChecked*100.0f / (float) numberOfGraphsToBeEvaluated);
                         percentage = (float) (Math.round(percentage*100.0f)/100.0f);
-                        System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs checked (" + Float.toString(percentage) + "%) - " + elapsedTime/(1000*60) + "min");
+                        System.out.println(numberOfGraphsChecked + "/" + numberOfGraphsToBeEvaluated + " graphs checked (" + Float.toString(percentage) + "%) - " + elapsedTime + "ms");
                     }
                     int cost2 = Distance.getDistance(oldNode2.getLatitude(), oldNode2.getLongitude(),
                             newNode.getLatitude(), newNode.getLongitude());
@@ -115,10 +128,10 @@ public class BetterGraph {
                     newNode.addImmediateNeighborsDestination(oldNode2, cost2);
                                         
                     numberOfGraphsReallyEvaluated++;
-                    if (numberOfGraphsReallyEvaluated % 10 == 0) {
+                    if (numberOfGraphsReallyEvaluated % 1000 == 0) {
                         intermediateTimestamp = System.currentTimeMillis();
-                        elapsedTime = (intermediateTimestamp - startTimestamp)/1000;
-                        System.out.println(Integer.toString(numberOfGraphsReallyEvaluated) + " graphs fully evaluated (in " + Float.toString(elapsedTime) + " sec.)");
+                        elapsedTime = intermediateTimestamp - startTimestamp;
+                        System.out.println(Integer.toString(numberOfGraphsReallyEvaluated) + " graphs fully evaluated (in " + Float.toString(elapsedTime) + " ms.)");
                     }
                     
                     // Building a set of neighbours (Node, cost) to add to the record
