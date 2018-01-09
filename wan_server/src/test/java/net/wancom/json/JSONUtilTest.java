@@ -2,9 +2,6 @@ package net.wancom.json;
 
 import org.junit.Test;
 
-import deprecated.json.JSONCountry;
-import deprecated.json.JSONUtil;
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
