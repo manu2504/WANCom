@@ -15,6 +15,8 @@ import java.util.Set;
 public class Graph {
 
     private Set<Node> nodes;
+    
+    public String message; // to return info with the graph (BetterGraph.addBestNewNode uses it)
 
     private Graph() {
         this.nodes = new HashSet<>();

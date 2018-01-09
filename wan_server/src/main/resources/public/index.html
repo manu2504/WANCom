@@ -51,6 +51,12 @@
         margin-right: 0.5em;
         margin-left: 0.5em;
       }
+      input[type=number] {
+        width: 80px;
+      }
+      button {
+        margin-left: 0.5em;
+      }
     </style>
   </head>
   <body>
@@ -75,8 +81,8 @@
       }
       
       /* topos = {
-        "France": { "nodes": [...], "links": [...] },
         "USA": {"nodes": [...], "links":[...] },
+        "China": { "nodes": [...], "links": [...] },
         ...
        }
       */
@@ -88,7 +94,7 @@
 		        "Dallas": {lat: ..., lng: ...},
 		        ...
 		      },
-		      "France": ...,
+		      "China": ...,
 		      ...
 		    }
 		  */
@@ -97,14 +103,14 @@
       
 		  /* polylines =(same format as)= polylinesShowingShortestPaths = {
 		      "USA": [Polyline, Polyline, ...],
-		      "France": [...],
+		      "China": [...],
 		      ...
 		   }
 		  */
 		  var polylines = {};
 		  var polylinesShowingShortestPaths = {};
 		  
-      var countries = ["USA", "China", "Germany", "France", "Finland"];
+      var countries = ["USA", "China", "Germany", "Finland"];
       var zoom_info = { // Where to zoom the map for each country? Center + zoom level
         World: { center: {lat: 47.044448, lng: 13.983138}, zoom: 2 },
         USA: { center: {lat: 41.878791, lng: -98.007661}, zoom: 3 },
@@ -118,14 +124,12 @@
           getJSON('USA.json'),
           getJSON('China.json'),
           getJSON('Germany.json'),
-          getJSON('France.json'),
           getJSON('Finland.json')
-        ).done(function (USA, China, Germany, France, Finland) {
+        ).done(function (USA, China, Germany, Finland) {
           // Start drawing the networks on the maps
           topos["USA"] = USA[0];
           topos["China"] = China[0];
           topos["Germany"] = Germany[0];
-          topos["France"] = France[0];
           topos["Finland"] = Finland[0];
           
           countries.map(function(country) {
@@ -276,7 +280,7 @@
         $dst_input              .appendTo($shortest_path_interface);
        
         var $req_sp_button = $('<button>', { html: 'Request shortest path' }).click(request_shortest_path);
-        var $reset_sp_button = $('<button>', { html: 'Reset' }).css({'margin-left': '0.5em'}).click(reset_shortest_path_fields);
+        var $reset_sp_button = $('<button>', { html: 'Reset' }).click(reset_shortest_path_fields);
         $req_sp_button.appendTo($shortest_path_interface);
         $reset_sp_button.appendTo($shortest_path_interface);
         
@@ -284,26 +288,21 @@
         var $new_graph_interface  = $('<div>', { id: 'new_graph_iface', class: 'iface' })
                                 .appendTo($user_dashboard);
         var $new_graph_header     = $('<div>', { html: '<p>New topology:</p>', id: 'header', css: { 'display': 'inline-block' } } );
-        /*var $choose_graph_label    = $('<label for="newgraph">Choose graph:</label>');
-        var $country_new_graph    = $('<select>', { id: 'select_ng', name: 'newgraph', on: { blur: function() { zoom(this.value); }, change: function() { zoom(this.value); } } });
-        countries.map(function(country) {
-          $('<option>', { text: country } ).appendTo($country_new_graph);
-        });*/
         var $cost_label = $('<label for="cost">Maximum cost:</label>');
         var $cost_input = $('<input>', { type: "number", placeholder: "500", value: 250, name:"cost" });
-        /*var $accuracy_label = $('<label for="accuracy">Maximum cost:</label>');
-        var $accuracy_inputs = [];
-        for (var accuracy in ['low', 'middle', 'high']) {
-          $accuracy_input.push( $('<input type="radio" name="accuracy" >' + accuracy + '</input>') );
-        }*/
+        var $accuracy_label = $('<label for="accuracy">Select accuracy of the result:</label>');
+        var accuracy_levels = ['low', 'middle', 'high'];
+        var $accuracy_input = [$('<input type="radio" name="accuracy" value="' + accuracy_levels[0] +'" checked>' + accuracy_levels[0] + '</input>')];
+        $accuracy_input.push($('<input type="radio" name="accuracy" value="' + accuracy_levels[1] +'">' + accuracy_levels[1] + '</input>'));
+        $accuracy_input.push($('<input type="radio" name="accuracy" value="' + accuracy_levels[2] +'">' + accuracy_levels[2] + '</input>'));
                 
         $new_graph_header   .appendTo($new_graph_interface);
-        //$choose_graph_label .appendTo($new_graph_interface);
-        //$country_new_graph  .appendTo($new_graph_interface);
         $cost_label         .appendTo($new_graph_interface);
         $cost_input         .appendTo($new_graph_interface);
-        /*$accuracy_label     .appendTo($new_graph_interface);
-        $accuracy_inputs    .appendTo($new_graph_interface);*/
+        $accuracy_label     .appendTo($new_graph_interface);
+        for (var i = 0; i < 3; i++) {
+          $accuracy_input[i].appendTo($new_graph_interface);
+        }
        
         $req_button = $('<button>', { html: 'Improve topology' }).click( request_new_graph );
         $req_button.appendTo($new_graph_interface);
@@ -376,6 +375,7 @@
         var max_cost = $(":input[name='cost']").val();
         var source_shortest_path = $(":input[name='src']").val();
         var dest_shortest_path = $(":input[name='dest']").val();
+        var accuracy = $(":input[name='accuracy']:checked").val();
         
         if (!max_cost) {
           $('#new_graph_iface').after($('<p>', { html: 'Please specify a maximum cost (ie. maximum length of new links that can be built)', class: 'error' }));
@@ -412,6 +412,7 @@
         request['src'] = source_shortest_path.substring( 0, source_shortest_path.lastIndexOf(',') );
         request['dst'] = dest_shortest_path.substring( 0, dest_shortest_path.lastIndexOf(',') );
         request['max_cost'] = max_cost;
+        request['accuracy'] = accuracy;
         
         $.ajax({
           method: "POST",
@@ -429,7 +430,7 @@
           polylines[country_name] = [];
           console.log("Going to draw new topology for " + country_name + "!");
           drawTopology(country_name);
-          $('#new_graph_iface').after($('<p>', { html: 'A new node has successfully been added to the graph', 'class': 'info' }));
+          $('#new_graph_iface').after($('<p>', { html: 'A new node has successfully been added to the graph <span style="color:gray">(' + new_topology['msg'] + ')</span>', 'class': 'info' }));
         })
         .fail(function(jqXHR, textStatus, errorThrown ) {
           if (errorThrown == "") {

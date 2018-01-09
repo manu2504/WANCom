@@ -190,6 +190,7 @@ public class JSONUtils {
         }
         jsonTopology.put("nodes", nodesList);
         jsonTopology.put("links", linksList);
+        jsonTopology.put("msg", graph.message);
 
         return jsonTopology;
     }

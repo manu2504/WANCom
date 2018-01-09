@@ -48,8 +48,8 @@ public class BetterGraph {
         case "high":
             density = Density.HIGH;
             break;
-        case "":
-            throw new WanComException("Please specify the density for the mesh of new nodes");
+        default:
+            throw new WanComException("Accuracy parameter invalid: " + accuracy);
         }
         JSONObject newTopology = JSONUtils.newJSONTopology(country, density);
         JSONArray newNodes = (JSONArray) newTopology.get("nodes");
@@ -133,10 +133,10 @@ public class BetterGraph {
                     newNode.addImmediateNeighborsDestination(oldNode2, cost2);
                                         
                     numberOfGraphsReallyEvaluated++;
-                    if (numberOfGraphsReallyEvaluated % 1000 == 0) {
+                    if (numberOfGraphsReallyEvaluated % 100000 == 0) {
                         intermediateTimestamp = System.currentTimeMillis();
                         elapsedTime = intermediateTimestamp - startTimestamp;
-                        System.out.println(Integer.toString(numberOfGraphsReallyEvaluated) + " graphs fully evaluated (in " + Float.toString(elapsedTime) + " ms.)");
+                        System.out.println(Integer.toString(numberOfGraphsReallyEvaluated) + " graphs fully evaluated (in " + Integer.toString(Math.round(elapsedTime)) + " ms.)");
                     }
                     
                     // Building a set of neighbours (Node, cost) to add to the record
@@ -147,10 +147,10 @@ public class BetterGraph {
                     Dijkstra.calculateShortestPathFromSource(graph, sourceNode);
                     int currentTotalDistance = targetNode.getCost();
                     if (currentTotalDistance < bestDistanceOfShortestPath) {
-                        System.out.println("Shortest path improved: " + Integer.toString(bestDistanceOfShortestPath) + "km");
+                        System.out.println("Shortest path improved: " + Integer.toString(bestDistanceOfShortestPath) + " km");
                         bestDistanceOfShortestPath = currentTotalDistance;
                         bestRecord = new Record(newNode, neighbours);
-                        System.out.println("Added " + bestRecord.toString());
+                        System.out.println("New better node: " + bestRecord.toString());
                     }
                     
                     graph.resetCosts(); // so that it makes sense to run Dijkstra gain
@@ -174,6 +174,7 @@ public class BetterGraph {
         }
         System.out.println("Number of graphs checked (including not meeting the constraint): " + Integer.toString(numberOfGraphsChecked));
         System.out.println("Number of graphs really evaluated: " + Integer.toString(numberOfGraphsReallyEvaluated));
+        graph.message = Integer.toString(numberOfGraphsReallyEvaluated) + " possibilities evaluated";
         return graph;
     }
     
