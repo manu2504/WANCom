@@ -1,4 +1,4 @@
-package net.wancom.eics;
+package deprecated.algorithm;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -11,6 +11,7 @@ import java.util.Map;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
+import net.wancom.eics.Distance;
 import net.wancom.exceptions.WanComException;
 import net.wancom.graph.*;
 import net.wancom.json.JSONUtils;

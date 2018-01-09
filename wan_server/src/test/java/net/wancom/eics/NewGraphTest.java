@@ -8,6 +8,8 @@ import net.wancom.json.JSONUtil;
 import org.junit.Before;
 import org.junit.Test;
 
+import deprecated.algorithm.NewGraph;
+
 import java.util.Scanner;
 
 import static org.junit.Assert.assertNotNull;
