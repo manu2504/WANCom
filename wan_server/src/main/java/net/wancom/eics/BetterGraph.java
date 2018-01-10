@@ -115,7 +115,7 @@ public class BetterGraph {
                     }
                     //System.out.println("      oldNode2: " + oldNode2.getNodeName());
                     numberOfGraphsChecked++;
-                    if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/100) == 0) {
+                    if ( numberOfGraphsChecked % (numberOfGraphsToBeEvaluated/20) == 0) {
                         intermediateTimestamp = System.currentTimeMillis();
                         elapsedTime = intermediateTimestamp - startTimestamp;
                         percentage = (float) ((float) numberOfGraphsChecked*100.0f / (float) numberOfGraphsToBeEvaluated);
@@ -174,7 +174,7 @@ public class BetterGraph {
         }
         System.out.println("Number of graphs checked (including not meeting the constraint): " + Integer.toString(numberOfGraphsChecked));
         System.out.println("Number of graphs really evaluated: " + Integer.toString(numberOfGraphsReallyEvaluated));
-        graph.message = Integer.toString(numberOfGraphsReallyEvaluated) + " possibilities evaluated";
+        graph.message = Integer.toString(numberOfGraphsReallyEvaluated) + " new paths evaluated";
         return graph;
     }
     

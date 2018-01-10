@@ -63,12 +63,7 @@ public class PerformanceEvaluation {
 	 	    	 System.setOut(old);
 	 	        
 	    		 System.out.println("USA runs for "+ x +" times ("+ totalTime + "ms)");
-	 	    	
-	    		 
 	    	 }
-
-
-          
 	     }
 	    	 System.out.println();
 	     }
@@ -94,11 +89,7 @@ public class PerformanceEvaluation {
 	 	    	 System.out.flush();
 	 	    	 System.setOut(old);
 	    		 System.out.println("China runs for "+ y +" times ("+ totalTime + "ms)");
-	    		
-	    		 
-	    		 
 	    		 }
-	    		 
 	    	 }
 	    	 System.out.println();
 	     }

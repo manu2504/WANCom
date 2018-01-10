@@ -18,6 +18,9 @@
       #dashboard {
         margin: 1em;
       }
+      form {
+        display: inline;
+      }
       #header p {
         font-weight: bold;
         margin-bottom: auto;
@@ -108,6 +111,7 @@
 		   }
 		  */
 		  var polylines = {};
+      var circles = {};
 		  var polylinesShowingShortestPaths = {};
 		  
       var countries = ["USA", "China", "Germany", "Finland"];
@@ -119,6 +123,17 @@
         Germany: { center: {lat: 50.951823, lng: 10.684529}, zoom: 5 },
         Finland: { center: {lat: 64.112879, lng: 26.413532}, zoom: 5 }
       };
+      
+      // Random colors used to display new paths
+      var colors_list = ['#007FFF', 'darkPink', 'lightBlue', 'purple', '#fcc142', '#9a37ba', '#94fc18', '#b07afc', '#00BFFF', '#ea661a', '#7c39b7'];
+      var colors_used = {};
+      countries.map(function(country) {
+        colors_used[country] = {};
+        for (var i = 0; i < colors_list.length; i++) {
+          colors_used[country][colors_list[i]] = false;
+        }
+      });
+      var global_id_for_pathPriority = 10;
       
       $.when( // When all the JSON files are loaded...
           getJSON('USA.json'),
@@ -133,6 +148,7 @@
           topos["Finland"] = Finland[0];
           
           countries.map(function(country) {
+            circles[country] = [];
             polylines[country] = [];
             polylinesShowingShortestPaths[country] = []; 
             drawTopology(country);
@@ -152,7 +168,7 @@
       function drawTopology(topo_Id) {
         var topo = topos[topo_Id];
         nodes[topo_Id] = {};
-        var new_node_info = null; // to allow to zoom on a new node after adding it on the graph
+        var new_node_coords = null; // to allow to zoom on a new node after adding it on the graph
         for (var i = 0; i < topo.nodes.length; i++) {
           var Lat = topo.nodes[i].latitude;
           var Lng = topo.nodes[i].longitude;
@@ -160,14 +176,18 @@
           var label = topo.nodes[i].id;
           var country = topo.nodes[i].country;
           var isNewNode = topo.nodes[i].new || false;
+          
+          if (isNewNode) {
+            new_node_coords = coordinates;
+          }
 
           nodes[topo_Id][label] = coordinates;
 
           var infowincontent = document.createElement('div');
           var strong = document.createElement('strong');
           strong.textContent = label + ", " + country;
-          infowincontent.appendChild(strong);     
-          addCircle(coordinates, map, infowincontent, isNewNode);
+          infowincontent.appendChild(strong);
+          addCircle(coordinates, map, infowincontent, isNewNode, topo_Id);
         }
 
         for (var i = 0; i < topo.links.length; i++) {
@@ -178,8 +198,8 @@
         }
         
         // For a new topology, let's zoom in the new node added
-        if (isNewNode) {
-          map.setCenter(coordinates);
+        if (new_node_coords) {
+          map.setCenter(new_node_coords);
           map.setZoom(6);
         }
       }
@@ -188,46 +208,53 @@
         var path = new Array(2);
         path[0] = nodes[topoId][source];
         path[1] = nodes[topoId][target];
-        var color, weight;
+        var color, weight, priority;
         
         if (isNewLink) {
           color = '#00e000';
           weight = 4;
+          priority = 5;
         } else {
           color = '#FFFF99';
           weight = 2;
+          priority = 3;
         }
 
         polyline = new google.maps.Polyline({
           path: path,
           strokeColor: color,
           strokeOpacity: 1.0,
-          strokeWeight: weight
+          strokeWeight: weight,
+          zIndex: priority
         });
         polyline.setMap(map);
-        polylines[topoId].push(polyline);
+        polylines[topoId].push({polyline: polyline, new: isNewLink});
       }
 
-      function addCircle(centerCoordinates, map, contentInfoWindow, isNewNode) {
+      function addCircle(centerCoordinates, map, contentInfoWindow, isNewNode, topoId) {
         if (map === undefined) {
           map = this.map; // if not provided, the map is the map object such as defined right below the initMap() function's signature
         }
-        var color = '#FF0000';
+        var color = '#FF0000', fillOpacity = 0.35, zIndex = 1;
         if (isNewNode) {
-          color = 'black';
+          color = 'pink';
+          fillOpacity = 0.65;
+          zIndex = 2;
         }
         var circle = new google.maps.Circle({
           strokeColor: color,
           strokeOpacity: 0.8,
           strokeWeight: 2,
           fillColor: color,
-          fillOpacity: 0.35,
+          fillOpacity: fillOpacity,
+          zIndex: zIndex,
           map: map,
           center: centerCoordinates,
           radius: 2.5*10000 // fixed size, in meters
         });
         
         circle.setMap(map);
+        circles[topoId].push({circle: circle, new: isNewNode});
         
         if (contentInfoWindow) {
           circle.addListener('click', function(){
@@ -426,8 +453,9 @@
             $('#new_graph_iface').after($('<p>', { html: 'No link can be added given the constraint', class: 'error' }));
             return;
           }
+          removeAllCirclesFromCountry(country_name);
+          removeAllLinksFromCountry(country_name);
           topos[country_name] = new_topology;
-          polylines[country_name] = [];
           console.log("Going to draw new topology for " + country_name + "!");
           drawTopology(country_name);
           $('#new_graph_iface').after($('<p>', { html: 'A new node has successfully been added to the graph <span style="color:gray">(' + new_topology['msg'] + ')</span>', 'class': 'info' }));
@@ -454,49 +482,54 @@
       }
       window.zoom = zoom;
       
-      function displayLinksFromCountry(countryId) {
-        polylines[countryId].map(function(polyline) {
-          polyline.setMap(map);
+      function removeAllLinksFromCountry(country) {
+        polylines[country].map(function(polylineObject) {
+          polylineObject.polyline.setMap(null);
         });
+        polylines[country] = [];
       }
       
-      function displayAllLinks() {
-        for (var country in polylines) {
-          polylines[country].map(function(polyline) {
-            polyline.setMap(map);
-          });
-        }
+      function removeAllCirclesFromCountry(country) {
+        circles[country].map(function(circleObject) {
+          circleObject.circle.setMap(null);
+        });
+        circles[country] = [];
       }
       
-      function removeAllLinks() {
-        for (var country in polylines) {
-          polylines[country].map(function(polyline) {
-            polyline.setMap(null);
-          });
-        }
-      }
-      
-      function highlightShortestPath(path, countryId) {
-        var coords = [];
+      function highlightShortestPath(path, countryName) {
+        var coords = []; // coordinates of all nodes in this path
         
         path.map(function(nodeName) {
-          coords.push(nodes[countryId][nodeName]);
+          coords.push(nodes[countryName][nodeName]);
         });
         
         var polyline = new google.maps.Polyline({
           path: coords,
-          strokeColor: randomColor(),
+          strokeColor: randomColorCountry(countryName),
           strokeOpacity: 1.0,
           strokeWeight: 2,
-          zIndex: 10
+          zIndex: global_id_for_pathPriority
         });
+        global_id_for_pathPriority++;
         polyline.setMap(map);
-        polylinesShowingShortestPaths[countryId].push(polyline);
+        polylinesShowingShortestPaths[countryName].push(polyline);
       }
       
+      function randomColorCountry(country) {
+        var rc;
+        for (var i = 0; i < colors_list.length; i++) {
+          if (!colors_used[country][colors_list[i]]) {
+            rc = colors_list[i];
+            colors_used[country][colors_list[i]] = true;
+            return rc;
+          }
+        }
+        rc = randomColor();
+        return rc;
+      }
       function randomColor() {
-        rc = "#";
-        for(i=0;i<6;i++){
+        var rc = "#";
+        for (var i = 0; i < 6; i++) {
           rc += Math.floor(Math.random()*16).toString(16);
         }
         return rc;
