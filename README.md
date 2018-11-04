@@ -1,4 +1,4 @@
-The **purpose of this project** is to build and **interactive tool** able to suggest topology improvements in Wide Area Networks. The goal is to improve average end-to-end latency between any pair of nodes in the network.
+The **purpose of this project** is to build an **interactive tool** able to suggest topology improvements in Wide Area Networks. The goal is to improve average end-to-end latency between any pair of nodes in the network.
 
 During the first phase of this project, we analyzed data retrieved from measurements (produced by traceroute) performed among multiple geo-distributed datacenters of Amazon EC2.
 
