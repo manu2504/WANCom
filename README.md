@@ -6,7 +6,7 @@ What we could analyze, is that the network latency is closely related to the geo
 
 Our goal has thus been to design an **Expert Change Infrastructure System (EICS)** that suggests network topology improvements by suggesting new nodes to add to the network.
 
-To achieve it, we collected data from open-source GML datasets containing the national network topologies for five countries (USA, Finland, China, Germany, France).
+To achieve it, we collected data from open-source GML datasets containing the national network topologies of five countries (USA, Finland, China, Germany, France).
 
 We then converted this GML data to JSON and displayed it onto a world map (using Google Maps).
 
